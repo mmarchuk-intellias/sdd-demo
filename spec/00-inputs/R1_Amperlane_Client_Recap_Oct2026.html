@@ -1,0 +1,395 @@
+<title>Amperlane Account Brief</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: plain internal-wiki page. Left page tree (desktop only), one content column, tables and panels like a team space export. */
+:root {
+  --bg: #ffffff;
+  --side: #f7f8f9;
+  --text: #172b4d;
+  --sub: #626f86;
+  --border: #dcdfe4;
+  --link: #0c66e4;
+  --row: #f7f8f9;
+  --info-bg: #e9f2ff; --info-bd: #0c66e4;
+  --note-bg: #f3f0ff; --note-bd: #6e5dc6;
+  --warn-bg: #fff7d6; --warn-bd: #b38600;
+  --err-bg: #ffeceb; --err-bd: #c9372c;
+  --ok-bg: #dcfff1; --ok-fg: #216e4e;
+  --lz-grey-bg: #dcdfe4; --lz-grey-fg: #44546f;
+  --lz-blue-bg: #cce0ff; --lz-blue-fg: #0055cc;
+  --lz-red-bg: #ffd5d2; --lz-red-fg: #ae2e24;
+  --lz-yel-bg: #f8e6a0; --lz-yel-fg: #7f5f01;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  --mono: SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1d2125; --side: #161a1d; --text: #b6c2cf; --sub: #8c9bab; --border: #38414a; --link: #579dff; --row: #22272b;
+    --info-bg: #092957; --info-bd: #579dff; --note-bg: #2b273f; --note-bd: #9f8fef; --warn-bg: #332e1b; --warn-bd: #cf9f02; --err-bg: #42221f; --err-bd: #f87168;
+    --ok-bg: #1c3329; --ok-fg: #7ee2b8; --lz-grey-bg: #38414a; --lz-grey-fg: #c7d1db; --lz-blue-bg: #09326c; --lz-blue-fg: #85b8ff; --lz-red-bg: #5d1f1a; --lz-red-fg: #fd9891; --lz-yel-bg: #533f04; --lz-yel-fg: #f5cd47;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1d2125; --side: #161a1d; --text: #b6c2cf; --sub: #8c9bab; --border: #38414a; --link: #579dff; --row: #22272b;
+  --info-bg: #092957; --info-bd: #579dff; --note-bg: #2b273f; --note-bd: #9f8fef; --warn-bg: #332e1b; --warn-bd: #cf9f02; --err-bg: #42221f; --err-bd: #f87168;
+  --ok-bg: #1c3329; --ok-fg: #7ee2b8; --lz-grey-bg: #38414a; --lz-grey-fg: #c7d1db; --lz-blue-bg: #09326c; --lz-blue-fg: #85b8ff; --lz-red-bg: #5d1f1a; --lz-red-fg: #fd9891; --lz-yel-bg: #533f04; --lz-yel-fg: #f5cd47;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 14px; line-height: 1.714; }
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+
+.shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); min-height: 100%; }
+@media (max-width: 900px) { .shell { grid-template-columns: minmax(0, 1fr); } .tree { display: none; } }
+.tree { background: var(--side); border-right: 1px solid var(--border); padding-block: 16px; padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: 12px; font-size: 13px; }
+.tree .space { font-weight: 600; padding: 4px 8px 10px; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+.tree .space small { display: block; color: var(--sub); font-weight: 400; }
+.tree ul { list-style: none; margin: 0; padding: 0 0 0 12px; }
+.tree > ul { padding-left: 0; }
+.tree li { padding: 2px 8px; border-radius: 3px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tree li.cur { background: var(--lz-blue-bg); color: var(--lz-blue-fg); font-weight: 600; }
+.tree .caret { color: var(--sub); display: inline-block; width: 12px; }
+
+main { padding-block: 20px 60px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); min-width: 0; }
+.page { max-width: 860px; margin: 0 auto; }
+.crumbs { font-size: 13px; color: var(--sub); display: flex; flex-wrap: wrap; gap: 4px; }
+.crumbs a { color: var(--sub); }
+h1 { font-size: 28px; line-height: 1.25; font-weight: 500; margin: 14px 0 6px; letter-spacing: -0.003em; }
+.byline { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; color: var(--sub); font-size: 13px; }
+.avatar { width: 22px; height: 22px; border-radius: 50%; background: #6e5dc6; color: #fff; font-size: 10px; font-weight: 700; display: inline-grid; place-items: center; }
+.labels { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.label { font-size: 12px; background: var(--lz-grey-bg); color: var(--lz-grey-fg); padding: 0 6px; border-radius: 3px; }
+h2 { font-size: 20px; font-weight: 500; margin: 32px 0 6px; line-height: 1.3; }
+h3 { font-size: 16px; font-weight: 600; margin: 20px 0 4px; }
+p { margin: 8px 0; }
+ul, ol { margin: 6px 0; padding-left: 24px; }
+li { margin: 2px 0; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 24px 0; }
+
+.lz { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 0 4px; border-radius: 3px; line-height: 16px; vertical-align: 1px; white-space: nowrap; }
+.lz.grey { background: var(--lz-grey-bg); color: var(--lz-grey-fg); }
+.lz.blue { background: var(--lz-blue-bg); color: var(--lz-blue-fg); }
+.lz.red { background: var(--lz-red-bg); color: var(--lz-red-fg); }
+.lz.yel { background: var(--lz-yel-bg); color: var(--lz-yel-fg); }
+.lz.green { background: var(--ok-bg); color: var(--ok-fg); }
+
+.panel { border-radius: 3px; padding: 8px 12px 8px 12px; margin: 12px 0; border-left: 3px solid; }
+.panel b:first-child { display: block; }
+.panel.info { background: var(--info-bg); border-color: var(--info-bd); }
+.panel.note { background: var(--note-bg); border-color: var(--note-bd); }
+.panel.warn { background: var(--warn-bg); border-color: var(--warn-bd); }
+.panel.err { background: var(--err-bg); border-color: var(--err-bd); }
+
+.tw { overflow-x: auto; margin: 10px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: var(--row); font-weight: 600; }
+table.kv th { width: 200px; }
+table.wide { min-width: 640px; }
+td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mention { background: var(--lz-grey-bg); color: var(--text); border-radius: 12px; padding: 0 6px; font-size: 13px; white-space: nowrap; }
+.jira { font-family: var(--mono); font-size: 12.5px; }
+.toc { border: 1px solid var(--border); border-radius: 3px; padding: 6px 14px; font-size: 13px; display: inline-block; margin: 14px 0 0; }
+.toc ol { margin: 4px 0; }
+details { border: 1px solid var(--border); border-radius: 3px; margin: 10px 0; }
+details > summary { cursor: pointer; padding: 6px 10px; font-weight: 600; }
+details > div { padding: 0 12px 8px; }
+.attach { display: grid; gap: 6px; }
+.attach div { display: flex; gap: 10px; align-items: center; border: 1px solid var(--border); border-radius: 3px; padding: 6px 10px; min-width: 0; }
+.ft { font-family: var(--mono); font-size: 11px; font-weight: 700; color: #fff; border-radius: 3px; padding: 1px 5px; flex: none; }
+.ft.ppt { background: #c9372c; } .ft.doc { background: #0c66e4; } .ft.md { background: #44546f; }
+.attach span.meta { color: var(--sub); font-size: 12px; margin-left: auto; white-space: nowrap; }
+.attach span.name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.task { list-style: none; padding-left: 4px; }
+.task li { display: flex; gap: 8px; align-items: baseline; }
+.box { width: 14px; height: 14px; border: 2px solid var(--sub); border-radius: 2px; flex: none; position: relative; top: 2px; }
+.box.done { background: var(--link); border-color: var(--link); }
+.task li.d > span:last-child { text-decoration: line-through; color: var(--sub); }
+.comments { margin-top: 36px; border-top: 1px solid var(--border); padding-top: 12px; }
+.c { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; margin: 14px 0; }
+.c .avatar { width: 32px; height: 32px; font-size: 12px; }
+.c .who { font-weight: 600; } .c .when { color: var(--sub); font-size: 12px; margin-left: 6px; font-weight: 400; }
+.c .act { color: var(--sub); font-size: 12px; }
+.c.reply { margin-left: 42px; }
+sup a { font-size: 11px; }
+.refs { font-size: 12.5px; color: var(--sub); }
+.refs a { word-break: break-word; }
+</style>
+
+<div class="shell">
+  <nav class="tree" aria-label="Page tree">
+    <div class="space">Presales · North America<small>Team space</small></div>
+    <ul>
+      <li><span class="caret">▸</span>2026 Pipeline</li>
+      <li><span class="caret">▾</span>Mobility &amp; EV</li>
+      <li><ul>
+        <li><span class="caret">▾</span>Amperlane</li>
+        <li><ul>
+          <li class="cur">Account brief</li>
+          <li>Call notes 2026-09-29</li>
+          <li>Call notes 2026-10-08</li>
+          <li>Solution direction (v1.2)</li>
+          <li>Estimation workbook</li>
+        </ul></li>
+        <li><span class="caret">▸</span>Fleetwise RFP (lost)</li>
+        <li><span class="caret">▸</span>Charging OEM — Q2 renewal</li>
+      </ul></li>
+      <li><span class="caret">▸</span>Templates</li>
+      <li><span class="caret">▸</span>Archive</li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page">
+      <div class="crumbs"><a href="#">Presales · North America</a><span>/</span><a href="#">Mobility &amp; EV</a><span>/</span><a href="#">Amperlane</a></div>
+      <h1>Amperlane — Account brief</h1>
+      <div class="byline">
+        <span class="avatar" aria-hidden="true">KS</span>
+        <span>Owned by <a href="#">Kyrylo Shvedov</a></span>
+        <span>·</span><span>Last updated Oct 19, 2026 by Mark Feldman</span>
+        <span>·</span><span>7 min read</span>
+      </div>
+      <div class="labels"><span class="label">ev-charging</span><span class="label">marketplace</span><span class="label">new-logo</span><span class="label">us-east</span><span class="label">fy27-q1</span></div>
+
+      <div class="panel info">
+        <b>TL;DR</b>
+        Seed-stage Brooklyn startup (raised $6.7M) wants a partner to build its EV fleet ↔ charger booking platform. Hard date: NYC go-live <b>Mar 1, 2027</b>. Phase 1 budget "around a million, give or take". Solution direction sent Oct 16, costed proposal due <b>Nov 6</b>. Biggest blocker: their business model isn't decided, and that drives the settlement design.
+      </div>
+
+      <div class="tw">
+        <table class="kv">
+          <tbody>
+            <tr><th>Status</th><td><span class="lz blue">Solutioning</span> &nbsp;<span class="lz yel">Proposal due Nov 6</span></td></tr>
+            <tr><th>Opportunity</th><td><span class="jira">PRESALE-2291</span> · Phase 1 ~$0.9–1.2M (T&amp;M or fixed, TBD) · follow-on LA + scale 2027–28</td></tr>
+            <tr><th>Source</th><td>Referral, Hudson Mobility Partners board member (Sep 15)</td></tr>
+            <tr><th>Client partner</th><td><span class="mention">@Mark Feldman</span></td></tr>
+            <tr><th>Presales team</th><td><span class="mention">@Kyrylo Shvedov</span> (engagement lead) · <span class="mention">@Olena Marchuk</span> (SA) · <span class="mention">@Andriy Bondar</span> (payments/integrations)</td></tr>
+            <tr><th>Delivery center</th><td>TBD, likely Mobility BU</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="toc" aria-label="Contents">
+        <b>On this page</b>
+        <ol>
+          <li><a href="#company">Company</a></li>
+          <li><a href="#people">People</a></li>
+          <li><a href="#pilot">Pilot</a></li>
+          <li><a href="#model">Business model</a></li>
+          <li><a href="#market">Market context</a></li>
+          <li><a href="#comp">Competition</a></li>
+          <li><a href="#risks">Risks</a></li>
+          <li><a href="#open">Open questions / next steps</a></li>
+        </ol>
+      </div>
+
+      <h2 id="company">Company</h2>
+      <div class="tw">
+        <table class="kv">
+          <tbody>
+            <tr><th>Legal entity</th><td>Amperlane, Inc. (Delaware C-corp)</td></tr>
+            <tr><th>HQ</th><td>Industry City, Sunset Park, Brooklyn, NY</td></tr>
+            <tr><th>Founded</th><td>March 2024</td></tr>
+            <tr><th>Headcount</th><td>14 FTE (3 founders, 4 ops/driver support EN/ES/BN, 2 partnerships, 2 eng, 1 design, 1 finance, 1 marketing)</td></tr>
+            <tr><th>Funding</th><td>Pre-seed $1.2M (Jun 2024, angels) · Seed $5.5M (Feb 2026), led by Hudson Mobility Partners with Gridline Ventures</td></tr>
+            <tr><th>Runway</th><td>to ~Q4 2027. Series A planned H2 2027</td></tr>
+            <tr><th>A-round milestone</th><td><b>10,000 completed bookings/month by June 2027</b>, NYC only (LA doesn't count)</td></tr>
+            <tr><th>Website</th><td>amperlane.io</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>What they do: a two-sided marketplace. Charging stations publish bookable capacity (sites, EVSEs, connectors, power, schedule, live status, tariffs). EV taxi/rideshare fleets and their drivers book slots, Dana calls it "cinema-seat booking for chargers". Amperlane keeps the margin on the match.</p>
+      <p>Why NYC first: TLC Green Rides pushes Uber/Lyft trips to zero-emission (25% in 2026, 100% by 2030) and the city has ~13k electric FHVs on ~360 public fast-charging ports. Revel left rideshare in Aug 2025, so fleets lost a dedicated charging option.</p>
+
+      <h2 id="people">People</h2>
+      <div class="tw">
+        <table class="wide">
+          <thead><tr><th>Name</th><th>Role</th><th>Background</th><th>Notes for us</th></tr></thead>
+          <tbody>
+            <tr><td>Dana Whitfield</td><td>Co-founder, CEO</td><td>9 yrs NYC FHV industry; ran EV charging logistics for ~300 cars at a Queens FHV base</td><td>Economic buyer. Fast, optimistic, no patience for "consultant talk". Owns the Mar 1 date and the A-round story.</td></tr>
+            <tr><td>Luis Ortega</td><td>Co-founder, COO / Partnerships</td><td>6 yrs site acquisition &amp; partnerships at a US DCFC network</td><td>Station-side reality check. Anything that costs stations money needs his OK.</td></tr>
+            <tr><td>Ravi Menon</td><td>Co-founder, CTO</td><td>Ex-staff eng, payments infra (marketplace payouts) at a NYC fintech. Joined Jan 2025</td><td>Technical decision maker. Wants IP ownership + no lock-in. TS / Postgres / AWS ($100k Activate credits). Will grill us on settlement.</td></tr>
+            <tr><td>Priya Nair</td><td>Senior SWE</td><td>Built Retool/Airtable ops tooling, maintains the Supabase prototype</td><td>Best source on where the pilot breaks. Wants to be embedded in the squad.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="pilot">Pilot ("Amperlane Concierge")</h2>
+      <p>Live since Oct 2025 in Brooklyn and Queens. Almost fully manual: Retool front-end, Airtable bookings, a Google Sheets slot grid per site, Twilio SMS bot, ops staff phoning stations to cone off stalls. Drivers still pay the station with their own card; Amperlane bills fleets $2.00 per completed booking through Stripe Billing.</p>
+
+      <h3>Numbers (Sep 2026, from client)</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Metric</th><th>Value</th><th>Comment</th></tr></thead>
+          <tbody>
+            <tr><td>Bookings / month</td><td class="n">~2,300</td><td>~1,850 completed</td></tr>
+            <tr><td>No-show rate</td><td class="n">17%</td><td><span class="lz red">not in their deck</span> came out on Call 1</td></tr>
+            <tr><td>Late &gt;10 min</td><td class="n">22%</td><td><span class="lz red">not in their deck</span></td></tr>
+            <tr><td>Arrival-to-plug wait (median)</td><td class="n">31 → 6 min</td><td>self-reported driver survey, n=212</td></tr>
+            <tr><td>Gowanus off-peak utilisation</td><td class="n">14% → 23%</td><td>10 AM–3 PM and 10 PM–5 AM</td></tr>
+            <tr><td>Avg energy / session</td><td class="n">~28 kWh</td><td>in line with public rideshare data (24–30 kWh)</td></tr>
+            <tr><td>Weekly active drivers</td><td class="n">186</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Supply: 3 sites / 46 DC ports</h3>
+      <div class="tw">
+        <table class="wide">
+          <thead><tr><th>Site</th><th>Operator</th><th>Ports</th><th>CSMS</th><th>Integration</th></tr></thead>
+          <tbody>
+            <tr><td>Gowanus FastHub (Brooklyn)</td><td>Kinship Charging</td><td class="n">16 · 150–320 kW · CCS1 + 4 NACS</td><td>AMPECO</td><td><span class="lz green">API</span> REST + webhooks. Reservations only on 10/16 chargers (firmware)</td></tr>
+            <tr><td>JFK Lot 9 Charging Plaza (Queens)</td><td>Jamaica Bay Energy</td><td class="n">20 · 150 kW · CCS1</td><td>ChargeLab</td><td><span class="lz yel">Status only</span> status + pricing, no reservations. OCPI 2.2.1 "sometime in 2027"</td></tr>
+            <tr><td>LIC Garage Depot</td><td>Hunters Point Garages LLC</td><td class="n">10 · 62.5–125 kW · CCS1</td><td>Legacy ChargePoint contract</td><td><span class="lz red">No API</span> portal CSV export; garage attendant on site</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Demand: 2 fleets</h3>
+      <ul>
+        <li><b>Borough Green Fleet LLC</b>: ~420 EVs on weekly leases to independent Uber/Lyft drivers, ~160 drivers in the pilot. ~55% Tesla (no integration yet), rest on Geotab.</li>
+        <li><b>Five Boroughs EV Cab Co.</b>: 12 electric medallion cabs, 24 drivers on two shifts, no telematics. Shift change 4–5 PM = the booking burst.</li>
+      </ul>
+      <div class="panel warn"><b>Heads-up</b>Last Tuesday before Call 2 a 320 kW unit at Gowanus went down at ~1:50 PM (cooling). Ops re-did 9 bookings by hand, 3 got moved to JFK. Good test scenario for the booking engine.</div>
+
+      <h2 id="model">Business model</h2>
+      <div class="panel err"><b>Not decided</b>The model in their brief didn't survive the discovery call. Workshop with Dana + Luis planned for the week of Oct 26.</div>
+      <div class="tw">
+        <table class="wide">
+          <thead><tr><th>Option</th><th>What</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>A · Take rate (in the brief)</td><td>10–12% of charging GMV paid by stations + $15/vehicle/month fleet SaaS. Their projection: $4.8M ARR in 2028</td><td><span class="lz red">Stations refuse %</span> Gowanus runs single-digit margins after demand charges</td></tr>
+            <tr><td>B · eMSP spread</td><td>Amperlane is merchant of record: buys at station B2B tariff (~$0.42/kWh at Gowanus), bills fleets bundled rate (~$0.49/kWh incl. guaranteed slot) + fleet subscription + pass-through no-show fees</td><td><span class="lz blue">Floated by Dana</span> Call 1</td></tr>
+            <tr><td>C · Hybrid</td><td>Stations pay only for incremental off-peak bookings; fleets get one monthly invoice, net-30</td><td><span class="lz grey">Open</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Whatever they pick: stations want weekly payouts, fleets pay net-30, so there's a cash gap of up to ~8 weeks. Ravi asked about money transmission; our line is to keep funds flows inside Stripe Connect, but their counsel has to confirm.</p>
+
+      <h2 id="market">Market context</h2>
+      <p>Checked Oct 2026. Use dates when quoting to the client.</p>
+      <ul>
+        <li>NYC Green Rides: 5% (2024) → 15% (2025) → 25% (2026) → 100% by 2030. Industry at 22.7% vs 25% in Mar 2026, TLC says "on track". <sup><a href="#r1">[1]</a><a href="#r2">[2]</a></sup></li>
+        <li>NYC fleet (Jul–Oct 2025): 103,790 active FHVs, 13,020 electric. 13,587 medallion taxis, 31 electric. <sup><a href="#r3">[3]</a></sup></li>
+        <li>~360 public fast-charging ports in NYC (TLC, Sep 2025). <sup><a href="#r4">[4]</a></sup></li>
+        <li>US DC fast charging Q3 2026: avg $0.540/kWh, utilisation 15.9% national, 31.8% in LA. <sup><a href="#r5">[5]</a></sup></li>
+        <li>CA Clean Miles: 30% eVMT target in 2026, but CPUC staff recommended a 3-year pause (Jun 2026). Affects how hard LA demand is. <sup><a href="#r6">[6]</a></sup></li>
+        <li>Uber electric share of US/Canada miles 9.1% in Q1 2026, first decline. <sup><a href="#r7">[7]</a></sup></li>
+        <li>Federal 45W (commercial EVs) ended Sep 30, 2025; 30C (chargers) ended Jun 30, 2026. <sup><a href="#r8">[8]</a></sup></li>
+      </ul>
+
+      <h2 id="comp">Competition / adjacent players</h2>
+      <div class="tw">
+        <table class="wide">
+          <thead><tr><th>Who</th><th>What</th><th>So what</th></tr></thead>
+          <tbody>
+            <tr><td>Voltera + Revel</td><td>Combination announced May 26, 2026, 1,000+ stalls operating or in development across 11 metros, fleet + AV focus <sup><a href="#r9">[9]</a></sup></td><td>Supply partner or competitor, Dana isn't sure which</td></tr>
+            <tr><td>Hubject Reservation Hub</td><td>EU pilot (Sep 2025) for truck slot booking across networks on OCPI 2.3 booking module <sup><a href="#r10">[10]</a></sup></td><td>Closest precedent. US adoption of OCPI 2.3 booking is low</td></tr>
+            <tr><td>EVgo</td><td>Launched reservations in 2021 on the West Coast <sup><a href="#r11">[11]</a></sup></td><td>Current status unknown, don't cite as live</td></tr>
+            <tr><td>Tesla Superchargers</td><td>Congestion fee $0.50/min (up to $1.00) after 5-min grace at busy sites <sup><a href="#r12">[12]</a></sup></td><td>Queue tax a booking layer could replace</td></tr>
+            <tr><td>Uber / Lyft</td><td>No public API with vehicle data <sup><a href="#r13">[13]</a></sup></td><td>Deep links only in MVP. One of them has an EV team interested in a pilot, needs SOC 2 Type I</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="risks">Risks</h2>
+      <div class="tw">
+        <table class="wide">
+          <thead><tr><th>Risk</th><th>Impact</th><th>Mitigation / owner</th></tr></thead>
+          <tbody>
+            <tr><td>Station APIs not ready (only Gowanus can hold a charger)</td><td><span class="lz red">High</span></td><td>Own slot calendar + soft holds, CSV/attendant path for LIC. Olena</td></tr>
+            <tr><td>Business model undecided</td><td><span class="lz red">High</span></td><td>Workshop wk of Oct 26. Kyrylo</td></tr>
+            <tr><td>Cash gap (weekly payouts vs net-30)</td><td><span class="lz yel">Med</span></td><td>Ledger, per-fleet credit limits; client's financing call. Andriy</td></tr>
+            <tr><td>Telematics cost / consent (Tesla Fleet API is pay-per-use)</td><td><span class="lz yel">Med</span></td><td>Manual SoC fallback in MVP</td></tr>
+            <tr><td>SOC 2 Type I within 12 months vs Mar 1 launch</td><td><span class="lz yel">Med</span></td><td>Controls built in from day one, audit after launch</td></tr>
+            <tr><td>10k bookings/month by June needs new NYC supply, not just software</td><td><span class="lz yel">Med</span></td><td>Client side (Luis). Flag in proposal</td></tr>
+            <tr><td>Regulatory shifts (CA Clean Miles pause, NEVI)</td><td><span class="lz grey">Low</span></td><td>Keep LA plan flexible</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="open">Open questions / next steps</h2>
+      <details open>
+        <summary>Open questions for the client (10)</summary>
+        <div>
+          <ol>
+            <li>Business model: % fee, spread or both? Merchant of record?</li>
+            <li>No-show policy: who pays by default, fee + station share, any overbooking?</li>
+            <li>Station terms: capacity caps, grace period, payout terms per site</li>
+            <li>LA: which of the two OCPI 2.2.1 prospects, when do we get access?</li>
+            <li>LIC: CSV + attendant, or move host to direct OCPP (CitrineOS)?</li>
+            <li>Teslas: will Borough Green pay for Tesla Fleet API or start with manual SoC?</li>
+            <li>SOC 2 Type I: target date, auditor, ride-hail pilot in Phase 1 or not?</li>
+            <li>Data migration scope (Airtable, Stripe Billing, Twilio logs)</li>
+            <li>Funds flow: counsel to confirm Stripe Connect structure</li>
+            <li>Which new NYC sites/fleets are realistic by June 2027?</li>
+          </ol>
+        </div>
+      </details>
+
+      <h3>Action items</h3>
+      <ul class="task">
+        <li class="d"><span class="box done" aria-hidden="true"></span><span>Send solution direction deck to Dana/Ravi (<span class="mention">@Olena Marchuk</span>, Oct 16)</span></li>
+        <li class="d"><span class="box done" aria-hidden="true"></span><span>Get anonymised pilot sample (received Oct 5)</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Schedule business-model workshop, wk of Oct 26 (<span class="mention">@Kyrylo Shvedov</span>)</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>AMPECO sandbox + ChargeLab API docs via Luis (<span class="mention">@Andriy Bondar</span>)</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Full raw pilot export (Airtable + Sheets) from Priya</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Estimation workbook v1 + staffing check with Mobility BU (<span class="mention">@Mark Feldman</span>, by Oct 30)</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Costed proposal out by Nov 6</span></li>
+      </ul>
+
+      <h3>Attachments</h3>
+      <div class="attach">
+        <div><span class="ft ppt">PPTX</span><span class="name">Amperlane_Platform_Partner_Brief_Sep2026.pptx</span><span class="meta">client · Sep 22</span></div>
+        <div><span class="ft doc">DOCX</span><span class="name">Amperlane_Call1_Discovery_Transcript_2026-09-29.docx</span><span class="meta">Sep 29</span></div>
+        <div><span class="ft doc">DOCX</span><span class="name">Amperlane_Call2_Tech_DeepDive_Transcript_2026-10-08.docx</span><span class="meta">Oct 8</span></div>
+        <div><span class="ft ppt">PPTX</span><span class="name">Intellias_Amperlane_Solution_Direction_Oct2026.pptx</span><span class="meta">sent Oct 16</span></div>
+      </div>
+
+      <hr>
+      <div class="refs">
+        <b>References</b>
+        <ol>
+          <li id="r1"><a href="https://www.nyc.gov/mayors-office/news/2023/08/mayor-adams-tlc-new-rules-require-city-s-rideshare-vehicles-be-zero-emission" target="_blank" rel="noopener">NYC Mayor's Office, Green Rides rule (Aug 2023)</a></li>
+          <li id="r2"><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/testimony_preliminary_budget_3_17_26.pdf" target="_blank" rel="noopener">TLC testimony, preliminary budget (Mar 17, 2026)</a></li>
+          <li id="r3"><a href="https://www.nyc.gov/assets/operations/downloads/pdf/pmmr2026/tlc.pdf" target="_blank" rel="noopener">Preliminary Mayor's Management Report FY2026, TLC</a></li>
+          <li id="r4"><a href="https://www.nyc.gov/site/tlc/about/tlc-climate-week-2025-record-electrification-gains.page" target="_blank" rel="noopener">TLC, Climate Week 2025 update</a></li>
+          <li id="r5"><a href="https://mgrid.org/2026/10/16/us-fast-chargers-pass-80964-ports-but-utilization-stays-flat-at-15-9-as-tesla-raises-prices/" target="_blank" rel="noopener">mgrid on Paren Q3 2026 (Oct 16, 2026)</a></li>
+          <li id="r6"><a href="https://www.cpuc.ca.gov/-/media/cpuc-website/divisions/consumer-protection-and-enforcement-division/documents/tlab/clean-miles-standard/cms-unanticipated-barriers-progress-report-june-2026.pdf" target="_blank" rel="noopener">CPUC, Clean Miles Standard progress report (Jun 2026)</a></li>
+          <li id="r7"><a href="https://www.uber.com/kr/zh/about/reports/sustainability-report" target="_blank" rel="noopener">Uber sustainability report (Apr 2026)</a></li>
+          <li id="r8"><a href="https://www.irs.gov/newsroom/faqs-for-modification-of-sections-25c-25d-25e-30c-30d-45l-45w-and-179d-under-public-law-119-21-139-stat-72-july-4-2025-commonly-known-as-the-one-big-beautiful-bill-act-obbb" target="_blank" rel="noopener">IRS FAQ, Public Law 119-21 credit changes</a></li>
+          <li id="r9"><a href="https://www.automotiveworld.com/news/voltera-and-revel-agree-ev-charging-merger-in-us/" target="_blank" rel="noopener">Automotive World, Voltera and Revel (May 2026)</a>; <a href="https://techcrunch.com/2025/08/11/revel-shuts-down-its-ride-hail-business-to-focus-on-ev-charging" target="_blank" rel="noopener">TechCrunch, Revel exits ride-hail (Aug 2025)</a></li>
+          <li id="r10"><a href="https://www.electrive.com/2025/09/03/hubject-and-partners-present-reservation-solution-for-electric-commercial-vehicles" target="_blank" rel="noopener">electrive, Hubject reservation solution (Sep 2025)</a></li>
+          <li id="r11"><a href="https://insideevs.com/news/510452/evgo-launches-reservation-program/" target="_blank" rel="noopener">InsideEVs, EVgo reservations (2021)</a></li>
+          <li id="r12"><a href="https://www.tesla.com/support/charging/supercharger/fees" target="_blank" rel="noopener">Tesla Supercharger fees</a></li>
+          <li id="r13"><a href="https://developer.uber.com/docs/drivers/references/api" target="_blank" rel="noopener">Uber Driver API reference</a></li>
+        </ol>
+      </div>
+
+      <section class="comments" aria-label="Comments">
+        <b>3 comments</b>
+        <div class="c">
+          <span class="avatar" style="background:#1f845a" aria-hidden="true">MF</span>
+          <div><span class="who">Mark Feldman</span><span class="when">Oct 19, 2026</span>
+            <p>Dana pinged me Friday, they liked the "what changed since your brief" slides. She wants the workshop on Tue Oct 27 if we can. Also asked if we can do fixed price for Phase 1, I said we'd look at it after Phase 0.</p>
+            <div class="act">Reply · Like</div></div>
+        </div>
+        <div class="c reply">
+          <span class="avatar" style="background:#c9372c" aria-hidden="true">OM</span>
+          <div><span class="who">Olena Marchuk</span><span class="when">Oct 19, 2026</span>
+            <p>Fixed price is risky until the settlement model is decided and we've seen the AMPECO sandbox. I'd keep Phase 0 fixed and Phase 1 T&amp;M with a cap.</p>
+            <div class="act">Reply · Like</div></div>
+        </div>
+        <div class="c reply">
+          <span class="avatar" aria-hidden="true">KS</span>
+          <div><span class="who">Kyrylo Shvedov</span><span class="when">Oct 19, 2026</span>
+            <p>+1. Tue 27th works for me, will send the invite with the 3 options as pre-read.</p>
+            <div class="act">Reply · Like</div></div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
