@@ -8,7 +8,7 @@
 |---|---|---|---|---|---|
 | Requirements | 336 | 0 | 0 | 331 | 5 |
 | User/job stories | 152 | 0 | 0 | 152 | 0 |
-| System stories | 0 | 0 | 0 | 0 | 0 |
+| System stories | 203 | 0 | 0 | 203 | 0 |
 | Tasks | 0 | 0 | 0 | 0 | 0 |
 
 | Quadrant | S-F | S-NF | U-F | U-NF |
@@ -19,7 +19,7 @@
 |---|---|---|---|---|---|---|---|
 | Requirements | 100 | 141 | 28 | 62 | 0 | 331 | 0 |
 
-**K coverage:** **76 K gap(s)**, trace.py exits 1.
+**K coverage:** **119 K gap(s)**, trace.py exits 1.
 
 Sources registered: SRC-C1, SRC-C2, SRC-D1, SRC-D2, SRC-R1.
 
@@ -34,28 +34,9 @@ Sources registered: SRC-C1, SRC-C2, SRC-D1, SRC-D2, SRC-R1.
 - **REQ-065** [I] The driver page shows the driver's estimated arrival time at the site. · `spec/20-requirements/requirements.md:130`
 - **REQ-075** [I] The platform reads SoC, charging state and location of a fleet's vehicles from Geotab wher · `spec/20-requirements/requirements.md:145`
 - **REQ-078** [I] A station operator can record the tariffs that apply at each site. · `spec/20-requirements/requirements.md:153`
-- **REQ-085** [K] The ledger is double-entry, with no balance columns. · `spec/20-requirements/requirements.md:165`
 - **REQ-093** [I] The platform reports the median wait from arrival to session start per site, from measured · `spec/20-requirements/requirements.md:183`
 - **REQ-094** [I] The platform reports utilisation per site for its off-peak windows. · `spec/20-requirements/requirements.md:184`
-- **REQ-101** [K] A database constraint enforces that no two active allocations on one EVSE overlap, so the  · `spec/20-requirements/requirements.md:208`
-- **REQ-105** [Y] No CSMS vendor SDK is used inside the booking core, so moving a site to another CSMS chang · `spec/20-requirements/requirements.md:217`
 - **REQ-108** [I] The booking and slot data model has a documented mapping to the OCPI 2.3 Booking module. · `spec/20-requirements/requirements.md:220`
-- **REQ-111** [Y] The payment provider sits behind an interface, so it can be replaced without changing the  · `spec/20-requirements/requirements.md:228`
-- **REQ-117** [Y] No code from the discarded prototype is reused; only its schema is consulted. · `spec/20-requirements/requirements.md:249`
-- **REQ-122** [Y] Every production change goes through a recorded change-management process with review and  · `spec/20-requirements/requirements.md:259`
-- **REQ-123** [K] Data is encrypted in transit and at rest. · `spec/20-requirements/requirements.md:260`
-- **REQ-124** [K] Production runs in an AWS account separate from every non-production environment. · `spec/20-requirements/requirements.md:261`
-- **REQ-127** [Y] Open-source components are used only where they are mature. · `spec/20-requirements/requirements.md:264`
-- **REQ-128** [K] Making bookings is available 99.9% of the time between 05:00 and 01:00 Eastern time. · `spec/20-requirements/requirements.md:270`
-- **REQ-129** [K] Planned maintenance, and any deployment that interrupts booking, happens only between 01:0 · `spec/20-requirements/requirements.md:271`
-- **REQ-132** [K] The platform supports at least 10,000 completed bookings a month in NYC by June 2027. · `spec/20-requirements/requirements.md:274`
-- **REQ-133** [K] Booking timers (hold expiry, reminder, station hold, pre-arrival check, grace, auto-releas · `spec/20-requirements/requirements.md:275`
-- **REQ-134** [Y] The workflow engine is self-hosted in Amperlane's AWS account. · `spec/20-requirements/requirements.md:276`
-- **REQ-135** [K] The platform is one modular monolith, not a set of microservices. · `spec/20-requirements/requirements.md:277`
-- **REQ-136** [K] The platform is written in TypeScript end to end, on PostgreSQL, hosted on AWS. · `spec/20-requirements/requirements.md:278`
-- **REQ-137** [Y] Hosting uses Amperlane's AWS Activate credits first. · `spec/20-requirements/requirements.md:279`
-- **REQ-139** [Y] Every booking function that the driver PWA, portals and ops console use is available throu · `spec/20-requirements/requirements.md:281`
-- **REQ-141** [Y] An automated test replays the Gowanus fault (1:50 PM, nine bookings, two needing NACS or a · `spec/20-requirements/requirements.md:283`
 - **REQ-163** [I] Where a CSMS provides pricing, the driver sees the site's public price before booking. · `spec/20-requirements/requirements.md:322`
 - **REQ-166** [I] The platform connects to CPOs over OCPI 2.2.1 as an eMSP (Locations, Tariffs, Sessions, CD · `spec/20-requirements/requirements.md:325`
 - **REQ-173** [I] The platform records arrival from the phone's location only when the driver has opted in. · `spec/20-requirements/requirements.md:338`
@@ -65,7 +46,6 @@ Sources registered: SRC-C1, SRC-C2, SRC-D1, SRC-D2, SRC-R1.
 - **REQ-196** [I] The ops console shows the full message history per driver and booking, with language and d · `spec/20-requirements/requirements.md:367`
 - **REQ-208** [I] A fleet manager can see the charges accrued in the current month before the invoice is iss · `spec/20-requirements/requirements.md:389`
 - **REQ-209** [I] A station operator sees the off-peak sessions that Amperlane bookings brought to each site · `spec/20-requirements/requirements.md:395`
-- **REQ-210** [K] The ledger records, with no schema change, a sample month of each Q-001 option (booking fe · `spec/20-requirements/requirements.md:401`
 - **REQ-221** [I] Every message to a driver tells the driver, in their language, how to reach ops. · `spec/20-requirements/requirements.md:417`
 - **REQ-223** [I] During a platform outage, a driver who texts the booking number gets an automatic reply in · `spec/20-requirements/requirements.md:419`
 - **REQ-226** [I] The platform reports per site and day: booking attempts, expired holds, confirmations, alt · `spec/20-requirements/requirements.md:427`
@@ -74,170 +54,217 @@ Sources registered: SRC-C1, SRC-C2, SRC-D1, SRC-D2, SRC-R1.
 - **REQ-235** [I] Fleet and station portal users can sign in with a one-time link or code sent to their emai · `spec/20-requirements/requirements.md:446`
 - **REQ-238** [I] Open Charge Map data is shown with the attribution its CC BY 4.0 licence requires. · `spec/20-requirements/requirements.md:461`
 - **REQ-251** [I] Cloud and usage-priced vendor costs (messaging, maps, telematics, payments) are reported m · `spec/20-requirements/requirements.md:504`
-- **REQ-253** [K] Credentials and any licence or account numbers the platform holds are listed in the data r · `spec/20-requirements/requirements.md:516`
-- **REQ-256** [Y] Location is kept only as derived arrival events, encrypted and access-controlled, and each · `spec/20-requirements/requirements.md:519`
-- **REQ-260** [Y] The platform rejects and logs inbound messaging and CSMS webhooks whose signature or share · `spec/20-requirements/requirements.md:523`
 - **REQ-264** [I] A register of every vendor that receives platform data records which data each receives an · `spec/20-requirements/requirements.md:527`
-- **REQ-265** [Y] The platform stores no driver's licence, TLC licence or bank account numbers unless the da · `spec/20-requirements/requirements.md:528`
 
 ### Stories with no system story
 
-- **JS-004** [Y] Next free slot offered and held when the slot is full · `spec/30-stories/JS-004.md`
-- **JS-007** [K] Book for the driver who will charge · `spec/30-stories/JS-007.md`
-- **JS-008** [Y] Afternoon and overnight slots in one confirmation · `spec/30-stories/JS-008.md`
-- **JS-010** [K] Fair and quick answers at the shift-change burst · `spec/30-stories/JS-010.md`
-- **JS-018** [K] Allocated EVSE occupied, booking reallocated and walk-up left alone · `spec/30-stories/JS-018.md`
-- **JS-019** [K] Whole site full before the slot, alternatives and ops exception · `spec/30-stories/JS-019.md`
-- **JS-020** [Y] Report a blocked stall on arrival and get another free EVSE · `spec/30-stories/JS-020.md`
-- **JS-023** [K] Charger reservation rejected or unanswered, booking unchanged · `spec/30-stories/JS-023.md`
-- **JS-024** [Y] Station holds at Gowanus during an AMPECO outage · `spec/30-stories/JS-024.md`
-- **JS-026** [Y] Unacknowledged station-hold request goes to ops · `spec/30-stories/JS-026.md`
-- **JS-103** [Y] Record arrival from the CSMS session start · `spec/30-stories/JS-103.md`
-- **JS-105** [K] Release a booking automatically when grace ends without arrival · `spec/30-stories/JS-105.md`
-- **JS-106** [Y] Get a re-offer when I arrive after my booking was released · `spec/30-stories/JS-106.md`
-- **JS-110** [K] Hold the no-show fee for ops when the platform or the site failed · `spec/30-stories/JS-110.md`
-- **JS-111** [Y] No fee when I arrived but charging did not start · `spec/30-stories/JS-111.md`
-- **JS-116** [K] Pick up a charger fault without anyone phoning · `spec/30-stories/JS-116.md`
-- **JS-117** [Y] Report a faulted EVSE in one tap · `spec/30-stories/JS-117.md`
-- **JS-118** [Y] Return a faulted EVSE to the pool only when it is stable · `spec/30-stories/JS-118.md`
-- **JS-119** [K] Rebook my booking automatically when my EVSE faults · `spec/30-stories/JS-119.md`
-- **JS-120** [Y] Choose an alternative when a fault leaves no EVSE for my booking · `spec/30-stories/JS-120.md`
-- **JS-123** [Y] Rebook every booking of a faulted EVSE in one action · `spec/30-stories/JS-123.md`
-- **JS-206** [K] EVSE status no older than 60 seconds, even when a webhook is lost · `spec/30-stories/JS-206.md`
-- **JS-210** [Y] A site's status feed goes down or an EVSE goes silent · `spec/30-stories/JS-210.md`
-- **JS-216** [K] One text acts once, even if it arrives twice · `spec/30-stories/JS-216.md`
-- **JS-217** [Y] A message the platform cannot understand reaches ops · `spec/30-stories/JS-217.md`
-- **JS-221** [Y] A booking link opened on an unverified phone shows only site, time and one-tap actions · `spec/30-stories/JS-221.md`
-- **JS-224** [K] A reminder before the slot · `spec/30-stories/JS-224.md`
-- **JS-226** [Y] A time-critical message that does not arrive is resent and shown to ops · `spec/30-stories/JS-226.md`
-- **JS-228** [Y] Keyword replies understood in English, Spanish and Bengali · `spec/30-stories/JS-228.md`
-- **JS-309** [Y] Know before the shift change whether each booked vehicle is charging · `spec/30-stories/JS-309.md`
-- **JS-312** [Y] Bookings above a lowered limit stand and are shown for action · `spec/30-stories/JS-312.md`
-- **JS-313** [Y] Station operator is told when a fault or maintenance hold changes bookings · `spec/30-stories/JS-313.md`
-- **JS-319** [K] Month close builds and submits fleet invoices from the ledger · `spec/30-stories/JS-319.md`
-- **JS-322** [K] Invoices survive payment-provider outages, retries and lost webhooks · `spec/30-stories/JS-322.md`
-- **JS-324** [Y] Match bookings to session records and set aside what does not match · `spec/30-stories/JS-324.md`
-- **JS-330** [Y] Five Boroughs bookings run with no manual ops action · `spec/30-stories/JS-330.md`
-- **JS-405** [Y] No driver names or phone numbers in data that leaves production · `spec/30-stories/JS-405.md`
-- **JS-407** [K] Open pilot bookings carried over at cut-over · `spec/30-stories/JS-407.md`
-- **JS-413** [Y] Sign-ins, role changes and production access on record · `spec/30-stories/JS-413.md`
-- **JS-414** [Y] Settle a disagreement over caps or terms from the change history · `spec/30-stories/JS-414.md`
-- **JS-415** [Y] Know who has seen a driver's personal data · `spec/30-stories/JS-415.md`
-- **JS-416** [K] Scope a suspected breach and follow the SHIELD notification procedure · `spec/30-stories/JS-416.md`
-- **JS-417** [Y] Personal data deleted or anonymised when its retention period ends · `spec/30-stories/JS-417.md`
-- **JS-419** [Y] Honour the next bookings by phone during a platform outage · `spec/30-stories/JS-419.md`
-- **JS-420** [Y] A runbook already used for every alert and external-system outage · `spec/30-stories/JS-420.md`
-- **JS-421** [K] A repeated tap gives one booking and one answer · `spec/30-stories/JS-421.md`
-- **JS-425** [K] A repeated save of a capacity-rule change applies once · `spec/30-stories/JS-425.md`
-- **US-001** [K] Open-slot view shows only bookable slots · `spec/30-stories/US-001.md`
-- **US-002** [K] Capacity caps per time window protect walk-up capacity · `spec/30-stories/US-002.md`
-- **US-003** [K] Book a slot with a hold and a confirmation · `spec/30-stories/US-003.md`
-- **US-005** [K] Cancel a booking in one tap or by SMS keyword · `spec/30-stories/US-005.md`
-- **US-006** [K] Bookings match the vehicle's connector and adapters · `spec/30-stories/US-006.md`
-- **US-009** [Y] Fleet manager books for a named driver · `spec/30-stories/US-009.md`
-- **US-011** [K] An EVSE is never allocated to two overlapping bookings · `spec/30-stories/US-011.md`
-- **US-012** [Y] Optional manual SoC in the booking flow · `spec/30-stories/US-012.md`
-- **US-013** [Y] Vehicle data only with the fleet's authorisation · `spec/30-stories/US-013.md`
-- **US-014** [Y] Onboard a site in any time zone without a code change · `spec/30-stories/US-014.md`
-- **US-015** [Y] Change per-site booking parameters without a deployment · `spec/30-stories/US-015.md`
-- **US-016** [Y] Booking times in the site's time zone · `spec/30-stories/US-016.md`
-- **US-017** [K] EVSE allocated shortly before the slot and sent to the driver · `spec/30-stories/US-017.md`
-- **US-021** [K] Charger reservation shortly before the slot · `spec/30-stories/US-021.md`
-- **US-022** [K] Reservable flag per EVSE set by ops · `spec/30-stories/US-022.md`
-- **US-025** [K] Station-hold requests to site staff replace the ops phone call · `spec/30-stories/US-025.md`
-- **US-027** [K] Station holds cleared when the booking ends · `spec/30-stories/US-027.md`
-- **US-028** [Y] Station-hold record kept per booking · `spec/30-stories/US-028.md`
-- **US-029** [Y] Manual mode for a site's station holds · `spec/30-stories/US-029.md`
-- **US-030** [K] Site staff sign in with their own site-scoped login · `spec/30-stories/US-030.md`
-- **US-031** [K] Attendant sets each EVSE to free, occupied or faulted · `spec/30-stories/US-031.md`
-- **US-032** [Y] Attendant sees who is due and confirms arrivals · `spec/30-stories/US-032.md`
-- **US-033** [Y] Book a slot that starts overnight · `spec/30-stories/US-033.md`
-- **US-101** [K] Record arrival by scanning the EVSE QR code · `spec/30-stories/US-101.md`
-- **US-102** [K] Print a QR code for every EVSE of a site · `spec/30-stories/US-102.md`
-- **US-104** [K] Book and arrive without sharing location · `spec/30-stories/US-104.md`
-- **US-107** [Y] Report running late in one tap · `spec/30-stories/US-107.md`
-- **US-108** [Y] Extend the grace period of one booking · `spec/30-stories/US-108.md`
-- **US-109** [K] Create one no-show fee line at the site's terms · `spec/30-stories/US-109.md`
-- **US-112** [Y] Know the fee terms and cancel without a fee before the cut-off · `spec/30-stories/US-112.md`
-- **US-113** [Y] Dispute a no-show and get the decision · `spec/30-stories/US-113.md`
-- **US-114** [Y] Decide a disputed no-show on one screen of evidence · `spec/30-stories/US-114.md`
-- **US-115** [Y] Waive a no-show fee before it is invoiced · `spec/30-stories/US-115.md`
-- **US-121** [K] Place the bookings a fault left unplaced · `spec/30-stories/US-121.md`
-- **US-122** [Y] Review and undo automatic fault rebookings · `spec/30-stories/US-122.md`
-- **US-124** [K] Work every exception from one queue · `spec/30-stories/US-124.md`
-- **US-125** [Y] See each site's day on one live board · `spec/30-stories/US-125.md`
-- **US-126** [Y] Find a driver and message them from one place · `spec/30-stories/US-126.md`
-- **US-127** [K] Book a slot on behalf of a registered driver · `spec/30-stories/US-127.md`
-- **US-128** [Y] Force-confirm or force-release a booking · `spec/30-stories/US-128.md`
-- **US-129** [K] Run every booking task of an ops shift in the ops console · `spec/30-stories/US-129.md`
-- **US-130** [Y] Take EVSEs out for maintenance with a maintenance hold · `spec/30-stories/US-130.md`
-- **US-131** [Y] Keep capacity for one fleet with a fleet-priority hold · `spec/30-stories/US-131.md`
-- **US-201** [K] Gowanus EVSE status through AMPECO · `spec/30-stories/US-201.md`
-- **US-202** [Y] Gowanus session records through AMPECO · `spec/30-stories/US-202.md`
-- **US-203** [K] JFK EVSE status through ChargeLab · `spec/30-stories/US-203.md`
-- **US-204** [Y] Upload the LIC session CSV for reconciliation · `spec/30-stories/US-204.md`
-- **US-205** [Y] The same booking rules at sites of every supply pattern · `spec/30-stories/US-205.md`
-- **US-207** [Y] Every status view shows its age and flags stale status · `spec/30-stories/US-207.md`
-- **US-208** [Y] Live status only from a partner site's own sources · `spec/30-stories/US-208.md`
-- **US-209** [Y] EVSE status at any past moment · `spec/30-stories/US-209.md`
-- **US-211** [K] Every booking message opens the booking in the phone's browser · `spec/30-stories/US-211.md`
-- **US-212** [K] Book in two taps from a message link · `spec/30-stories/US-212.md`
-- **US-213** [K] Book a vehicle that has no telematics · `spec/30-stories/US-213.md`
-- **US-214** [Y] Book by texting a site code and a time · `spec/30-stories/US-214.md`
-- **US-215** [Y] Book and get booking messages on WhatsApp · `spec/30-stories/US-215.md`
-- **US-218** [K] The registered mobile number is the driver's only identity · `spec/30-stories/US-218.md`
-- **US-219** [K] A removed driver can no longer book for the fleet · `spec/30-stories/US-219.md`
-- **US-220** [K] Signed, single-use links in driver messages · `spec/30-stories/US-220.md`
-- **US-222** [K] Text commands count only from the booker or the charging driver · `spec/30-stories/US-222.md`
-- **US-223** [K] One confirmation per booking, in the reader's language · `spec/30-stories/US-223.md`
-- **US-225** [Y] A welcome message when a driver's number is registered · `spec/30-stories/US-225.md`
-- **US-227** [K] Every message and driver PWA screen in the driver's language · `spec/30-stories/US-227.md`
-- **US-229** [K] Messages only after the driver agrees; STOP ends them at once · `spec/30-stories/US-229.md`
-- **US-230** [Y] Consent texts and fee notices in three languages, with the accepted version kept · `spec/30-stories/US-230.md`
-- **US-231** [Y] Directions in the driver's own navigation app and one tap back to Uber or Lyft · `spec/30-stories/US-231.md`
-- **US-232** [K] Gowanus charger reservations sent and cancelled through AMPECO · `spec/30-stories/US-232.md`
-- **US-301** [K] Ops onboards a fleet and registers its drivers and vehicles on its behalf · `spec/30-stories/US-301.md`
-- **US-302** [Y] Fleet manager registers the fleet's drivers' mobile numbers · `spec/30-stories/US-302.md`
-- **US-303** [Y] Fleet manager keeps the fleet's vehicle profiles up to date · `spec/30-stories/US-303.md`
-- **US-304** [Y] Fleet adapter policy with a per-vehicle override · `spec/30-stories/US-304.md`
-- **US-305** [Y] Import a fleet's vehicles and driver numbers from one file · `spec/30-stories/US-305.md`
-- **US-306** [K] Fleet manager sees every booking of the fleet · `spec/30-stories/US-306.md`
-- **US-307** [Y] Fleet manager sees the no-shows of the fleet's drivers · `spec/30-stories/US-307.md`
-- **US-308** [Y] Monthly usage report per vehicle in the fleet portal · `spec/30-stories/US-308.md`
-- **US-310** [Y] Station operator sets each site's bookable days and hours · `spec/30-stories/US-310.md`
-- **US-311** [Y] Station operator changes a capacity rule and sees walk-up capacity · `spec/30-stories/US-311.md`
-- **US-314** [Y] Station operator sees what each fault cost in bookings · `spec/30-stories/US-314.md`
-- **US-315** [Y] Station operator sees upcoming bookings and their allocated EVSE · `spec/30-stories/US-315.md`
-- **US-316** [K] No-show fee as its own line, reversed by a new entry · `spec/30-stories/US-316.md`
-- **US-317** [Y] A fleet's owed, paid and outstanding at any past date · `spec/30-stories/US-317.md`
-- **US-318** [K] One consolidated monthly invoice per fleet, every item listed · `spec/30-stories/US-318.md`
-- **US-320** [Y] A fee reversed after invoicing returns as a credit on the next invoice · `spec/30-stories/US-320.md`
-- **US-321** [K] Fleet pays its invoice through Stripe without card data reaching Amperlane · `spec/30-stories/US-321.md`
-- **US-323** [Y] Finance sees each invoice's payment status and the overdue ones · `spec/30-stories/US-323.md`
-- **US-325** [Y] Finance views for invoices, reconciliation and disputes, with no operational rights · `spec/30-stories/US-325.md`
-- **US-326** [K] Completed-booking definition set by ops over stored evidence · `spec/30-stories/US-326.md`
-- **US-327** [Y] Monthly completed bookings for NYC, with pilot data marked · `spec/30-stories/US-327.md`
-- **US-328** [Y] Series A data-room report on demand, traceable to booking ids · `spec/30-stories/US-328.md`
-- **US-329** [Y] No-show and late-arrival rates per month, fleet and site · `spec/30-stories/US-329.md`
-- **US-400** [Y] Pilot history queryable with new bookings · `spec/30-stories/US-400.md`
-- **US-401** [Y] Re-runnable pilot migration that reconciles with the export · `spec/30-stories/US-401.md`
-- **US-402** [Y] Pilot outcomes the data room can trust · `spec/30-stories/US-402.md`
-- **US-403** [Y] One documented rule when the Sheets and Airtable disagree · `spec/30-stories/US-403.md`
-- **US-404** [Y] Raw pilot export kept read-only and for named people only · `spec/30-stories/US-404.md`
-- **US-406** [K] Pilot sites and fleets run on the platform from launch · `spec/30-stories/US-406.md`
-- **US-408** [K] Each booking invoiced once across the cut-over · `spec/30-stories/US-408.md`
-- **US-409** [Y] Real drivers on the platform before the Amperlane Concierge is switched off · `spec/30-stories/US-409.md`
-- **US-410** [K] Production access by role for named people, logged from the first release · `spec/30-stories/US-410.md`
-- **US-411** [K] Portal users see only their own organisation's data · `spec/30-stories/US-411.md`
-- **US-412** [K] Booking history with actor and reason code that nobody can edit · `spec/30-stories/US-412.md`
-- **US-418** [Y] Anonymise one driver on request without breaking records · `spec/30-stories/US-418.md`
-- **US-422** [Y] A simulated site to break chargers on purpose, and a staging that never touches production · `spec/30-stories/US-422.md`
-- **US-423** [K] Amperlane owns the code, the AWS accounts and the data · `spec/30-stories/US-423.md`
-- **US-424** [Y] One team from Phase 0 and a signed integration-layer handover · `spec/30-stories/US-424.md`
+_none_
 
 ### System stories with no task
 
-_none_
+- **SS-001** [K] Open-slot view shows only holdable slots, overnight included · `spec/30-stories/system/SS-001.md`
+- **SS-002** [K] Hold placement on the time grid with configured durations, cap check and hold time · `spec/30-stories/system/SS-002.md`
+- **SS-003** [K] Confirmation with pool feasibility, buffer, cap re-check and fixed terms · `spec/30-stories/system/SS-003.md`
+- **SS-004** [K] Connector compatibility through native connector or allowed adapter · `spec/30-stories/system/SS-004.md`
+- **SS-005** [K] Booker and charging driver recorded on every booking · `spec/30-stories/system/SS-005.md`
+- **SS-006** [K] Booking vehicle registered to the fleet, allowed and not retired · `spec/30-stories/system/SS-006.md`
+- **SS-007** [K] Burst fairness with per-site decisions in received order · `spec/30-stories/system/SS-007.md`
+- **SS-008** [K] Booking API latency and the five-times burst load test · `spec/30-stories/system/SS-008.md`
+- **SS-009** [K] Same-site next free slot, searched to the end of the day's bookable hours · `spec/30-stories/system/SS-009.md`
+- **SS-010** [K] Cross-site alternatives ranked by distance from the booked site · `spec/30-stories/system/SS-010.md`
+- **SS-011** [K] Offer acceptance by tap or keyword, with taken slot, expiry and decline · `spec/30-stories/system/SS-011.md`
+- **SS-012** [Y] Afternoon and overnight slots confirmed together, each on its own · `spec/30-stories/system/SS-012.md`
+- **SS-013** [K] Cancellation of active bookings with capacity returned at once · `spec/30-stories/system/SS-013.md`
+- **SS-014** [K] Idempotent booking commands with original result and key reuse refused · `spec/30-stories/system/SS-014.md`
+- **SS-015** [K] Ops booking on behalf of a registered driver under the same rules · `spec/30-stories/system/SS-015.md`
+- **SS-016** [Y] Ops force-confirm within capacity and force-release as a cancellation · `spec/30-stories/system/SS-016.md`
+- **SS-017** [Y] Maintenance hold on EVSEs or capacity for a time window · `spec/30-stories/system/SS-017.md`
+- **SS-018** [Y] Fleet-priority hold of capacity for one named fleet · `spec/30-stories/system/SS-018.md`
+- **SS-019** [Y] Bookings above a lowered limit stand and are listed for action · `spec/30-stories/system/SS-019.md`
+- **SS-020** [K] Actor and catalogue reason code on every booking state change · `spec/30-stories/system/SS-020.md`
+- **SS-021** [K] Site time zones, instants and daylight-saving changes · `spec/30-stories/system/SS-021.md`
+- **SS-022** [K] Booking presets for the driver page and text booking · `spec/30-stories/system/SS-022.md`
+- **SS-023** [K] Capacity rules and bookable hours cover each slot exactly once · `spec/30-stories/system/SS-023.md`
+- **SS-024** [Y] Station operator capacity-rule change in force at once, with walk-up EVSEs per window · `spec/30-stories/system/SS-024.md`
+- **SS-025** [K] Idempotent capacity-rule changes with one change and one history entry per key · `spec/30-stories/system/SS-025.md`
+- **SS-026** [K] Per-site booking parameters, versioned and changed without deployment · `spec/30-stories/system/SS-026.md`
+- **SS-027** [K] Per-site no-show fee terms required to go live and fixed at confirmation · `spec/30-stories/system/SS-027.md`
+- **SS-028** [Y] Site onboarding without code change, bookable only once live · `spec/30-stories/system/SS-028.md`
+- **SS-029** [K] Reservable flag per EVSE changed by ops without a release · `spec/30-stories/system/SS-029.md`
+- **SS-030** [K] EVSE connector records with type and maximum power · `spec/30-stories/system/SS-030.md`
+- **SS-031** [K] Signed printable QR code per EVSE, stable on reprint · `spec/30-stories/system/SS-031.md`
+- **SS-032** [K] Per-booking workflow with timers from the booking's fixed parameters · `spec/30-stories/system/SS-032.md`
+- **SS-033** [K] Reminder at the site's lead time to the charging driver · `spec/30-stories/system/SS-033.md`
+- **SS-034** [K] Durable booking timers that survive restarts and take effect once · `spec/30-stories/system/SS-034.md`
+- **SS-035** [Y] Self-hosted workflow engine in Amperlane's AWS account · `spec/30-stories/system/SS-035.md`
+- **SS-036** [K] Fault-rebooking saga ends every affected booking in a defined state · `spec/30-stories/system/SS-036.md`
+- **SS-037** [K] Driver number registration in E.164, once per fleet, several fleets allowed · `spec/30-stories/system/SS-037.md`
+- **SS-038** [K] Vehicle profiles added, edited and retired with connector, adapters and power · `spec/30-stories/system/SS-038.md`
+- **SS-039** [Y] Fleet adapter policy with per-vehicle override · `spec/30-stories/system/SS-039.md`
+- **SS-040** [K] Ops onboarding of a fleet and handover to a fleet manager · `spec/30-stories/system/SS-040.md`
+- **SS-041** [Y] Bulk import of vehicles and driver numbers with per-row errors · `spec/30-stories/system/SS-041.md`
+- **SS-042** [K] Booker-only numbers that book for the fleet but never charge · `spec/30-stories/system/SS-042.md`
+- **SS-043** [Y] Vehicle-data authorisation recorded by ops, visible to and revocable by the fleet · `spec/30-stories/system/SS-043.md`
+- **SS-044** [K] Optional manual SoC reading, with no vehicle data needed to book · `spec/30-stories/system/SS-044.md`
+- **SS-045** [K] Vehicles each registered driver may book under the fleet's policy · `spec/30-stories/system/SS-045.md`
+- **SS-100** [K] Late allocation at the site's allocation offset, never at booking time · `spec/30-stories/system/SS-100.md`
+- **SS-101** [K] EVSE choice: compatible, lowest sufficient power, free (walk-ups never displaced) · `spec/30-stories/system/SS-101.md`
+- **SS-102** [K] No overlapping allocations on one EVSE, buffer included · `spec/30-stories/system/SS-102.md`
+- **SS-103** [K] Database exclusion constraint rejects overlapping active allocations from any writer · `spec/30-stories/system/SS-103.md`
+- **SS-104** [K] Reallocation when the allocated EVSE is in use at station-hold time or the pre-arrival che · `spec/30-stories/system/SS-104.md`
+- **SS-105** [K] Site full before arrival: ops exception, immediate alternatives, 'moved — site full' · `spec/30-stories/system/SS-105.md`
+- **SS-106** [Y] Blocked-stall reallocation to a free compatible EVSE at the site · `spec/30-stories/system/SS-106.md`
+- **SS-107** [Y] Charge not started after arrival: rebook at the site or route to ops, no fee · `spec/30-stories/system/SS-107.md`
+- **SS-108** [K] Fault rebooking at the same site: allocated bookings rebooked, later bookings re-checked · `spec/30-stories/system/SS-108.md`
+- **SS-109** [K] Unplaced fault-affected bookings: driver offers and ops exception within the set times · `spec/30-stories/system/SS-109.md`
+- **SS-110** [K] Bulk rebooking proposals for unplaced bookings, approved by ops · `spec/30-stories/system/SS-110.md`
+- **SS-111** [Y] Fault rebooking summary and undo of a single rebooking · `spec/30-stories/system/SS-111.md`
+- **SS-112** [Y] Ops one-action rebooking of all bookings of an EVSE, marking it faulted · `spec/30-stories/system/SS-112.md`
+- **SS-113** [Y] Maintenance-hold rebooking as on a fault, 'moved — maintenance' · `spec/30-stories/system/SS-113.md`
+- **SS-114** [K] Ops rebooking of a single booking under the same rules · `spec/30-stories/system/SS-114.md`
+- **SS-115** [Y] Gowanus fault replay passes on the simulator (nine bookings at the shift change) · `spec/30-stories/system/SS-115.md`
+- **SS-116** [K] Charger reservation at the station-hold offset, expiry no earlier than the end of grace · `spec/30-stories/system/SS-116.md`
+- **SS-117** [K] Charger reservation rejected or unanswered: site-staff fallback and ops exception, booking · `spec/30-stories/system/SS-117.md`
+- **SS-118** [K] Site-staff station-hold request: stall, mark and clear times, delivery-failure exception · `spec/30-stories/system/SS-118.md`
+- **SS-119** [Y] Unacknowledged site-staff request: ops exception at the pre-arrival check, booking stays v · `spec/30-stories/system/SS-119.md`
+- **SS-120** [K] Clearing station holds on release, cancellation or rebooking · `spec/30-stories/system/SS-120.md`
+- **SS-121** [K] Station-hold record per booking: method, requests, answers and their times · `spec/30-stories/system/SS-121.md`
+- **SS-122** [Y] Gowanus degraded mode: station holds through site staff while AMPECO is down or stale · `spec/30-stories/system/SS-122.md`
+- **SS-123** [K] Manual mode per site: an ops timed list of station holds instead of automated ones · `spec/30-stories/system/SS-123.md`
+- **SS-124** [K] QR arrival: a valid scan within the arrival window records arrival · `spec/30-stories/system/SS-124.md`
+- **SS-125** [K] Session-start arrival on the allocated EVSE within the arrival window · `spec/30-stories/system/SS-125.md`
+- **SS-126** [K] Attendant arrival confirmation within the arrival window · `spec/30-stories/system/SS-126.md`
+- **SS-127** [K] Grace and auto-release: release at the end of grace without arrival, never after arrival · `spec/30-stories/system/SS-127.md`
+- **SS-128** [Y] Late arrival: kept as a no-show with the arrival time, re-offer triggered · `spec/30-stories/system/SS-128.md`
+- **SS-129** [Y] Running-late report: recorded for ops, no effect on grace, release or fee · `spec/30-stories/system/SS-129.md`
+- **SS-130** [Y] Ops grace extension per booking: reason code, up to the site maximum · `spec/30-stories/system/SS-130.md`
+- **SS-131** [K] No-show fee decision: one fee request, or ops review for excluded bookings · `spec/30-stories/system/SS-131.md`
+- **SS-132** [Y] Cancellation before the site's cut-off carries no no-show fee · `spec/30-stories/system/SS-132.md`
+- **SS-133** [Y] Blocked-stall report: stored with evidence, ops exception, counts as a failed station hold · `spec/30-stories/system/SS-133.md`
+- **SS-134** [Y] No-show disputes: raised within the window, ops decision with a reason code · `spec/30-stories/system/SS-134.md`
+- **SS-135** [Y] Dispute evidence timeline; location evidence only while the dispute is open · `spec/30-stories/system/SS-135.md`
+- **SS-200** [K] Status event application: idempotent, ordered by observed-at, source recorded · `spec/30-stories/system/SS-200.md`
+- **SS-201** [K] Status freshness: poll reconciliation keeps connected-site status within 60 s · `spec/30-stories/system/SS-201.md`
+- **SS-202** [K] Status read model: observed-at, source and stale flag on every status read · `spec/30-stories/system/SS-202.md`
+- **SS-203** [K] Status feed outage: bookings continue, status stale, ops exception before the next allocat · `spec/30-stories/system/SS-203.md`
+- **SS-204** [Y] Silent EVSE: unknown and out of allocation after the silence time, back on a non-fault sta · `spec/30-stories/system/SS-204.md`
+- **SS-205** [Y] Status history: status and source at any past moment · `spec/30-stories/system/SS-205.md`
+- **SS-206** [Y] Live status sources: CSMS API, OCPI Locations or attendant only; other sites static · `spec/30-stories/system/SS-206.md`
+- **SS-207** [K] Attendant status reports as the status source for the attendant's site · `spec/30-stories/system/SS-207.md`
+- **SS-208** [K] Fault intake: faulted EVSE out of new allocations and one fault event within the set time · `spec/30-stories/system/SS-208.md`
+- **SS-209** [Y] Return to service after a stable available period or an ops return · `spec/30-stories/system/SS-209.md`
+- **SS-210** [Y] Driver fault report: ops alert linked to site and EVSE, never a status · `spec/30-stories/system/SS-210.md`
+- **SS-211** [K] AMPECO status: webhooks and poll, status mapping, unmappable statuses · `spec/30-stories/system/SS-211.md`
+- **SS-212** [K] AMPECO charger reservations: send, cancel with retry, typed results · `spec/30-stories/system/SS-212.md`
+- **SS-213** [Y] AMPECO session records: read once available, deduplicated, late records accepted · `spec/30-stories/system/SS-213.md`
+- **SS-214** [K] ChargeLab status by webhook or poll, with payload validation · `spec/30-stories/system/SS-214.md`
+- **SS-215** [Y] LIC CSV ingestion: ops upload, validation, each row once, reconciliation only · `spec/30-stories/system/SS-215.md`
+- **SS-216** [Y] Session-start events from the CSMS where provided, normalised and deduplicated · `spec/30-stories/system/SS-216.md`
+- **SS-217** [Y] Vendor-neutral CSMS interface: no vendor SDK or vendor types in the booking core · `spec/30-stories/system/SS-217.md`
+- **SS-218** [Y] CSMS webhook signature or shared-secret verification · `spec/30-stories/system/SS-218.md`
+- **SS-219** [K] Exception queue: every exception type, dedupe, grace-critical first, close · `spec/30-stories/system/SS-219.md`
+- **SS-220** [Y] Live site board: bookings by state, EVSE status with age, open exceptions · `spec/30-stories/system/SS-220.md`
+- **SS-221** [Y] Driver search by mobile number, plate or booking code · `spec/30-stories/system/SS-221.md`
+- **SS-222** [K] Shift without pilot tools: every pilot booking task available in the console · `spec/30-stories/system/SS-222.md`
+- **SS-223** [K] Fleet portal bookings: the fleet's upcoming and past bookings with state · `spec/30-stories/system/SS-223.md`
+- **SS-224** [Y] Fleet portal no-shows by driver (rebooks and cancellations excluded) · `spec/30-stories/system/SS-224.md`
+- **SS-225** [Y] Today's arrival and charging per booked vehicle · `spec/30-stories/system/SS-225.md`
+- **SS-226** [Y] Station portal upcoming bookings with allocated EVSE, no driver phone numbers · `spec/30-stories/system/SS-226.md`
+- **SS-227** [Y] Station portal fault and maintenance outcomes per affected booking · `spec/30-stories/system/SS-227.md`
+- **SS-228** [K] Attendant view: today's due drivers by EVSE and station-hold requests to mark and clear · `spec/30-stories/system/SS-228.md`
+- **SS-229** [K] Completion evidence per booking and an ops-configurable completed definition · `spec/30-stories/system/SS-229.md`
+- **SS-230** [Y] Monthly completed bookings for NYC, pilot data marked and separable · `spec/30-stories/system/SS-230.md`
+- **SS-231** [Y] Series A data-room report for a month range, traceable to booking ids · `spec/30-stories/system/SS-231.md`
+- **SS-232** [Y] No-show and late-arrival rates per month, fleet and site · `spec/30-stories/system/SS-232.md`
+- **SS-233** [Y] Per-vehicle monthly fleet report with matched energy · `spec/30-stories/system/SS-233.md`
+- **SS-234** [Y] Fault cost per fault: bookings rebooked, offered alternatives or sent to ops · `spec/30-stories/system/SS-234.md`
+- **SS-235** [Y] Ops-free booking measure for Five Boroughs from the audit trail · `spec/30-stories/system/SS-235.md`
+- **SS-236** [K] Station portal capacity-rule saves: one idempotency key per form, repeated on every resend · `spec/30-stories/system/SS-236.md`
+- **SS-237** [K] Ops console capacity-rule saves: one idempotency key per form, repeated on every resend · `spec/30-stories/system/SS-237.md`
+- **SS-300** [K] Booking confirmation and cancellation messages: one per booking per recipient · `spec/30-stories/system/SS-300.md`
+- **SS-301** [K] Allocation, reallocation and rebooking notices to the charging driver · `spec/30-stories/system/SS-301.md`
+- **SS-302** [K] Booking message catalogue: every message in the driver's language, with the booking's link · `spec/30-stories/system/SS-302.md`
+- **SS-303** [K] Driver language preference: English, Spanish or Bengali, latest setting wins, English fall · `spec/30-stories/system/SS-303.md`
+- **SS-304** [K] Messaging consent and STOP/START per channel · `spec/30-stories/system/SS-304.md`
+- **SS-305** [Y] Consent texts and fee notices: versions in three languages, acceptance stored · `spec/30-stories/system/SS-305.md`
+- **SS-306** [K] Welcome and cut-over messages for newly registered and carried-over drivers · `spec/30-stories/system/SS-306.md`
+- **SS-307** [K] Delivery tracking and one resend on the other channel for time-critical messages · `spec/30-stories/system/SS-307.md`
+- **SS-308** [Y] WhatsApp channel: booking and booking messages, templates outside the 24-hour window · `spec/30-stories/system/SS-308.md`
+- **SS-309** [K] Inbound deduplication by provider message id · `spec/30-stories/system/SS-309.md`
+- **SS-310** [K] Keyword replies in English, Spanish and Bengali: cancel, late, accept, decline, fault, hel · `spec/30-stories/system/SS-310.md`
+- **SS-311** [K] Text booking: site code and time to a booking or an offer, with no ops action · `spec/30-stories/system/SS-311.md`
+- **SS-312** [K] Messages the platform cannot act on, and unregistered numbers: to ops, acknowledged · `spec/30-stories/system/SS-312.md`
+- **SS-313** [Y] Station operator fault and maintenance notice by SMS within the set time · `spec/30-stories/system/SS-313.md`
+- **SS-314** [Y] Ops message to a driver on the driver's channel, recorded on the booking · `spec/30-stories/system/SS-314.md`
+- **SS-315** [Y] Status messages to booker-only numbers so small fleets follow bookings without the portal · `spec/30-stories/system/SS-315.md`
+- **SS-316** [K] Re-offer and alternatives message within the set time, accepted by one tap or keyword · `spec/30-stories/system/SS-316.md`
+- **SS-317** [Y] Messaging webhook signature verification · `spec/30-stories/system/SS-317.md`
+- **SS-318** [K] Driver identity: the registered mobile number only, with entitlement across fleets · `spec/30-stories/system/SS-318.md`
+- **SS-319** [K] Driver removal: no booking for that fleet on any channel from the moment of removal · `spec/30-stories/system/SS-319.md`
+- **SS-320** [K] Signed driver links: bound to the first device, driver-scoped, with expiry and renewal · `spec/30-stories/system/SS-320.md`
+- **SS-321** [K] Limited view and one-time codes on unverified devices, with lockout · `spec/30-stories/system/SS-321.md`
+- **SS-322** [K] Sender authorisation: booking-changing messages only from the booker or charging driver · `spec/30-stories/system/SS-322.md`
+- **SS-323** [K] Organisation-scoped access for fleet, station-operator and attendant users · `spec/30-stories/system/SS-323.md`
+- **SS-324** [K] Attendant site-scoped login on a site device, revocable by ops · `spec/30-stories/system/SS-324.md`
+- **SS-325** [K] Booking link opens the booking in the phone's browser, with nothing to install · `spec/30-stories/system/SS-325.md`
+- **SS-326** [K] Two-tap booking from the open-slot view with presets, SoC optional · `spec/30-stories/system/SS-326.md`
+- **SS-327** [K] One-tap actions: cancel, running late, report a faulted EVSE or a blocked stall, accept an · `spec/30-stories/system/SS-327.md`
+- **SS-328** [K] Driver PWA screens in the driver's language: English, Spanish or Bengali · `spec/30-stories/system/SS-328.md`
+- **SS-329** [Y] Times shown in the site's time zone with the zone indicated · `spec/30-stories/system/SS-329.md`
+- **SS-330** [Y] Directions in the driver's navigation app and one tap back to the Uber Driver or Lyft Driv · `spec/30-stories/system/SS-330.md`
+- **SS-331** [K] No location request without the driver's opt-in · `spec/30-stories/system/SS-331.md`
+- **SS-332** [K] Append-only audit trail: state changes, overrides, manual ops actions, station holds · `spec/30-stories/system/SS-332.md`
+- **SS-333** [Y] Configuration change audit with before and after values · `spec/30-stories/system/SS-333.md`
+- **SS-334** [Y] Security event audit: sign-ins, failed sign-ins, role changes, data access, configuration  · `spec/30-stories/system/SS-334.md`
+- **SS-335** [Y] Personal-data access log: every view and export of a driver's personal data · `spec/30-stories/system/SS-335.md`
+- **SS-336** [Y] Retention purge: personal data deleted or anonymised when its period ends · `spec/30-stories/system/SS-336.md`
+- **SS-337** [Y] Driver anonymisation on request, records kept under a pseudonym · `spec/30-stories/system/SS-337.md`
+- **SS-338** [K] Breach scope listing: individuals and data elements, vendor-held included · `spec/30-stories/system/SS-338.md`
+- **SS-339** [Y] De-identified data outside production: exports, data-room extracts, staging seeds · `spec/30-stories/system/SS-339.md`
+- **SS-340** [Y] Location kept only as derived arrival events; raw readings deleted · `spec/30-stories/system/SS-340.md`
+- **SS-341** [K] Location consent guard: no location stored without an active opt-in inside the window · `spec/30-stories/system/SS-341.md`
+- **SS-342** [K] Sensitive-identifier register: listed, encrypted, named roles, reads audited; unlisted not · `spec/30-stories/system/SS-342.md`
+- **SS-400** [K] Generic double-entry ledger that records every business-model option · `spec/30-stories/system/SS-400.md`
+- **SS-401** [K] No-show fee line, exactly one per no-show, separate from energy · `spec/30-stories/system/SS-401.md`
+- **SS-402** [K] Append-only ledger; fee reversal or waiver by a new entry · `spec/30-stories/system/SS-402.md`
+- **SS-403** [Y] Fleet position at any past date: owed, paid, outstanding · `spec/30-stories/system/SS-403.md`
+- **SS-404** [K] Monthly invoice build at close: one net-30 invoice per fleet, late records carried · `spec/30-stories/system/SS-404.md`
+- **SS-405** [K] Invoice lines itemised and traceable to ledger entries and bookings · `spec/30-stories/system/SS-405.md`
+- **SS-406** [Y] Credit lines for fees reversed after their invoice was issued · `spec/30-stories/system/SS-406.md`
+- **SS-407** [Y] Session matching: booking to session record within the set time · `spec/30-stories/system/SS-407.md`
+- **SS-408** [Y] Reconciliation queue: unmatched bookings and records held from invoicing until ops resolve · `spec/30-stories/system/SS-408.md`
+- **SS-409** [Y] Invoice payment status and overdue flag · `spec/30-stories/system/SS-409.md`
+- **SS-410** [K] Cut-over invoicing: each booking invoiced once, by slot start against the cut-over instant · `spec/30-stories/system/SS-410.md`
+- **SS-411** [Y] Finance views of invoices, reconciliation and disputes across every fleet and site · `spec/30-stories/system/SS-411.md`
+- **SS-412** [K] Idempotent invoice submission, retried while the provider is down · `spec/30-stories/system/SS-412.md`
+- **SS-413** [K] Payment webhooks with scheduled status reconciliation · `spec/30-stories/system/SS-413.md`
+- **SS-414** [K] Invoice payment on Stripe-hosted pages, no card data at Amperlane · `spec/30-stories/system/SS-414.md`
+- **SS-415** [Y] Payment-provider interface: provider replaceable without core changes · `spec/30-stories/system/SS-415.md`
+- **SS-416** [Y] Pilot history loaded into the platform model, linked to live records · `spec/30-stories/system/SS-416.md`
+- **SS-417** [Y] Re-runnable migration with per-record outcome and count reconciliation · `spec/30-stories/system/SS-417.md`
+- **SS-418** [Y] Status re-classification with original value, rule and evidence; pre-2026-02-01 flag · `spec/30-stories/system/SS-418.md`
+- **SS-419** [Y] Sheet-versus-Airtable precedence rule with a conflict list · `spec/30-stories/system/SS-419.md`
+- **SS-420** [Y] Raw pilot export: read-only, named people only, deleted at the end of retention · `spec/30-stories/system/SS-420.md`
+- **SS-421** [K] Open pilot bookings carried over at cut-over, drivers told · `spec/30-stories/system/SS-421.md`
+- **SS-422** [K] Cut-over switch: one configured instant, pilot tools out of the booking path · `spec/30-stories/system/SS-422.md`
+- **SS-423** [Y] Pre-launch real-booking period and go-live record · `spec/30-stories/system/SS-423.md`
+- **SS-424** [K] Encryption in transit (TLS 1.2 or later) and at rest with KMS keys · `spec/30-stories/system/SS-424.md`
+- **SS-425** [K] Production in an AWS account separate from every other environment · `spec/30-stories/system/SS-425.md`
+- **SS-426** [Y] Recorded change management for every production change · `spec/30-stories/system/SS-426.md`
+- **SS-427** [K] Architecture gates: modular monolith, TypeScript on PostgreSQL and AWS, mature open source · `spec/30-stories/system/SS-427.md`
+- **SS-428** [K] Booking availability 99.9% from 05:00 to 01:00 ET, measured by a synthetic check · `spec/30-stories/system/SS-428.md`
+- **SS-429** [K] Planned downtime only between 01:00 and 05:00 ET · `spec/30-stories/system/SS-429.md`
+- **SS-430** [K] Sizing for 10,000 completed bookings a month, proven by a seeded load test · `spec/30-stories/system/SS-430.md`
+- **SS-431** [Y] Hosting draws AWS Activate credits first · `spec/30-stories/system/SS-431.md`
+- **SS-432** [Y] Versioned, documented API used by every front-end · `spec/30-stories/system/SS-432.md`
+- **SS-433** [K] Production access: named people, roles, every access logged in a separate log account · `spec/30-stories/system/SS-433.md`
+- **SS-434** [K] Amperlane ownership: its repositories, Terraform-only AWS, full data export · `spec/30-stories/system/SS-434.md`
+- **SS-435** [Y] Simulated site and sandbox-only staging · `spec/30-stories/system/SS-435.md`
+- **SS-436** [K] Outage copy of the next bookings per site, outside the platform, ops-only · `spec/30-stories/system/SS-436.md`
+- **SS-437** [Y] Runbook for every alert and external system, used by Amperlane before hypercare ends · `spec/30-stories/system/SS-437.md`
+- **SS-438** [Y] Amperlane engineers in the repositories, and a signed integration handover checklist · `spec/30-stories/system/SS-438.md`
+- **SS-439** [Y] No prototype code in the codebase: provenance check · `spec/30-stories/system/SS-439.md`
+- **SS-440** [Y] Finance role: read-only, refused on booking, capacity-rule and fleet-policy commands · `spec/30-stories/system/SS-440.md`
 
 ### Tasks with no requirement
 

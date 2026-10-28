@@ -1,18 +1,20 @@
 ---
 id: DESIGN
 type: design
-title: Amperlane Platform v1 high-level design (v0 hypothesis)
+title: Amperlane Platform v1 high-level design (v1)
 status: approved
 owner: Mykola Marchuk
-version: 0
+version: 1
 kyiv: null
 parents: [BUSINESS-CONTEXT, INTEGRATIONS]
 sources: [SRC-D1, SRC-C1, SRC-C2, SRC-D2]
 ---
-# High-level design, v0 (hypothesis)
+# High-level design, v1
 
-> **v0 hypothesis** (playbook §10.1). This sketch is built from the context and the confirmed integration capabilities.
-> It will be revised after Step 3. **Requirements must not cite this file**; they cite sources and `CTX-` facts.
+> **v1** (Gate 3, 2026-10-28). v0 was a hypothesis (playbook §10.1), built from the context and the confirmed
+> integration capabilities. v1 adds what Step 3 settled: the refined component names the system stories use (§2.6) and
+> the configured parameters with their defaults (§8, A-059). The rest of the v0 text stands until a trigger of §7.
+> **Requirements must not cite this file**; they cite sources and `CTX-` facts.
 > Decisions the sources show as already agreed are recorded as ADRs in [adr/](adr/). Everything else here is a
 > proposal, and each component says how solid it is:
 >
@@ -73,6 +75,9 @@ Dotted lines are options, later phases or unconfirmed access. There is no data i
 
 ## 2. Components
 
+Each system story names its component in `component:`. Five names refine the v0 components below (§2.6); the old names
+stay in §2.1 – §2.5 for the parts they still describe.
+
 ### 2.1 Channels
 
 | Component | Responsibility | Why it exists | Solidity |
@@ -128,6 +133,19 @@ Dotted lines are options, later phases or unconfirmed access. There is no data i
 | AWS (ECS Fargate, RDS), Terraform, separate production account | Hosting in Amperlane's accounts. | CTX-005, CTX-085, CTX-107 | AWS and Terraform agreed (ADR-001); services proposed |
 | OpenTelemetry + Grafana | Observability, SOC 2 evidence. | CTX-107 | proposed |
 | EVerest simulator | A simulated site for tests: faults, overstays, late drivers, the Gowanus replay. | CTX-103 | client-stated |
+
+### 2.6 Components refined in Step 3
+
+Adopted at Gate 3 (2026-10-28). Booking & calendar keeps its calendar part (holds, confirmation, cancellation, offers,
+the state machine and reason codes), and Inventory & availability its configuration part. None of these changes an ADR.
+
+| Component | Responsibility | Formerly | Solidity |
+|---|---|---|---|
+| Allocation & rebooking | Late allocation and EVSE choice, the no-overlap guarantee, reallocation, site-full handling, fault and maintenance rebooking, proposals and undo. | Booking & calendar (allocation part), §2.3 | agreed (ADR-005, ADR-006); timings A-002 |
+| Station-hold dispatcher | The station hold at the station-hold offset per supply pattern (charger reservation, site-staff request, ops manual list), with fallbacks, acknowledgements, clearing and the station-hold record; reaches chargers only through the CSMS integrations. | Booking & calendar (station-hold part), §2.3 and §3 | client-stated; reservations per Q-009 |
+| Arrival & no-show | Arrival evidence (QR scan, CSMS session start, attendant), grace and auto-release, late arrival and running late, grace extension, the no-show fee decision, blocked-stall reports and disputes. | Booking & calendar (arrival part), §2.3 | client-stated; grace A-003, session starts A-051 |
+| EVSE status service | Vendor-neutral EVSE status with its freshness and history, feed outage and silent-EVSE handling, attendant status, fault intake and return to service. | Inventory & availability (live-status part), §2.3 | client-stated |
+| Partner portals | Fleet portal, station portal and attendant view with their read models; the editing behaviour belongs to the core components. | Fleet portal, Station portal and Attendant view, §2.1 | client-stated; attendant use unconfirmed (U-13) |
 
 ## 3. One booking engine, three supply patterns
 
@@ -233,5 +251,89 @@ Original values and source system are kept (CTX-053, CTX-054, Q-020).
 
 ## 7. Revision trigger
 
-Revise this file to v1 after Gate 3 (stories and system stories). Also revise it, for the affected parts, when any of
-these close: Q-001, Q-010, Q-014, Q-015, Q-017, Q-026, Q-038, CF-015, CF-020, CF-025.
+v1 is the revision after Gate 3 (stories and system stories). Revise this file, for the affected parts, when any of
+these close: Q-001, Q-010, Q-014, Q-015, Q-017, Q-026, Q-038, CF-015, CF-020, CF-025; revise §8 when a value of A-059
+is changed in Phase 0 or a client decision in §8 is made.
+
+## 8. Configured parameters
+
+The requirements name "a set time", "a set period" or "a set interval" with no number; the system stories name each
+value and SS-026 holds the catalogue (REQ-146). The defaults below are A-059 (Intellias proposal, Step 3.3,
+2026-10-28, validated in Phase 0) unless the basis names a source or a registered item for that very parameter.
+Client decisions have no default. Each value is changed without a deployment, and a booking keeps the version it was
+confirmed under (SS-026 clauses 4, 5). Offsets are before the slot start unless stated. The owning SS holds the value;
+its consumers follow in brackets.
+
+| Parameter | Default | Unit | Owning SS (consumers) | Basis |
+|---|---|---|---|---|
+| **Per site (SS-026 clause 1)** | | | | |
+| Time grid | 15 | min | SS-026 (SS-001, SS-002) | A-001 (SRC-C2@00:27:21, SRC-D2#7) |
+| Booking durations | 30, 45, 60 | min | SS-026 (SS-002) | A-001 |
+| Buffer | 10 | min | SS-026 (SS-102) | A-001 |
+| Hold time | 3 | min | SS-026 (SS-002) | A-001 |
+| Allocation offset | 15 | min | SS-026 (SS-100) | A-002 (T-15) |
+| Station-hold offset | 15, run after allocation | min | SS-026 (SS-104, SS-116, SS-118) | A-002 (T-15) |
+| Pre-arrival check offset | 10 | min | SS-026 (SS-104, SS-105, SS-119) | A-002 (T-10) |
+| Reminder lead time | 30 | min | SS-026 (SS-033) | A-059 (Intellias proposal; A-011 left the default open). Before allocation and station hold, so a cancel or "running late" frees the slot before an EVSE is tied up (JS-224). |
+| Grace period | 10 | min | SS-026 (SS-127) | REQ-034, A-003 (SRC-C1@00:09:55) |
+| Maximum grace extension (total per booking) | 5 | min | SS-026 (SS-130) | A-059 (Intellias proposal): within A-020's mechanism; a station term (CF-021, Q-004) |
+| Arrival-window start | 15 | min | SS-026 (SS-124 – SS-126, SS-407) | A-059 (Intellias proposal): equal to the allocation offset (A-002): arrival is judged on the allocated EVSE |
+| Reservation answer timeout | 60 | s | SS-026 (SS-117, SS-212) | A-059 (Intellias proposal) |
+| Site-staff delivery timeout | 2 | min | SS-026 (SS-118, SS-120, SS-122) | A-059 (Intellias proposal) |
+| Clear-instruction time | 2, after release, cancellation or rebooking | min | SS-026 (SS-120) | A-059 (Intellias proposal) |
+| Cancellation cut-off | the slot start | instant | SS-026 (SS-013, SS-132) | A-049 (Q-042) |
+| Silence time | 5 | min | SS-026 (SS-204) | A-059 (Intellias proposal): must exceed the 60 s stale threshold (N2) |
+| **Platform-wide (SS-026 clause 2)** | | | | |
+| Site-full exception time | 60 | s | SS-026 (SS-105) | A-059 (Intellias proposal) |
+| Unplaced-booking exception time | 5, after the fault | min | SS-026 (SS-109) | A-059 (Intellias proposal) |
+| Fault reaction time | 60, after the fault status is received | s | SS-026 (SS-208) | A-059 (Intellias proposal) |
+| Late-arrival re-offer time | 60, after the late arrival is recorded | s | SS-026 (SS-128, SS-316) | A-059 (Intellias proposal) |
+| Fault offer time | 3, after the fault is recorded | min | SS-026 (SS-109, SS-316) | A-059 (Intellias proposal) |
+| Station-operator notice time | 15, after the fault is recorded or the hold saved | min | SS-026 (SS-313) | A-059 (Intellias proposal) |
+| Session-start wait | 5, after the later of arrival and slot start (SS-107 clause 1) | min | SS-026 (SS-107) | A-059 (Intellias proposal) |
+| Stable-available time | 30 | min | SS-026 (SS-209) | A-059 (Intellias proposal) |
+| Timer lateness tolerance | 60, after the end of grace | s | SS-026 (SS-127) | A-059 (Intellias proposal) |
+| Session match time | 15, after the record is stored | min | SS-026 (SS-407) | A-059 (Intellias proposal) |
+| Session-record read interval | 5 | min | SS-026 (SS-213) | A-059 (Intellias proposal) |
+| Invoice close offset | 3 days after month end; the close runs at 00:00 America/New_York on the 4th calendar day; period boundaries stay in each site's time zone (REQ-218, A-013) | days | SS-026 (SS-404, SS-410) | A-059 (Intellias proposal) |
+| Delivery-status wait | 3 | min | SS-026 (SS-307) | A-059 (Intellias proposal) |
+| Link validity after grace | 24, after grace ends | h | SS-026 (SS-320) | A-059 (Intellias proposal) |
+| Link validity for a driver-page link requested by text | 24, from issue | h | SS-026 (SS-320) | A-059 (Intellias proposal) |
+| One-time-code validity | 10 | min | SS-026 (SS-321) | A-059 (Intellias proposal) |
+| Verified-device period | 30 | days | SS-026 (SS-321) | A-059 (Intellias proposal) |
+| Wrong-code limit | 5 in a row per number | wrong codes | SS-026 (SS-321) | A-059 (Intellias proposal) |
+| Code lockout time | 15 | min | SS-026 (SS-321) | A-059 (Intellias proposal) |
+| Cancellation retry interval (charger reservations) | 60, until confirmed or the reservation expires | s | SS-026 (SS-212) | A-059 (Intellias proposal) |
+| Payment retry interval | 15 | min | SS-026 (SS-412) | A-059 (Intellias proposal) |
+| Payment check interval | 1 | h | SS-026 (SS-413) | A-059 (Intellias proposal) |
+| Outage-copy refresh interval | 5 | min | SS-026 (SS-436) | A-059 (Intellias proposal) |
+| Outage-copy horizon | 12, after the refresh | h | SS-026 (SS-436) | A-059 (Intellias proposal) |
+| Number of cross-site alternatives | 3 | offers | SS-026 (SS-010) | A-059 (Intellias proposal) |
+| Dispute window | 30, from the booking's slot start | days | SS-026 (SS-134) | A-047 |
+| Default adapter policy for new fleets | adapters forbidden until the fleet sets its policy (REQ-072) | setting | SS-026 (SS-039) | A-059 (Intellias proposal): connector mismatches in the pilot (CTX-049) |
+| **Per CSMS integration (SS-026 clause 9)** | | | | |
+| Status poll interval | 20 | s | SS-026 (SS-201) | A-059 (Intellias proposal): must keep N1's 60 s (REQ-104, REQ-107) within the vendor's rate limit (Q-061) |
+| **Held by their own SS** | | | | |
+| Idempotency-key retention (platform keys, inbound message and event ids) | at least 7 | days | SS-014, SS-025, SS-309 | A-035 |
+| Provider idempotency-key retention (Stripe) | 24 | h | SS-412 | A-059 (Intellias proposal): from Stripe's documentation, not a presale source (Q-062) |
+| Cut-over instant | 2027-03-01 01:00 America/New_York | instant | SS-422 (SS-410, SS-421) | A-059 (Intellias proposal): the launch date of REQ-142 (SRC-C1@00:29:06) at the start of the N5 maintenance window (A-028), Step 3.1 bucket-5 #46; moves with CF-027 |
+| Consecutive failed synthetic checks before the availability alert | 3 | checks (one a minute, A-033) | SS-428 | A-059 (Intellias proposal) |
+| Prototype similarity threshold | a duplicated block of 10 or more lines | lines | SS-439 | A-059 (Intellias proposal) |
+| Staging test number range | +1 NPA-555-0100 to NPA-555-0199 | phone numbers | SS-339 (SS-435) | A-059 (Intellias proposal): NANP numbers reserved for fictional use, not a presale source |
+| Completed definition | the Completed state (data-model §3) | definition | SS-229 | Q-017's interim rule (A-027 withdrawn) |
+| Replies to unregistered numbers | off | setting | SS-312 (SS-310) | Q-056 with Step 3.1 bucket-5 #28 (no reply until the agreement rule is known) |
+| WhatsApp channel enabled | off, until the Twilio WhatsApp sender and the EN/ES/BN templates are approved | setting | SS-308 | constitution R7 fallback for U-10 (Q-034) |
+| Site time zone | America/New_York for the NYC sites | zone | SS-021 | A-013 |
+| **Client decisions: no default** | | | | |
+| No-show fee amount and station share | client decision | USD | SS-027 | Q-002, Q-005 (bucket-5 #17); recorded per site before it goes live; an explicit zero is allowed |
+| Bookable hours and capacity rules | client decision | — | SS-023 | Q-005; set per site at onboarding |
+| Agreement forms | client decision | list | SS-304 | Q-056 (legal policy); none until Q-056 is answered |
+| Pre-launch real-booking period | client decision | dates | SS-423 | Q-055 (go-live criteria); none until Q-055 is answered |
+| Raw pilot export retention period | client decision | period | SS-420 | Q-022, A-025; none until counsel sets it, shown as "not set" (SS-420 clause 5) |
+
+59 parameters: 15 with a source or a registered item, 39 under A-059, 5 client decisions.
+
+Not configuration: webhook secrets (SS-218, SS-317) are credentials; the 60 s stale threshold and status-age bound
+(constitution N1, N2; REQ-104, REQ-160), 99% of reachable minutes (A-031), October 2025 (REQ-095), the daily purge
+(A-058), the 10 s dispatch (constitution N11, A-036) and the N24 page targets are fixed values in the constitution or a
+requirement.

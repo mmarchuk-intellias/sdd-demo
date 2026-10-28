@@ -4,7 +4,7 @@ type: requirements
 title: Amperlane Platform v1 requirements (closed list for Gate 2)
 status: approved
 owner: Mykola Marchuk
-version: 2
+version: 3
 kyiv: null
 parents: [BUSINESS-CONTEXT, CONSTITUTION]
 sources: [SRC-D1, SRC-C1, SRC-C2, SRC-D2, SRC-R1]
@@ -444,7 +444,7 @@ definition is baseline, while billing per completed booking is parked.
 | REQ-228 | U-F | Migrated statuses are re-classified so that moved, no-show and cancelled are distinct outcomes, and each re-classified record keeps its original status and the rule and evidence used. | SRC-C2@00:05:22, SRC-C2@00:52:53, CTX-054 | Y (provisional) | A-026, CF-018, Q-029 |
 | REQ-229 | U-F | Where a site's pilot Google Sheet and Airtable disagree, the migration applies one documented precedence rule and lists every conflict it resolved. | SRC-C2@00:02:34, SRC-C2@00:05:22, CTX-042, CTX-054 | Y (provisional) | Q-020, A-026 |
 | REQ-230 | U-F | Migrated records from before February 2026 carry a data-quality flag. | SRC-C2@00:05:22, CTX-054 | Y (provisional) | Q-020 |
-| REQ-231 | U-F | At cut-over, every pilot booking for a slot after the cut-over exists in the platform with its driver, site and window, and its driver is told in their language how to manage it. | SRC-C1@00:29:06, SRC-C1@00:33:22, CTX-079 | K (provisional) | A-026 |
+| REQ-231 | U-F | At cut-over, every pilot booking for a slot after the cut-over exists in the platform with its driver, site and window, also where its driver's number is not registered or no registered vehicle is known for it, and its driver is told in their language how to manage it. | SRC-C1@00:29:06, SRC-C1@00:33:22, CTX-079, CTX-042 | K (provisional) | A-026, A-055, A-061 | v2 | approved |
 | REQ-232 | U-F | Each booking is invoiced exactly once, by the pilot process if its slot started before the cut-over and by the platform otherwise. | SRC-C1@00:13:26, SRC-C2@00:03:28, CTX-051 | K (provisional) | Q-017 |
 
 ### Security, privacy and compliance

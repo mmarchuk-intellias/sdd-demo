@@ -4,7 +4,7 @@ type: changelog
 title: Approved changes to the baseline
 status: approved
 owner: Mykola Marchuk
-version: 1
+version: 2
 kyiv: null
 parents: [REQUIREMENTS]
 sources: []
@@ -13,7 +13,8 @@ sources: []
 
 Changes to approved artefacts (playbook §7, constitution spec convention 14). Each CR records its trigger, the changed
 ids (with their new version), the impacted ids and who approved it. The triage that proposed CR-001 – CR-008 is
-summarised in the Step 3 work; the changed rows are in requirements.md.
+summarised in the Step 3 work; the changed rows are in requirements.md. CR-009 comes from the Step 3.3 triage of
+the system stories, decided at Gate 3 (2026-10-28).
 
 | CR | Date | Trigger | Changed | Impact | Approved by |
 |---|---|---|---|---|---|
@@ -25,3 +26,4 @@ summarised in the Step 3 work; the changed rows are in requirements.md.
 | CR-006 | 2026-10-28 | Step 3 red team: audit of finance and site-staff views | REQ-263 (v2) | US-325 | Mykola Marchuk |
 | CR-007 | 2026-10-28 | Step 3 red team: site full at the pre-arrival check | REQ-148 (v2) | JS-019 | Mykola Marchuk |
 | CR-008 | 2026-10-28 | new requirement from a source (SRC-C2@00:24:04) | REQ-336 (new, Y), epics.md FT-02.1 | JS-020 | Mykola Marchuk |
+| CR-009 | 2026-10-28 | contradiction REQ-231 vs REQ-009 v2 and REQ-012 (Step 3.3 system stories, Gate 3) | REQ-231 (v2) | JS-407, US-406; SS-003, SS-005, SS-006, SS-101, SS-421 | Mykola Marchuk |
