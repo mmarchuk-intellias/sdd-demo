@@ -6,20 +6,20 @@
 
 | Artefact | Total | draft | in-review | approved | deprecated |
 |---|---|---|---|---|---|
-| Requirements | 335 | 0 | 0 | 330 | 5 |
-| User/job stories | 0 | 0 | 0 | 0 | 0 |
+| Requirements | 336 | 0 | 0 | 331 | 5 |
+| User/job stories | 152 | 0 | 0 | 152 | 0 |
 | System stories | 0 | 0 | 0 | 0 | 0 |
 | Tasks | 0 | 0 | 0 | 0 | 0 |
 
 | Quadrant | S-F | S-NF | U-F | U-NF |
 |---|---|---|---|---|
-| Requirements | 126 | 49 | 118 | 37 |
+| Requirements | 127 | 49 | 118 | 37 |
 
 | KYIV | K | Y | I | V | none | provisional | final |
 |---|---|---|---|---|---|---|---|
-| Requirements | 100 | 140 | 28 | 62 | 0 | 330 | 0 |
+| Requirements | 100 | 141 | 28 | 62 | 0 | 331 | 0 |
 
-**K coverage:** **100 K gap(s)**, trace.py exits 1.
+**K coverage:** **76 K gap(s)**, trace.py exits 1.
 
 Sources registered: SRC-C1, SRC-C2, SRC-D1, SRC-D2, SRC-R1.
 
@@ -27,278 +27,213 @@ Sources registered: SRC-C1, SRC-C2, SRC-D1, SRC-D2, SRC-R1.
 
 ### Requirements with no story (V excluded)
 
-- **REQ-001** [K] Drivers and fleet users see, per site and time, only the slots in which a hold for the cho · `spec/20-requirements/requirements.md:43`
-- **REQ-002** [K] A booker creates a booking by choosing a site, a start time on the site's time grid and on · `spec/20-requirements/requirements.md:44`
-- **REQ-003** [K] A booking claims capacity from the pool of compatible EVSEs at the site and gets a specifi · `spec/20-requirements/requirements.md:45`
-- **REQ-004** [K] A new hold or booking is accepted only if, for every slot it covers, the holds and booking · `spec/20-requirements/requirements.md:46`
-- **REQ-005** [K] A site's capacity rules each set days of the week, a time window and a cap on bookable EVS · `spec/20-requirements/requirements.md:47`
 - **REQ-006** [I] For a site flagged as NEVI-funded, the platform rejects a capacity rule that exceeds the p · `spec/20-requirements/requirements.md:48`
-- **REQ-007** [K] No two allocations on one EVSE overlap in time, the site's buffer included, among allocati · `spec/20-requirements/requirements.md:49`
-- **REQ-008** [Y] When a booking attempt fails because the requested slot is full, the response offers the n · `spec/20-requirements/requirements.md:50`
-- **REQ-009** [K] A booking records the booker and the charging driver, each as a mobile number registered t · `spec/20-requirements/requirements.md:51`
-- **REQ-010** [Y] A booker selects an afternoon slot and an overnight slot for the same vehicle and confirms · `spec/20-requirements/requirements.md:52`
-- **REQ-011** [Y] A fleet manager or fleet owner can book a slot for a named driver of the fleet. · `spec/20-requirements/requirements.md:53`
-- **REQ-012** [K] Every booking names one vehicle registered to the booking's fleet, and that vehicle's conn · `spec/20-requirements/requirements.md:54`
-- **REQ-013** [K] A booking is accepted and allocated only for EVSEs with a connector that matches the vehic · `spec/20-requirements/requirements.md:55`
-- **REQ-014** [K] Each EVSE connector records its connector type (CCS1 or NACS) and its maximum power in kW. · `spec/20-requirements/requirements.md:56`
-- **REQ-015** [K] Each vehicle records its native connector, its allowed adapters and its maximum DC chargin · `spec/20-requirements/requirements.md:57`
-- **REQ-016** [Y] At allocation, the platform gives each vehicle the lowest-power free compatible EVSE that  · `spec/20-requirements/requirements.md:58`
 - **REQ-017** [I] When the vehicle's SoC is known, the booking flow suggests a duration from the SoC and the · `spec/20-requirements/requirements.md:59`
-- **REQ-018** [Y] A driver can optionally enter the vehicle's current SoC in the booking flow. · `spec/20-requirements/requirements.md:60`
-- **REQ-019** [K] A driver can book a vehicle with no telematics from their own phone through SMS or the dri · `spec/20-requirements/requirements.md:61`
-- **REQ-020** [K] The platform never sends a stop command for a walk-up's session, never sends site staff a  · `spec/20-requirements/requirements.md:62`
-- **REQ-021** [K] When the allocated EVSE is occupied at station-hold time or at the pre-arrival check, the  · `spec/20-requirements/requirements.md:63`
-- **REQ-022** [K] When no compatible EVSE at the site is free for an allocated booking at station-hold time  · `spec/20-requirements/requirements.md:64`
-- **REQ-023** [K] Whether a booking is accepted, kept or released is decided only by Amperlane's slot calend · `spec/20-requirements/requirements.md:70`
-- **REQ-024** [K] For an allocated EVSE flagged as reservable, the platform sends a charger reservation thro · `spec/20-requirements/requirements.md:71`
-- **REQ-025** [K] Each EVSE carries a reservable flag that ops can change without a software release. · `spec/20-requirements/requirements.md:72`
-- **REQ-026** [K] For an allocated EVSE that is not reservable, the platform sends site staff a station-hold · `spec/20-requirements/requirements.md:73`
-- **REQ-027** [K] For each booking at a site with a physical station hold, the platform sends site staff the · `spec/20-requirements/requirements.md:74`
-- **REQ-028** [Y] Booking, allocation, grace, auto-release, no-show and fault rebooking follow the same rule · `spec/20-requirements/requirements.md:75`
-- **REQ-029** [Y] Live EVSE status comes only from CSMS APIs, OCPI Locations or the attendant view, and ever · `spec/20-requirements/requirements.md:76`
 - **REQ-030** [I] Public charging sites from NLR AFDC and Open Charge Map are shown on the driver map as not · `spec/20-requirements/requirements.md:77`
-- **REQ-031** [K] The platform reads Gowanus EVSE status and sends and cancels charger reservations through  · `spec/20-requirements/requirements.md:78`
-- **REQ-332** [Y] The platform reads Gowanus session records through the AMPECO API once Kinship makes them  · `spec/20-requirements/requirements.md:79`
-- **REQ-032** [K] The platform reads JFK's EVSE status from the ChargeLab API by webhook or poll. · `spec/20-requirements/requirements.md:80`
 - **REQ-333** [I] The platform reads JFK's public price from the ChargeLab API for display before booking. · `spec/20-requirements/requirements.md:81`
-- **REQ-033** [K] If no arrival is recorded by the end of the grace period, the platform releases the bookin · `spec/20-requirements/requirements.md:87`
-- **REQ-034** [K] Each site has a grace period, 10 minutes unless configured otherwise, and the auto-release · `spec/20-requirements/requirements.md:88`
-- **REQ-035** [K] When a booking with a physical station hold is released after grace, cancelled or rebooked · `spec/20-requirements/requirements.md:89`
-- **REQ-036** [K] A booking released after grace with no arrival creates exactly one no-show fee line item,  · `spec/20-requirements/requirements.md:90`
-- **REQ-037** [Y] A driver who arrives after the booking's grace period, including any ops extension, keeps  · `spec/20-requirements/requirements.md:91`
-- **REQ-038** [Y] When a driver records arrival after the booking was released as a no-show, the driver gets · `spec/20-requirements/requirements.md:92`
-- **REQ-039** [K] A driver cancels a booking with one tap on the page opened from any message about that boo · `spec/20-requirements/requirements.md:93`
-- **REQ-040** [Y] A driver reports 'running late' with one tap on the page opened from any message about tha · `spec/20-requirements/requirements.md:94`
-- **REQ-041** [Y] A driver who replies with a cancel keyword to an SMS about a booking cancels that booking  · `spec/20-requirements/requirements.md:95`
-- **REQ-042** [Y] Ops can extend the grace period of a single booking with a reason code, up to a maximum se · `spec/20-requirements/requirements.md:96`
-- **REQ-043** [K] A driver records arrival by scanning the QR code posted at an EVSE of the booking's site,  · `spec/20-requirements/requirements.md:97`
-- **REQ-044** [K] The platform produces a printable QR code for each EVSE that site staff can put up. · `spec/20-requirements/requirements.md:98`
-- **REQ-045** [Y] A fleet or a driver can raise a dispute on a no-show within the dispute window (A-047), an · `spec/20-requirements/requirements.md:99`
-- **REQ-046** [Y] A driver can report that the allocated stall was blocked on arrival, and the report is sto · `spec/20-requirements/requirements.md:100`
-- **REQ-047** [K] Within a set time of receiving an EVSE fault status from the CSMS by webhook or poll, the  · `spec/20-requirements/requirements.md:106`
-- **REQ-048** [Y] On a fault, the platform rebooks every booking allocated to the faulted EVSE and re-checks · `spec/20-requirements/requirements.md:107`
-- **REQ-049** [Y] A driver whose booking cannot be placed at the same site after a fault gets, within a set  · `spec/20-requirements/requirements.md:108`
-- **REQ-050** [K] Each fault-affected booking the platform could not place appears in the ops exception queu · `spec/20-requirements/requirements.md:109`
-- **REQ-051** [Y] When a fault or a maintenance hold changes bookings at a site, the station operator gets a · `spec/20-requirements/requirements.md:110`
-- **REQ-052** [K] A booking rebooked because of a fault carries the reason code 'moved — charger fault', the · `spec/20-requirements/requirements.md:111`
-- **REQ-053** [K] Every booking state change records its actor (the system or a named person) and a reason c · `spec/20-requirements/requirements.md:112`
-- **REQ-054** [Y] Ops can rebook all bookings of a faulted EVSE in one action. · `spec/20-requirements/requirements.md:113`
-- **REQ-055** [K] Ops can make a booking on behalf of a registered driver under the same capacity, compatibi · `spec/20-requirements/requirements.md:114`
-- **REQ-056** [Y] Ops can confirm a held or unconfirmed booking with a reason code, under the same capacity  · `spec/20-requirements/requirements.md:115`
-- **REQ-057** [Y] Ops can release a booking with a reason code, with the same effect on capacity, station ho · `spec/20-requirements/requirements.md:116`
-- **REQ-058** [K] Every booking task ops performs in the pilot (taking a request, confirming, arranging stat · `spec/20-requirements/requirements.md:117`
-- **REQ-059** [K] The driver interface is a progressive web app opened in the phone's browser, with no app-s · `spec/20-requirements/requirements.md:123`
-- **REQ-060** [K] A driver books with the registered mobile number as the only identity, with no sign-up for · `spec/20-requirements/requirements.md:124`
-- **REQ-061** [Y] A driver who texts a site code and a time, such as 'GOW 1645', to Amperlane's SMS number g · `spec/20-requirements/requirements.md:125`
-- **REQ-062** [Y] A driver can book and receive booking messages through WhatsApp. · `spec/20-requirements/requirements.md:126`
-- **REQ-063** [K] Every booking message carries a link that opens the driver page for that booking. · `spec/20-requirements/requirements.md:127`
-- **REQ-064** [Y] From a booking, the driver can open directions to the site in the driver's own navigation  · `spec/20-requirements/requirements.md:128`
-- **REQ-065** [I] The driver page shows the driver's estimated arrival time at the site. · `spec/20-requirements/requirements.md:129`
-- **REQ-066** [Y] From the driver page, the driver can return to the Uber or Lyft driver app with one tap. · `spec/20-requirements/requirements.md:130`
-- **REQ-067** [K] The charging driver receives a reminder on their channel at the site's configured reminder · `spec/20-requirements/requirements.md:131`
-- **REQ-069** [K] A fleet manager sees in the fleet portal every upcoming and past booking of the fleet with · `spec/20-requirements/requirements.md:138`
-- **REQ-070** [Y] A fleet manager can add, edit and retire the fleet's vehicles in the fleet portal, includi · `spec/20-requirements/requirements.md:139`
-- **REQ-071** [Y] The fleet portal reports per vehicle and per month the bookings, no-shows, completed booki · `spec/20-requirements/requirements.md:140`
-- **REQ-072** [Y] A fleet sets whether its vehicles may use adapters, and the setting can be overridden per  · `spec/20-requirements/requirements.md:141`
-- **REQ-073** [Y] A fleet manager sees the no-shows of the fleet's drivers. · `spec/20-requirements/requirements.md:142`
-- **REQ-074** [Y] A fleet owner sees for each vehicle booked today whether arrival was recorded and whether  · `spec/20-requirements/requirements.md:143`
-- **REQ-075** [I] The platform reads SoC, charging state and location of a fleet's vehicles from Geotab wher · `spec/20-requirements/requirements.md:144`
-- **REQ-076** [Y] A station operator sets the days and hours in which each of its sites accepts bookings, in · `spec/20-requirements/requirements.md:150`
-- **REQ-077** [Y] A station operator changes a site's capacity rule in the station portal, and the change ap · `spec/20-requirements/requirements.md:151`
-- **REQ-078** [I] A station operator can record the tariffs that apply at each site. · `spec/20-requirements/requirements.md:152`
-- **REQ-079** [Y] A station operator sees the upcoming bookings at its sites and the EVSE each one is alloca · `spec/20-requirements/requirements.md:153`
-- **REQ-080** [Y] A station operator sees, for each fault, how many bookings it forced to be rebooked, offer · `spec/20-requirements/requirements.md:154`
-- **REQ-081** [K] Site staff, such as the LIC attendant, sign in to the platform on a site device through a  · `spec/20-requirements/requirements.md:155`
-- **REQ-082** [Y] The station portal shows, for each time window, how many EVSEs stay unbookable for walk-up · `spec/20-requirements/requirements.md:156`
-- **REQ-083** [K] Each fleet receives one consolidated invoice per month with net-30 payment terms. · `spec/20-requirements/requirements.md:162`
-- **REQ-084** [K] Each fleet invoice is generated from ledger entries and submitted to the payment provider  · `spec/20-requirements/requirements.md:163`
-- **REQ-085** [K] The ledger is double-entry, with no balance columns. · `spec/20-requirements/requirements.md:164`
-- **REQ-086** [Y] The ledger shows, for each fleet and any past date, what the fleet owed, had paid and had  · `spec/20-requirements/requirements.md:165`
-- **REQ-087** [K] Fleet invoice payments are collected through Stripe. · `spec/20-requirements/requirements.md:166`
-- **REQ-088** [K] After a booking is confirmed, the booker and the charging driver each receive one confirma · `spec/20-requirements/requirements.md:172`
-- **REQ-089** [K] A driver never receives more than one confirmation for one booking. · `spec/20-requirements/requirements.md:173`
-- **REQ-090** [K] An inbound SMS or WhatsApp message whose provider message id was already processed is not  · `spec/20-requirements/requirements.md:174`
-- **REQ-091** [Y] The platform reports completed bookings per month for NYC sites, using the definition conf · `spec/20-requirements/requirements.md:180`
-- **REQ-092** [Y] The platform reports per month, per fleet and per site the no-shows and the late arrivals, · `spec/20-requirements/requirements.md:181`
-- **REQ-093** [I] The platform reports the median wait from arrival to session start per site, from measured · `spec/20-requirements/requirements.md:182`
-- **REQ-094** [I] The platform reports utilisation per site for its off-peak windows. · `spec/20-requirements/requirements.md:183`
-- **REQ-095** [Y] On demand, the platform produces the Series A data-room report for any range of months sin · `spec/20-requirements/requirements.md:184`
-- **REQ-096** [Y] The pilot history since October 2025 (bookings, no-shows, arrival times, drivers and stall · `spec/20-requirements/requirements.md:190`
-- **REQ-097** [K] From the launch date, every new booking at the three pilot sites for the two pilot fleets  · `spec/20-requirements/requirements.md:196`
-- **REQ-100** [K] A registered driver who opens the driver page from a message link books from the open-slot · `spec/20-requirements/requirements.md:206`
-- **REQ-101** [K] A database constraint enforces that no two active allocations on one EVSE overlap, so the  · `spec/20-requirements/requirements.md:207`
-- **REQ-102** [Y] During a burst, competing attempts for the same site and slot are decided in the order the · `spec/20-requirements/requirements.md:208`
-- **REQ-103** [K] Repeating a booking request with the same idempotency key creates at most one booking and  · `spec/20-requirements/requirements.md:209`
-- **REQ-104** [K] For connected sites, each EVSE's status age, measured and evaluated as A-031 defines, is a · `spec/20-requirements/requirements.md:215`
-- **REQ-105** [Y] No CSMS vendor SDK is used inside the booking core, so moving a site to another CSMS chang · `spec/20-requirements/requirements.md:216`
-- **REQ-106** [K] A webhook from a CSMS, the payment provider or the messaging provider that arrives twice o · `spec/20-requirements/requirements.md:217`
-- **REQ-107** [K] A periodic poll reconciles each connected site's EVSE status, so a lost webhook cannot lea · `spec/20-requirements/requirements.md:218`
-- **REQ-108** [I] The booking and slot data model has a documented mapping to the OCPI 2.3 Booking module. · `spec/20-requirements/requirements.md:219`
-- **REQ-109** [Y] Every fleet invoice line traces to ledger entries and to its booking when the invoice is i · `spec/20-requirements/requirements.md:225`
-- **REQ-110** [Y] A scheduled check reconciles the status of invoices, and of payouts where the business mod · `spec/20-requirements/requirements.md:226`
-- **REQ-111** [Y] The payment provider sits behind an interface, so it can be replaced without changing the  · `spec/20-requirements/requirements.md:227`
-- **REQ-112** [K] All driver messages and the driver PWA are available in English, Spanish and Bengali. · `spec/20-requirements/requirements.md:233`
-- **REQ-113** [Y] Each Five Boroughs booking reaches arrival, auto-release or an automatic rebook with no ma · `spec/20-requirements/requirements.md:239`
-- **REQ-114** [Y] At Gowanus, every physical station hold the platform requests is matched by a platform ins · `spec/20-requirements/requirements.md:240`
-- **REQ-115** [Y] Migrated pilot history lives in the platform's own data model, linked to the same driver,  · `spec/20-requirements/requirements.md:246`
-- **REQ-116** [Y] A re-runnable pilot migration loads every source booking record or lists it as rejected wi · `spec/20-requirements/requirements.md:247`
-- **REQ-117** [Y] No code from the discarded prototype is reused; only its schema is consulted. · `spec/20-requirements/requirements.md:248`
-- **REQ-118** [Y] Pilot or platform data shared outside Amperlane or used outside production has driver name · `spec/20-requirements/requirements.md:249`
-- **REQ-119** [K] All platform code lives in Amperlane's repositories, and all infrastructure and data run i · `spec/20-requirements/requirements.md:255`
-- **REQ-120** [K] Access to production systems and data is role-based, limited to named people and logged fr · `spec/20-requirements/requirements.md:256`
-- **REQ-121** [Y] From the first release, sign-ins, failed sign-ins, role and permission changes, production · `spec/20-requirements/requirements.md:257`
-- **REQ-122** [Y] Every production change goes through a recorded change-management process with review and  · `spec/20-requirements/requirements.md:258`
-- **REQ-123** [K] Data is encrypted in transit and at rest. · `spec/20-requirements/requirements.md:259`
-- **REQ-124** [K] Production runs in an AWS account separate from every non-production environment. · `spec/20-requirements/requirements.md:260`
-- **REQ-125** [Y] Personal data is kept only as long as disputes, finance and the retention period counsel s · `spec/20-requirements/requirements.md:261`
-- **REQ-126** [K] An append-only audit trail records who did what and when for every booking state change, o · `spec/20-requirements/requirements.md:262`
-- **REQ-127** [Y] Open-source components are used only where they are mature. · `spec/20-requirements/requirements.md:263`
-- **REQ-128** [K] Making bookings is available 99.9% of the time between 05:00 and 01:00 Eastern time. · `spec/20-requirements/requirements.md:269`
-- **REQ-129** [K] Planned maintenance, and any deployment that interrupts booking, happens only between 01:0 · `spec/20-requirements/requirements.md:270`
-- **REQ-130** [K] Booking API responses take under 300 ms at the 95th percentile, including during the shift · `spec/20-requirements/requirements.md:271`
-- **REQ-131** [K] A load test of 2,000 booking attempts in 10 minutes, five times the modelled launch burst  · `spec/20-requirements/requirements.md:272`
-- **REQ-132** [K] The platform supports at least 10,000 completed bookings a month in NYC by June 2027. · `spec/20-requirements/requirements.md:273`
-- **REQ-133** [K] Booking timers (hold expiry, reminder, station hold, pre-arrival check, grace, auto-releas · `spec/20-requirements/requirements.md:274`
-- **REQ-134** [Y] The workflow engine is self-hosted in Amperlane's AWS account. · `spec/20-requirements/requirements.md:275`
-- **REQ-135** [K] The platform is one modular monolith, not a set of microservices. · `spec/20-requirements/requirements.md:276`
-- **REQ-136** [K] The platform is written in TypeScript end to end, on PostgreSQL, hosted on AWS. · `spec/20-requirements/requirements.md:277`
-- **REQ-137** [Y] Hosting uses Amperlane's AWS Activate credits first. · `spec/20-requirements/requirements.md:278`
-- **REQ-138** [Y] A test site in a time zone other than Eastern is configured, booked, allocated and release · `spec/20-requirements/requirements.md:279`
-- **REQ-139** [Y] Every booking function that the driver PWA, portals and ops console use is available throu · `spec/20-requirements/requirements.md:280`
-- **REQ-140** [Y] A simulated site lets engineers make chargers fault, overrun and report late drivers on de · `spec/20-requirements/requirements.md:281`
-- **REQ-141** [Y] An automated test replays the Gowanus fault (1:50 PM, nine bookings, two needing NACS or a · `spec/20-requirements/requirements.md:282`
-- **REQ-142** [K] The platform goes live in NYC production on 1 March 2027 with real sites and real fleets a · `spec/20-requirements/requirements.md:288`
-- **REQ-143** [Y] Amperlane engineers work in the same repositories and rituals as Intellias from Phase 0, w · `spec/20-requirements/requirements.md:289`
-- **REQ-144** [Y] By handover, Priya Nair owns the knowledge of the integration layer, confirmed by a handov · `spec/20-requirements/requirements.md:290`
-- **REQ-145** [K] Picking a slot places a hold on one unit of capacity, which expires and returns the capaci · `spec/20-requirements/requirements.md:298`
-- **REQ-146** [Y] Per-site parameters (time grid, durations, buffer, hold time, allocation and pre-arrival o · `spec/20-requirements/requirements.md:299`
-- **REQ-147** [K] A booking is confirmed only if, for every slot it covers, all bookings overlapping that sl · `spec/20-requirements/requirements.md:300`
-- **REQ-148** [Y] When the site is full at station-hold time, the driver immediately gets the next compatibl · `spec/20-requirements/requirements.md:301`
-- **REQ-149** [Y] A booking rebooked because its site was full carries the reason code 'moved — site full'. · `spec/20-requirements/requirements.md:302`
-- **REQ-150** [K] Cancelling a booking returns its capacity to the slot calendar as soon as the cancellation · `spec/20-requirements/requirements.md:303`
-- **REQ-151** [Y] Times are stored as instants and shown in the site's time zone with the zone indicated, an · `spec/20-requirements/requirements.md:304`
-- **REQ-152** [Y] Drivers can book slots that start between 01:00 and 05:00 Eastern time. · `spec/20-requirements/requirements.md:305`
-- **REQ-153** [K] When a booking with a charger reservation is cancelled, released or rebooked, the platform · `spec/20-requirements/requirements.md:311`
-- **REQ-154** [Y] For every booking the platform records the station-hold method used, each request sent, th · `spec/20-requirements/requirements.md:312`
-- **REQ-155** [K] When a charger reservation is rejected, or not answered within a set time, the platform se · `spec/20-requirements/requirements.md:313`
-- **REQ-156** [Y] When site staff have not acknowledged a station-hold request by the pre-arrival check, ops · `spec/20-requirements/requirements.md:314`
-- **REQ-158** [K] The attendant view lets the attendant set each EVSE at the site to free, occupied or fault · `spec/20-requirements/requirements.md:316`
-- **REQ-159** [Y] The attendant view shows which driver is due at which EVSE and when. · `spec/20-requirements/requirements.md:317`
-- **REQ-160** [Y] Every view of EVSE status shows when the status was observed, marks connected-site status  · `spec/20-requirements/requirements.md:318`
-- **REQ-161** [Y] Every booking for which the operator provides a session record is matched to it within a s · `spec/20-requirements/requirements.md:319`
-- **REQ-162** [Y] The platform ingests the LIC ChargePoint portal CSV, uploaded by hand at irregular times,  · `spec/20-requirements/requirements.md:320`
-- **REQ-163** [I] Where a CSMS provides pricing, the driver sees the site's public price before booking. · `spec/20-requirements/requirements.md:321`
-- **REQ-164** [Y] The platform keeps a time-stamped history of every EVSE status change, so the status at an · `spec/20-requirements/requirements.md:322`
-- **REQ-165** [Y] Ops onboards a new site in the ops console (operator, address, time zone, supply pattern,  · `spec/20-requirements/requirements.md:323`
-- **REQ-166** [I] The platform connects to CPOs over OCPI 2.2.1 as an eMSP (Locations, Tariffs, Sessions, CD · `spec/20-requirements/requirements.md:324`
-- **REQ-167** [Y] When the AMPECO API is unreachable or its status is stale, the platform runs station holds · `spec/20-requirements/requirements.md:325`
-- **REQ-168** [Y] When a site's status feed is unavailable, the platform keeps accepting bookings within the · `spec/20-requirements/requirements.md:326`
-- **REQ-169** [Y] When an API-connected EVSE sends no status for a set time, the platform marks it unknown,  · `spec/20-requirements/requirements.md:327`
-- **REQ-170** [Y] Ops can switch a site to manual mode, in which the platform keeps the slot calendar and gi · `spec/20-requirements/requirements.md:328`
-- **REQ-171** [Y] A booking cancelled before the site's cancellation cut-off (Q-042) gets no no-show fee. · `spec/20-requirements/requirements.md:334`
-- **REQ-334** [Y] A 'running late' report by itself never waives the no-show fee of a driver who then does n · `spec/20-requirements/requirements.md:335`
-- **REQ-172** [Y] The booking confirmation tells the driver the grace period and the no-show fee terms that  · `spec/20-requirements/requirements.md:336`
-- **REQ-173** [I] The platform records arrival from the phone's location only when the driver has opted in. · `spec/20-requirements/requirements.md:337`
-- **REQ-174** [Y] The platform records arrival from a CSMS session-start event on the booking's allocated EV · `spec/20-requirements/requirements.md:338`
-- **REQ-175** [I] The platform records arrival when a vehicle's telematics location enters the site's geofen · `spec/20-requirements/requirements.md:339`
-- **REQ-176** [Y] The attendant can confirm a driver's arrival in the attendant view. · `spec/20-requirements/requirements.md:340`
-- **REQ-177** [K] Once arrival is recorded, the booking is not released at the end of grace, even when the g · `spec/20-requirements/requirements.md:341`
-- **REQ-178** [I] While a session runs, the platform shows its live status from the CSMS where the CSMS prov · `spec/20-requirements/requirements.md:342`
-- **REQ-179** [Y] For a disputed no-show, ops sees on one screen the booking's ordered history: states, acto · `spec/20-requirements/requirements.md:343`
-- **REQ-180** [K] No no-show fee is created automatically for a booking that was rebooked, whose station hol · `spec/20-requirements/requirements.md:344`
-- **REQ-181** [Y] When a booking has an arrival but no charging session starts within a set time, no no-show · `spec/20-requirements/requirements.md:345`
-- **REQ-182** [Y] Ops can waive a no-show fee before it is invoiced, with a reason code, recorded as a separ · `spec/20-requirements/requirements.md:346`
-- **REQ-183** [Y] The no-show fee amount and the station operator's share of it are set per site. · `spec/20-requirements/requirements.md:347`
-- **REQ-184** [Y] Ops can place a maintenance hold that removes EVSEs or capacity at a site from booking for · `spec/20-requirements/requirements.md:353`
-- **REQ-335** [Y] Ops can place a fleet-priority hold that keeps capacity at a site for a time window for on · `spec/20-requirements/requirements.md:354`
-- **REQ-185** [Y] When a maintenance hold removes an EVSE with allocated bookings, those bookings are rebook · `spec/20-requirements/requirements.md:355`
-- **REQ-186** [Y] When a station operator lowers a capacity rule, or ops adds a fleet-priority hold, below t · `spec/20-requirements/requirements.md:356`
-- **REQ-187** [Y] Ops sees a summary of the automatic fault rebookings and can undo any of them. · `spec/20-requirements/requirements.md:357`
-- **REQ-188** [Y] For fault-affected bookings the platform could not place, it proposes rebookings that ops  · `spec/20-requirements/requirements.md:358`
-- **REQ-189** [K] The ops console lists every open exception (failed or unacknowledged station hold, site fu · `spec/20-requirements/requirements.md:359`
-- **REQ-190** [Y] The ops console shows one live board per site for the current day with bookings by state,  · `spec/20-requirements/requirements.md:360`
-- **REQ-191** [Y] A driver can report a faulted EVSE in one tap from the booking page or by message, which c · `spec/20-requirements/requirements.md:361`
-- **REQ-192** [Y] At LIC, a faulted status set by the attendant triggers the same rebooking as a CSMS fault. · `spec/20-requirements/requirements.md:362`
-- **REQ-193** [I] A station operator can mark an EVSE out of service in the station portal, which triggers f · `spec/20-requirements/requirements.md:363`
-- **REQ-194** [Y] After a fault, an EVSE returns to the pool only after it has reported available for a set  · `spec/20-requirements/requirements.md:364`
-- **REQ-195** [Y] Ops can find a driver's bookings, messages and fees by mobile number, plate or booking cod · `spec/20-requirements/requirements.md:365`
-- **REQ-196** [I] The ops console shows the full message history per driver and booking, with language and d · `spec/20-requirements/requirements.md:366`
-- **REQ-197** [Y] Ops can send a templated or free-text message to a driver on the driver's channel from the · `spec/20-requirements/requirements.md:367`
-- **REQ-198** [Y] A driver is identified by a mobile number registered to one or more fleets and can book an · `spec/20-requirements/requirements.md:373`
-- **REQ-199** [K] Each driver has a preferred language, set by the fleet, by ops or by the driver, every mes · `spec/20-requirements/requirements.md:374`
-- **REQ-200** [K] When the EVSE is allocated or reallocated, the charging driver gets a message on their cha · `spec/20-requirements/requirements.md:375`
-- **REQ-201** [Y] A fleet can register a booker-only number that books for the fleet and names the charging  · `spec/20-requirements/requirements.md:376`
-- **REQ-202** [K] When a fleet removes a driver, that driver's number can no longer book for that fleet on a · `spec/20-requirements/requirements.md:377`
-- **REQ-203** [Y] When a driver's number is registered, the driver gets a welcome message in their language  · `spec/20-requirements/requirements.md:378`
-- **REQ-204** [K] A driver who has not opted in to location can complete every booking step, with arrival ta · `spec/20-requirements/requirements.md:379`
-- **REQ-205** [Y] A fleet registers its drivers' mobile numbers and its vehicles in the fleet portal. · `spec/20-requirements/requirements.md:385`
-- **REQ-206** [K] Ops can onboard a fleet and register its drivers and vehicles on its behalf, and a fleet m · `spec/20-requirements/requirements.md:386`
-- **REQ-207** [Y] A fleet manager or ops can import a fleet's vehicles and driver numbers from one file, wit · `spec/20-requirements/requirements.md:387`
-- **REQ-208** [I] A fleet manager can see the charges accrued in the current month before the invoice is iss · `spec/20-requirements/requirements.md:388`
-- **REQ-209** [I] A station operator sees the off-peak sessions that Amperlane bookings brought to each site · `spec/20-requirements/requirements.md:394`
-- **REQ-210** [K] The ledger records, with no schema change, a sample month of each Q-001 option (booking fe · `spec/20-requirements/requirements.md:400`
-- **REQ-211** [K] A no-show fee is a separate line item, never mixed into energy charges. · `spec/20-requirements/requirements.md:401`
-- **REQ-212** [K] A disputed no-show fee line can be reversed without changing any energy line. · `spec/20-requirements/requirements.md:402`
-- **REQ-213** [Y] Reversing a fee line after the invoice that carried it was issued creates a credit line on · `spec/20-requirements/requirements.md:403`
-- **REQ-214** [Y] A booking that ends without a matched session record, and a session record on a booked EVS · `spec/20-requirements/requirements.md:404`
-- **REQ-215** [Y] Amperlane finance has views for fleet invoices, reconciliation against session records and · `spec/20-requirements/requirements.md:405`
-- **REQ-216** [Y] The platform tracks the payment status of every fleet invoice and flags any invoice unpaid · `spec/20-requirements/requirements.md:406`
-- **REQ-217** [Y] Each fleet invoice lists every charged item with booking id, site, date, vehicle and drive · `spec/20-requirements/requirements.md:407`
-- **REQ-218** [Y] An invoice month closes at a set time after month end, with period boundaries in the site' · `spec/20-requirements/requirements.md:408`
-- **REQ-219** [Y] When a confirmation, reminder, allocation notice, re-offer or fault notice is reported und · `spec/20-requirements/requirements.md:414`
-- **REQ-220** [Y] Keyword replies (cancel, running late, accept or decline an alternative, help) are underst · `spec/20-requirements/requirements.md:415`
-- **REQ-221** [I] Every message to a driver tells the driver, in their language, how to reach ops. · `spec/20-requirements/requirements.md:416`
-- **REQ-222** [Y] An inbound driver message the platform cannot understand goes to ops with the driver's lan · `spec/20-requirements/requirements.md:417`
-- **REQ-223** [I] During a platform outage, a driver who texts the booking number gets an automatic reply in · `spec/20-requirements/requirements.md:418`
-- **REQ-224** [K] For each booking the platform stores arrival, session-record match with energy, rebooks an · `spec/20-requirements/requirements.md:424`
-- **REQ-225** [Y] Migrated pilot data is marked as pilot data in every report, reported under the same statu · `spec/20-requirements/requirements.md:425`
-- **REQ-226** [I] The platform reports per site and day: booking attempts, expired holds, confirmations, alt · `spec/20-requirements/requirements.md:426`
-- **REQ-227** [I] The platform reports ops workload: exceptions per day by type, time to pick up, and manual · `spec/20-requirements/requirements.md:427`
-- **REQ-228** [Y] Migrated statuses are re-classified so that moved, no-show and cancelled are distinct outc · `spec/20-requirements/requirements.md:433`
-- **REQ-229** [Y] Where a site's pilot Google Sheet and Airtable disagree, the migration applies one documen · `spec/20-requirements/requirements.md:434`
-- **REQ-230** [Y] Migrated records from before February 2026 carry a data-quality flag. · `spec/20-requirements/requirements.md:435`
-- **REQ-231** [K] At cut-over, every pilot booking for a slot after the cut-over exists in the platform with · `spec/20-requirements/requirements.md:436`
-- **REQ-232** [K] Each booking is invoiced exactly once, by the pilot process if its slot started before the · `spec/20-requirements/requirements.md:437`
-- **REQ-233** [Y] Ops can anonymise one driver's personal data on request, keeping booking, audit and ledger · `spec/20-requirements/requirements.md:443`
-- **REQ-234** [I] When a fleet or station operator leaves the platform, its users are disabled, its future b · `spec/20-requirements/requirements.md:444`
-- **REQ-235** [I] Fleet and station portal users can sign in with a one-time link or code sent to their emai · `spec/20-requirements/requirements.md:445`
-- **REQ-236** [K] Every state-changing command from any channel (confirm, cancel, running late, accept an al · `spec/20-requirements/requirements.md:453`
-- **REQ-237** [Y] Staging runs every integration against a sandbox or simulator and never against production · `spec/20-requirements/requirements.md:459`
-- **REQ-238** [I] Open Charge Map data is shown with the attribution its CC BY 4.0 licence requires. · `spec/20-requirements/requirements.md:460`
-- **REQ-239** [Y] If automatic fault rebooking stops partway, every affected booking ends rebooked, proposed · `spec/20-requirements/requirements.md:466`
-- **REQ-240** [K] Links in driver messages are signed and single-use, open only that driver's bookings witho · `spec/20-requirements/requirements.md:472`
-- **REQ-241** [Y] On a device that has not completed a one-time code for that driver within a set period, a  · `spec/20-requirements/requirements.md:473`
-- **REQ-242** [K] A command received by SMS or WhatsApp that changes a booking is accepted only from the reg · `spec/20-requirements/requirements.md:474`
-- **REQ-243** [Y] A small fleet can book and see whether each booked charge took place through messaging and · `spec/20-requirements/requirements.md:480`
-- **REQ-244** [K] Every invoice, and every payout where the business model has them (Q-001), submitted to th · `spec/20-requirements/requirements.md:486`
-- **REQ-245** [Y] When the payment provider is unavailable, bookings, arrivals and fee lines are still recor · `spec/20-requirements/requirements.md:487`
-- **REQ-246** [Y] Card details are entered only on payment-provider-hosted pages or fields, so card numbers  · `spec/20-requirements/requirements.md:488`
-- **REQ-247** [K] Ledger entries are append-only, and every correction is made by a new entry. · `spec/20-requirements/requirements.md:489`
-- **REQ-248** [K] Drivers get SMS or WhatsApp messages only after the platform has recorded the driver's agr · `spec/20-requirements/requirements.md:495`
-- **REQ-249** [Y] Every WhatsApp message the platform starts outside a 24-hour window opened by the driver u · `spec/20-requirements/requirements.md:496`
-- **REQ-250** [Y] Consent texts, fee notices and their language versions exist in English, Spanish and Benga · `spec/20-requirements/requirements.md:497`
-- **REQ-251** [I] Cloud and usage-priced vendor costs (messaging, maps, telematics, payments) are reported m · `spec/20-requirements/requirements.md:503`
-- **REQ-252** [Y] The raw pilot export is stored read-only, accessible only to named people, and deleted at  · `spec/20-requirements/requirements.md:509`
-- **REQ-253** [K] Credentials and any licence or account numbers the platform holds are listed in the data r · `spec/20-requirements/requirements.md:515`
-- **REQ-254** [K] A breach-notification procedure that meets the NY SHIELD Act exists before launch, and the · `spec/20-requirements/requirements.md:516`
-- **REQ-255** [K] Location is collected only after the driver's explicit opt-in, which is off by default, on · `spec/20-requirements/requirements.md:517`
-- **REQ-256** [Y] Location is kept only as derived arrival events, encrypted and access-controlled, and each · `spec/20-requirements/requirements.md:518`
-- **REQ-257** [Y] Vehicle data is read only for vehicles whose fleet has recorded its authorisation as accou · `spec/20-requirements/requirements.md:519`
-- **REQ-258** [K] Each portal user sees only their own organisation's data: a fleet user only that fleet's v · `spec/20-requirements/requirements.md:520`
-- **REQ-259** [Y] Ops users can view a driver's location evidence only within an open dispute for that booki · `spec/20-requirements/requirements.md:521`
-- **REQ-260** [Y] The platform rejects and logs inbound messaging and CSMS webhooks whose signature or share · `spec/20-requirements/requirements.md:522`
-- **REQ-262** [Y] The audit trail also records changes to capacity rules, fleet policies, partner terms, use · `spec/20-requirements/requirements.md:524`
-- **REQ-263** [Y] Every view or export of a driver's personal data by an ops, fleet or station-operator user · `spec/20-requirements/requirements.md:525`
-- **REQ-264** [I] A register of every vendor that receives platform data records which data each receives an · `spec/20-requirements/requirements.md:526`
-- **REQ-265** [Y] The platform stores no driver's licence, TLC licence or bank account numbers unless the da · `spec/20-requirements/requirements.md:527`
-- **REQ-266** [Y] Ops can get the next bookings per site from a copy kept outside the primary system and ref · `spec/20-requirements/requirements.md:533`
-- **REQ-267** [Y] Amperlane's engineers can export all platform data in open formats without Intellias' help · `spec/20-requirements/requirements.md:534`
-- **REQ-268** [Y] Every alert and every external-system outage has a written runbook that Amperlane's engine · `spec/20-requirements/requirements.md:535`
-- **REQ-269** [Y] For a set period before 1 March 2027 the platform runs real bookings with real drivers at  · `spec/20-requirements/requirements.md:541`
+- **REQ-065** [I] The driver page shows the driver's estimated arrival time at the site. · `spec/20-requirements/requirements.md:130`
+- **REQ-075** [I] The platform reads SoC, charging state and location of a fleet's vehicles from Geotab wher · `spec/20-requirements/requirements.md:145`
+- **REQ-078** [I] A station operator can record the tariffs that apply at each site. · `spec/20-requirements/requirements.md:153`
+- **REQ-085** [K] The ledger is double-entry, with no balance columns. · `spec/20-requirements/requirements.md:165`
+- **REQ-093** [I] The platform reports the median wait from arrival to session start per site, from measured · `spec/20-requirements/requirements.md:183`
+- **REQ-094** [I] The platform reports utilisation per site for its off-peak windows. · `spec/20-requirements/requirements.md:184`
+- **REQ-101** [K] A database constraint enforces that no two active allocations on one EVSE overlap, so the  · `spec/20-requirements/requirements.md:208`
+- **REQ-105** [Y] No CSMS vendor SDK is used inside the booking core, so moving a site to another CSMS chang · `spec/20-requirements/requirements.md:217`
+- **REQ-108** [I] The booking and slot data model has a documented mapping to the OCPI 2.3 Booking module. · `spec/20-requirements/requirements.md:220`
+- **REQ-111** [Y] The payment provider sits behind an interface, so it can be replaced without changing the  · `spec/20-requirements/requirements.md:228`
+- **REQ-117** [Y] No code from the discarded prototype is reused; only its schema is consulted. · `spec/20-requirements/requirements.md:249`
+- **REQ-122** [Y] Every production change goes through a recorded change-management process with review and  · `spec/20-requirements/requirements.md:259`
+- **REQ-123** [K] Data is encrypted in transit and at rest. · `spec/20-requirements/requirements.md:260`
+- **REQ-124** [K] Production runs in an AWS account separate from every non-production environment. · `spec/20-requirements/requirements.md:261`
+- **REQ-127** [Y] Open-source components are used only where they are mature. · `spec/20-requirements/requirements.md:264`
+- **REQ-128** [K] Making bookings is available 99.9% of the time between 05:00 and 01:00 Eastern time. · `spec/20-requirements/requirements.md:270`
+- **REQ-129** [K] Planned maintenance, and any deployment that interrupts booking, happens only between 01:0 · `spec/20-requirements/requirements.md:271`
+- **REQ-132** [K] The platform supports at least 10,000 completed bookings a month in NYC by June 2027. · `spec/20-requirements/requirements.md:274`
+- **REQ-133** [K] Booking timers (hold expiry, reminder, station hold, pre-arrival check, grace, auto-releas · `spec/20-requirements/requirements.md:275`
+- **REQ-134** [Y] The workflow engine is self-hosted in Amperlane's AWS account. · `spec/20-requirements/requirements.md:276`
+- **REQ-135** [K] The platform is one modular monolith, not a set of microservices. · `spec/20-requirements/requirements.md:277`
+- **REQ-136** [K] The platform is written in TypeScript end to end, on PostgreSQL, hosted on AWS. · `spec/20-requirements/requirements.md:278`
+- **REQ-137** [Y] Hosting uses Amperlane's AWS Activate credits first. · `spec/20-requirements/requirements.md:279`
+- **REQ-139** [Y] Every booking function that the driver PWA, portals and ops console use is available throu · `spec/20-requirements/requirements.md:281`
+- **REQ-141** [Y] An automated test replays the Gowanus fault (1:50 PM, nine bookings, two needing NACS or a · `spec/20-requirements/requirements.md:283`
+- **REQ-163** [I] Where a CSMS provides pricing, the driver sees the site's public price before booking. · `spec/20-requirements/requirements.md:322`
+- **REQ-166** [I] The platform connects to CPOs over OCPI 2.2.1 as an eMSP (Locations, Tariffs, Sessions, CD · `spec/20-requirements/requirements.md:325`
+- **REQ-173** [I] The platform records arrival from the phone's location only when the driver has opted in. · `spec/20-requirements/requirements.md:338`
+- **REQ-175** [I] The platform records arrival when a vehicle's telematics location enters the site's geofen · `spec/20-requirements/requirements.md:340`
+- **REQ-178** [I] While a session runs, the platform shows its live status from the CSMS where the CSMS prov · `spec/20-requirements/requirements.md:343`
+- **REQ-193** [I] A station operator can mark an EVSE out of service in the station portal, which triggers f · `spec/20-requirements/requirements.md:364`
+- **REQ-196** [I] The ops console shows the full message history per driver and booking, with language and d · `spec/20-requirements/requirements.md:367`
+- **REQ-208** [I] A fleet manager can see the charges accrued in the current month before the invoice is iss · `spec/20-requirements/requirements.md:389`
+- **REQ-209** [I] A station operator sees the off-peak sessions that Amperlane bookings brought to each site · `spec/20-requirements/requirements.md:395`
+- **REQ-210** [K] The ledger records, with no schema change, a sample month of each Q-001 option (booking fe · `spec/20-requirements/requirements.md:401`
+- **REQ-221** [I] Every message to a driver tells the driver, in their language, how to reach ops. · `spec/20-requirements/requirements.md:417`
+- **REQ-223** [I] During a platform outage, a driver who texts the booking number gets an automatic reply in · `spec/20-requirements/requirements.md:419`
+- **REQ-226** [I] The platform reports per site and day: booking attempts, expired holds, confirmations, alt · `spec/20-requirements/requirements.md:427`
+- **REQ-227** [I] The platform reports ops workload: exceptions per day by type, time to pick up, and manual · `spec/20-requirements/requirements.md:428`
+- **REQ-234** [I] When a fleet or station operator leaves the platform, its users are disabled, its future b · `spec/20-requirements/requirements.md:445`
+- **REQ-235** [I] Fleet and station portal users can sign in with a one-time link or code sent to their emai · `spec/20-requirements/requirements.md:446`
+- **REQ-238** [I] Open Charge Map data is shown with the attribution its CC BY 4.0 licence requires. · `spec/20-requirements/requirements.md:461`
+- **REQ-251** [I] Cloud and usage-priced vendor costs (messaging, maps, telematics, payments) are reported m · `spec/20-requirements/requirements.md:504`
+- **REQ-253** [K] Credentials and any licence or account numbers the platform holds are listed in the data r · `spec/20-requirements/requirements.md:516`
+- **REQ-256** [Y] Location is kept only as derived arrival events, encrypted and access-controlled, and each · `spec/20-requirements/requirements.md:519`
+- **REQ-260** [Y] The platform rejects and logs inbound messaging and CSMS webhooks whose signature or share · `spec/20-requirements/requirements.md:523`
+- **REQ-264** [I] A register of every vendor that receives platform data records which data each receives an · `spec/20-requirements/requirements.md:527`
+- **REQ-265** [Y] The platform stores no driver's licence, TLC licence or bank account numbers unless the da · `spec/20-requirements/requirements.md:528`
 
 ### Stories with no system story
 
-_none_
+- **JS-004** [Y] Next free slot offered and held when the slot is full · `spec/30-stories/JS-004.md`
+- **JS-007** [K] Book for the driver who will charge · `spec/30-stories/JS-007.md`
+- **JS-008** [Y] Afternoon and overnight slots in one confirmation · `spec/30-stories/JS-008.md`
+- **JS-010** [K] Fair and quick answers at the shift-change burst · `spec/30-stories/JS-010.md`
+- **JS-018** [K] Allocated EVSE occupied, booking reallocated and walk-up left alone · `spec/30-stories/JS-018.md`
+- **JS-019** [K] Whole site full before the slot, alternatives and ops exception · `spec/30-stories/JS-019.md`
+- **JS-020** [Y] Report a blocked stall on arrival and get another free EVSE · `spec/30-stories/JS-020.md`
+- **JS-023** [K] Charger reservation rejected or unanswered, booking unchanged · `spec/30-stories/JS-023.md`
+- **JS-024** [Y] Station holds at Gowanus during an AMPECO outage · `spec/30-stories/JS-024.md`
+- **JS-026** [Y] Unacknowledged station-hold request goes to ops · `spec/30-stories/JS-026.md`
+- **JS-103** [Y] Record arrival from the CSMS session start · `spec/30-stories/JS-103.md`
+- **JS-105** [K] Release a booking automatically when grace ends without arrival · `spec/30-stories/JS-105.md`
+- **JS-106** [Y] Get a re-offer when I arrive after my booking was released · `spec/30-stories/JS-106.md`
+- **JS-110** [K] Hold the no-show fee for ops when the platform or the site failed · `spec/30-stories/JS-110.md`
+- **JS-111** [Y] No fee when I arrived but charging did not start · `spec/30-stories/JS-111.md`
+- **JS-116** [K] Pick up a charger fault without anyone phoning · `spec/30-stories/JS-116.md`
+- **JS-117** [Y] Report a faulted EVSE in one tap · `spec/30-stories/JS-117.md`
+- **JS-118** [Y] Return a faulted EVSE to the pool only when it is stable · `spec/30-stories/JS-118.md`
+- **JS-119** [K] Rebook my booking automatically when my EVSE faults · `spec/30-stories/JS-119.md`
+- **JS-120** [Y] Choose an alternative when a fault leaves no EVSE for my booking · `spec/30-stories/JS-120.md`
+- **JS-123** [Y] Rebook every booking of a faulted EVSE in one action · `spec/30-stories/JS-123.md`
+- **JS-206** [K] EVSE status no older than 60 seconds, even when a webhook is lost · `spec/30-stories/JS-206.md`
+- **JS-210** [Y] A site's status feed goes down or an EVSE goes silent · `spec/30-stories/JS-210.md`
+- **JS-216** [K] One text acts once, even if it arrives twice · `spec/30-stories/JS-216.md`
+- **JS-217** [Y] A message the platform cannot understand reaches ops · `spec/30-stories/JS-217.md`
+- **JS-221** [Y] A booking link opened on an unverified phone shows only site, time and one-tap actions · `spec/30-stories/JS-221.md`
+- **JS-224** [K] A reminder before the slot · `spec/30-stories/JS-224.md`
+- **JS-226** [Y] A time-critical message that does not arrive is resent and shown to ops · `spec/30-stories/JS-226.md`
+- **JS-228** [Y] Keyword replies understood in English, Spanish and Bengali · `spec/30-stories/JS-228.md`
+- **JS-309** [Y] Know before the shift change whether each booked vehicle is charging · `spec/30-stories/JS-309.md`
+- **JS-312** [Y] Bookings above a lowered limit stand and are shown for action · `spec/30-stories/JS-312.md`
+- **JS-313** [Y] Station operator is told when a fault or maintenance hold changes bookings · `spec/30-stories/JS-313.md`
+- **JS-319** [K] Month close builds and submits fleet invoices from the ledger · `spec/30-stories/JS-319.md`
+- **JS-322** [K] Invoices survive payment-provider outages, retries and lost webhooks · `spec/30-stories/JS-322.md`
+- **JS-324** [Y] Match bookings to session records and set aside what does not match · `spec/30-stories/JS-324.md`
+- **JS-330** [Y] Five Boroughs bookings run with no manual ops action · `spec/30-stories/JS-330.md`
+- **JS-405** [Y] No driver names or phone numbers in data that leaves production · `spec/30-stories/JS-405.md`
+- **JS-407** [K] Open pilot bookings carried over at cut-over · `spec/30-stories/JS-407.md`
+- **JS-413** [Y] Sign-ins, role changes and production access on record · `spec/30-stories/JS-413.md`
+- **JS-414** [Y] Settle a disagreement over caps or terms from the change history · `spec/30-stories/JS-414.md`
+- **JS-415** [Y] Know who has seen a driver's personal data · `spec/30-stories/JS-415.md`
+- **JS-416** [K] Scope a suspected breach and follow the SHIELD notification procedure · `spec/30-stories/JS-416.md`
+- **JS-417** [Y] Personal data deleted or anonymised when its retention period ends · `spec/30-stories/JS-417.md`
+- **JS-419** [Y] Honour the next bookings by phone during a platform outage · `spec/30-stories/JS-419.md`
+- **JS-420** [Y] A runbook already used for every alert and external-system outage · `spec/30-stories/JS-420.md`
+- **JS-421** [K] A repeated tap gives one booking and one answer · `spec/30-stories/JS-421.md`
+- **JS-425** [K] A repeated save of a capacity-rule change applies once · `spec/30-stories/JS-425.md`
+- **US-001** [K] Open-slot view shows only bookable slots · `spec/30-stories/US-001.md`
+- **US-002** [K] Capacity caps per time window protect walk-up capacity · `spec/30-stories/US-002.md`
+- **US-003** [K] Book a slot with a hold and a confirmation · `spec/30-stories/US-003.md`
+- **US-005** [K] Cancel a booking in one tap or by SMS keyword · `spec/30-stories/US-005.md`
+- **US-006** [K] Bookings match the vehicle's connector and adapters · `spec/30-stories/US-006.md`
+- **US-009** [Y] Fleet manager books for a named driver · `spec/30-stories/US-009.md`
+- **US-011** [K] An EVSE is never allocated to two overlapping bookings · `spec/30-stories/US-011.md`
+- **US-012** [Y] Optional manual SoC in the booking flow · `spec/30-stories/US-012.md`
+- **US-013** [Y] Vehicle data only with the fleet's authorisation · `spec/30-stories/US-013.md`
+- **US-014** [Y] Onboard a site in any time zone without a code change · `spec/30-stories/US-014.md`
+- **US-015** [Y] Change per-site booking parameters without a deployment · `spec/30-stories/US-015.md`
+- **US-016** [Y] Booking times in the site's time zone · `spec/30-stories/US-016.md`
+- **US-017** [K] EVSE allocated shortly before the slot and sent to the driver · `spec/30-stories/US-017.md`
+- **US-021** [K] Charger reservation shortly before the slot · `spec/30-stories/US-021.md`
+- **US-022** [K] Reservable flag per EVSE set by ops · `spec/30-stories/US-022.md`
+- **US-025** [K] Station-hold requests to site staff replace the ops phone call · `spec/30-stories/US-025.md`
+- **US-027** [K] Station holds cleared when the booking ends · `spec/30-stories/US-027.md`
+- **US-028** [Y] Station-hold record kept per booking · `spec/30-stories/US-028.md`
+- **US-029** [Y] Manual mode for a site's station holds · `spec/30-stories/US-029.md`
+- **US-030** [K] Site staff sign in with their own site-scoped login · `spec/30-stories/US-030.md`
+- **US-031** [K] Attendant sets each EVSE to free, occupied or faulted · `spec/30-stories/US-031.md`
+- **US-032** [Y] Attendant sees who is due and confirms arrivals · `spec/30-stories/US-032.md`
+- **US-033** [Y] Book a slot that starts overnight · `spec/30-stories/US-033.md`
+- **US-101** [K] Record arrival by scanning the EVSE QR code · `spec/30-stories/US-101.md`
+- **US-102** [K] Print a QR code for every EVSE of a site · `spec/30-stories/US-102.md`
+- **US-104** [K] Book and arrive without sharing location · `spec/30-stories/US-104.md`
+- **US-107** [Y] Report running late in one tap · `spec/30-stories/US-107.md`
+- **US-108** [Y] Extend the grace period of one booking · `spec/30-stories/US-108.md`
+- **US-109** [K] Create one no-show fee line at the site's terms · `spec/30-stories/US-109.md`
+- **US-112** [Y] Know the fee terms and cancel without a fee before the cut-off · `spec/30-stories/US-112.md`
+- **US-113** [Y] Dispute a no-show and get the decision · `spec/30-stories/US-113.md`
+- **US-114** [Y] Decide a disputed no-show on one screen of evidence · `spec/30-stories/US-114.md`
+- **US-115** [Y] Waive a no-show fee before it is invoiced · `spec/30-stories/US-115.md`
+- **US-121** [K] Place the bookings a fault left unplaced · `spec/30-stories/US-121.md`
+- **US-122** [Y] Review and undo automatic fault rebookings · `spec/30-stories/US-122.md`
+- **US-124** [K] Work every exception from one queue · `spec/30-stories/US-124.md`
+- **US-125** [Y] See each site's day on one live board · `spec/30-stories/US-125.md`
+- **US-126** [Y] Find a driver and message them from one place · `spec/30-stories/US-126.md`
+- **US-127** [K] Book a slot on behalf of a registered driver · `spec/30-stories/US-127.md`
+- **US-128** [Y] Force-confirm or force-release a booking · `spec/30-stories/US-128.md`
+- **US-129** [K] Run every booking task of an ops shift in the ops console · `spec/30-stories/US-129.md`
+- **US-130** [Y] Take EVSEs out for maintenance with a maintenance hold · `spec/30-stories/US-130.md`
+- **US-131** [Y] Keep capacity for one fleet with a fleet-priority hold · `spec/30-stories/US-131.md`
+- **US-201** [K] Gowanus EVSE status through AMPECO · `spec/30-stories/US-201.md`
+- **US-202** [Y] Gowanus session records through AMPECO · `spec/30-stories/US-202.md`
+- **US-203** [K] JFK EVSE status through ChargeLab · `spec/30-stories/US-203.md`
+- **US-204** [Y] Upload the LIC session CSV for reconciliation · `spec/30-stories/US-204.md`
+- **US-205** [Y] The same booking rules at sites of every supply pattern · `spec/30-stories/US-205.md`
+- **US-207** [Y] Every status view shows its age and flags stale status · `spec/30-stories/US-207.md`
+- **US-208** [Y] Live status only from a partner site's own sources · `spec/30-stories/US-208.md`
+- **US-209** [Y] EVSE status at any past moment · `spec/30-stories/US-209.md`
+- **US-211** [K] Every booking message opens the booking in the phone's browser · `spec/30-stories/US-211.md`
+- **US-212** [K] Book in two taps from a message link · `spec/30-stories/US-212.md`
+- **US-213** [K] Book a vehicle that has no telematics · `spec/30-stories/US-213.md`
+- **US-214** [Y] Book by texting a site code and a time · `spec/30-stories/US-214.md`
+- **US-215** [Y] Book and get booking messages on WhatsApp · `spec/30-stories/US-215.md`
+- **US-218** [K] The registered mobile number is the driver's only identity · `spec/30-stories/US-218.md`
+- **US-219** [K] A removed driver can no longer book for the fleet · `spec/30-stories/US-219.md`
+- **US-220** [K] Signed, single-use links in driver messages · `spec/30-stories/US-220.md`
+- **US-222** [K] Text commands count only from the booker or the charging driver · `spec/30-stories/US-222.md`
+- **US-223** [K] One confirmation per booking, in the reader's language · `spec/30-stories/US-223.md`
+- **US-225** [Y] A welcome message when a driver's number is registered · `spec/30-stories/US-225.md`
+- **US-227** [K] Every message and driver PWA screen in the driver's language · `spec/30-stories/US-227.md`
+- **US-229** [K] Messages only after the driver agrees; STOP ends them at once · `spec/30-stories/US-229.md`
+- **US-230** [Y] Consent texts and fee notices in three languages, with the accepted version kept · `spec/30-stories/US-230.md`
+- **US-231** [Y] Directions in the driver's own navigation app and one tap back to Uber or Lyft · `spec/30-stories/US-231.md`
+- **US-232** [K] Gowanus charger reservations sent and cancelled through AMPECO · `spec/30-stories/US-232.md`
+- **US-301** [K] Ops onboards a fleet and registers its drivers and vehicles on its behalf · `spec/30-stories/US-301.md`
+- **US-302** [Y] Fleet manager registers the fleet's drivers' mobile numbers · `spec/30-stories/US-302.md`
+- **US-303** [Y] Fleet manager keeps the fleet's vehicle profiles up to date · `spec/30-stories/US-303.md`
+- **US-304** [Y] Fleet adapter policy with a per-vehicle override · `spec/30-stories/US-304.md`
+- **US-305** [Y] Import a fleet's vehicles and driver numbers from one file · `spec/30-stories/US-305.md`
+- **US-306** [K] Fleet manager sees every booking of the fleet · `spec/30-stories/US-306.md`
+- **US-307** [Y] Fleet manager sees the no-shows of the fleet's drivers · `spec/30-stories/US-307.md`
+- **US-308** [Y] Monthly usage report per vehicle in the fleet portal · `spec/30-stories/US-308.md`
+- **US-310** [Y] Station operator sets each site's bookable days and hours · `spec/30-stories/US-310.md`
+- **US-311** [Y] Station operator changes a capacity rule and sees walk-up capacity · `spec/30-stories/US-311.md`
+- **US-314** [Y] Station operator sees what each fault cost in bookings · `spec/30-stories/US-314.md`
+- **US-315** [Y] Station operator sees upcoming bookings and their allocated EVSE · `spec/30-stories/US-315.md`
+- **US-316** [K] No-show fee as its own line, reversed by a new entry · `spec/30-stories/US-316.md`
+- **US-317** [Y] A fleet's owed, paid and outstanding at any past date · `spec/30-stories/US-317.md`
+- **US-318** [K] One consolidated monthly invoice per fleet, every item listed · `spec/30-stories/US-318.md`
+- **US-320** [Y] A fee reversed after invoicing returns as a credit on the next invoice · `spec/30-stories/US-320.md`
+- **US-321** [K] Fleet pays its invoice through Stripe without card data reaching Amperlane · `spec/30-stories/US-321.md`
+- **US-323** [Y] Finance sees each invoice's payment status and the overdue ones · `spec/30-stories/US-323.md`
+- **US-325** [Y] Finance views for invoices, reconciliation and disputes, with no operational rights · `spec/30-stories/US-325.md`
+- **US-326** [K] Completed-booking definition set by ops over stored evidence · `spec/30-stories/US-326.md`
+- **US-327** [Y] Monthly completed bookings for NYC, with pilot data marked · `spec/30-stories/US-327.md`
+- **US-328** [Y] Series A data-room report on demand, traceable to booking ids · `spec/30-stories/US-328.md`
+- **US-329** [Y] No-show and late-arrival rates per month, fleet and site · `spec/30-stories/US-329.md`
+- **US-400** [Y] Pilot history queryable with new bookings · `spec/30-stories/US-400.md`
+- **US-401** [Y] Re-runnable pilot migration that reconciles with the export · `spec/30-stories/US-401.md`
+- **US-402** [Y] Pilot outcomes the data room can trust · `spec/30-stories/US-402.md`
+- **US-403** [Y] One documented rule when the Sheets and Airtable disagree · `spec/30-stories/US-403.md`
+- **US-404** [Y] Raw pilot export kept read-only and for named people only · `spec/30-stories/US-404.md`
+- **US-406** [K] Pilot sites and fleets run on the platform from launch · `spec/30-stories/US-406.md`
+- **US-408** [K] Each booking invoiced once across the cut-over · `spec/30-stories/US-408.md`
+- **US-409** [Y] Real drivers on the platform before the Amperlane Concierge is switched off · `spec/30-stories/US-409.md`
+- **US-410** [K] Production access by role for named people, logged from the first release · `spec/30-stories/US-410.md`
+- **US-411** [K] Portal users see only their own organisation's data · `spec/30-stories/US-411.md`
+- **US-412** [K] Booking history with actor and reason code that nobody can edit · `spec/30-stories/US-412.md`
+- **US-418** [Y] Anonymise one driver on request without breaking records · `spec/30-stories/US-418.md`
+- **US-422** [Y] A simulated site to break chargers on purpose, and a staging that never touches production · `spec/30-stories/US-422.md`
+- **US-423** [K] Amperlane owns the code, the AWS accounts and the data · `spec/30-stories/US-423.md`
+- **US-424** [Y] One team from Phase 0 and a signed integration-layer handover · `spec/30-stories/US-424.md`
 
 ### System stories with no task
 
@@ -314,68 +249,68 @@ _none_
 
 ### Parked (V) requirements without stories (expected, for visibility)
 
-- **REQ-270** [V] Each fleet invoice covers its drivers' energy, so fleet finance never handles drivers' car · `spec/20-requirements/requirements.md:554`
-- **REQ-271** [V] The platform invoices each fleet monthly for a fee per completed booking ($2 today). · `spec/20-requirements/requirements.md:555`
-- **REQ-272** [V] After each completed session, the station operator's payable amount is recorded automatica · `spec/20-requirements/requirements.md:556`
-- **REQ-273** [V] The platform records each session's cost to Amperlane at the station operator's B2B tariff · `spec/20-requirements/requirements.md:557`
-- **REQ-274** [V] The platform bills fleets a bundled per-kWh rate that includes the guaranteed slot. · `spec/20-requirements/requirements.md:558`
-- **REQ-275** [V] The platform charges station operators a take rate of 10–12% on charging GMV booked throug · `spec/20-requirements/requirements.md:559`
-- **REQ-276** [V] The platform charges station operators a fee only on incremental off-peak sessions, never  · `spec/20-requirements/requirements.md:560`
-- **REQ-277** [V] When Amperlane holds station operators' money, they are paid weekly, with the payout frequ · `spec/20-requirements/requirements.md:561`
-- **REQ-278** [V] Fleets are invoiced through Stripe Invoicing and station operators are paid by Stripe Conn · `spec/20-requirements/requirements.md:562`
-- **REQ-279** [V] Money owed to station operators is held and moved by Stripe and never sits in an Amperlane · `spec/20-requirements/requirements.md:563`
-- **REQ-280** [V] The ledger shows Amperlane's exposure between weekly payouts to station operators and net- · `spec/20-requirements/requirements.md:564`
-- **REQ-281** [V] Each fleet has a credit limit on its outstanding balance, and exceeding it triggers the fl · `spec/20-requirements/requirements.md:565`
-- **REQ-282** [V] In a merchant-of-record model, energy is billed only from a matched session record that me · `spec/20-requirements/requirements.md:566`
-- **REQ-283** [V] Stripe files and delivers 1099 forms for station operators paid through the platform. · `spec/20-requirements/requirements.md:567`
-- **REQ-284** [V] A pricing module applies station operators' B2B tariffs and fleet bundled rates to session · `spec/20-requirements/requirements.md:568`
-- **REQ-285** [V] As merchant of record, Amperlane issues receipts and tax lines for the energy it sells to  · `spec/20-requirements/requirements.md:569`
-- **REQ-286** [V] A fleet can dispute an energy charge, and ops resolves it against the operator's session r · `spec/20-requirements/requirements.md:570`
-- **REQ-287** [V] A station operator sees its payouts in the station portal, each with a statement of the se · `spec/20-requirements/requirements.md:571`
-- **REQ-288** [V] A failed payout stays owed in the ledger, finance is alerted, and it is paid in the next p · `spec/20-requirements/requirements.md:572`
-- **REQ-289** [V] Finance can hold a station operator's payout with a reason code until it is released. · `spec/20-requirements/requirements.md:573`
-- **REQ-290** [V] A station operator completes payment-provider onboarding through the provider's hosted flo · `spec/20-requirements/requirements.md:574`
-- **REQ-291** [V] No single user can both change a station operator's payout account details and approve a p · `spec/20-requirements/requirements.md:575`
-- **REQ-292** [V] A chargeback or bank return is recorded in the ledger and shown to finance with the bookin · `spec/20-requirements/requirements.md:576`
-- **REQ-293** [V] The platform bills each fleet a subscription per vehicle per month ($15 in the brief), wit · `spec/20-requirements/requirements.md:577`
-- **REQ-294** [V] A fleet manager can restrict which sites the fleet's drivers may book. · `spec/20-requirements/requirements.md:578`
-- **REQ-295** [V] A fleet manager can set a maximum number of bookings per driver per day, such as two. · `spec/20-requirements/requirements.md:579`
-- **REQ-296** [V] Drivers never pay at the charger with their own cards, because Amperlane bills the session · `spec/20-requirements/requirements.md:580`
-- **REQ-297** [V] Adyen for Platforms replaces Stripe for payouts to station operators. · `spec/20-requirements/requirements.md:581`
-- **REQ-298** [V] The payer of the no-show fee (fleet, driver, or fleet pays and deducts) is a setting per f · `spec/20-requirements/requirements.md:587`
-- **REQ-299** [V] Where a fleet's policy is 'driver pays', the platform collects the no-show fee from the dr · `spec/20-requirements/requirements.md:588`
-- **REQ-300** [V] Before a driver's first booking under a 'driver pays' policy, the driver sees the fee and  · `spec/20-requirements/requirements.md:589`
-- **REQ-301** [V] When a fee a driver already paid is reversed, the driver is refunded to the original payme · `spec/20-requirements/requirements.md:590`
-- **REQ-302** [V] Under a 'fleet pays and deducts' policy, the fleet invoice shows each no-show fee with the · `spec/20-requirements/requirements.md:591`
-- **REQ-303** [V] No-show fees are passed through to the station operator, and reversing a fee reverses the  · `spec/20-requirements/requirements.md:592`
-- **REQ-304** [V] Whether a no-show fee still applies after a late driver accepts the re-offer is a setting  · `spec/20-requirements/requirements.md:593`
-- **REQ-305** [V] A 'running late' report either releases the stall to walk-ups at once or extends the hold  · `spec/20-requirements/requirements.md:599`
-- **REQ-306** [V] A driver whose vehicle is seen approaching the site is not marked a no-show when grace end · `spec/20-requirements/requirements.md:600`
-- **REQ-307** [V] Grace is extended automatically while the vehicle is within a set distance of the site, up · `spec/20-requirements/requirements.md:601`
-- **REQ-308** [V] The platform integrates with the ChargePoint CSMS. · `spec/20-requirements/requirements.md:607`
-- **REQ-309** [V] The platform integrates with the EVgo CSMS. · `spec/20-requirements/requirements.md:608`
-- **REQ-310** [V] The platform integrates with the Electrify America CSMS. · `spec/20-requirements/requirements.md:609`
-- **REQ-311** [V] The platform reads SoC for Tesla vehicles through the Tesla Fleet API, metered per fleet a · `spec/20-requirements/requirements.md:610`
-- **REQ-312** [V] The platform reads SoC, charging state and location through Smartcar for vehicles without  · `spec/20-requirements/requirements.md:611`
-- **REQ-313** [V] Hosts without a CSMS connect their chargers over OCPP to a CitrineOS back-end that Amperla · `spec/20-requirements/requirements.md:612`
-- **REQ-314** [V] Stripe Billing history and Twilio message logs are migrated with the pilot history. · `spec/20-requirements/requirements.md:613`
-- **REQ-315** [V] The workflow engine runs on Temporal Cloud instead of self-hosted. · `spec/20-requirements/requirements.md:614`
-- **REQ-316** [V] An exception that needs ops while no ops person is signed in reaches an on-duty contact by · `spec/20-requirements/requirements.md:620`
-- **REQ-317** [V] During the March 2027 hypercare, a production incident that affects booking is acknowledge · `spec/20-requirements/requirements.md:621`
-- **REQ-318** [V] The platform is ready for a SOC 2 Type I audit by the date Amperlane sets: 12 months from  · `spec/20-requirements/requirements.md:622`
-- **REQ-319** [V] An external penetration test is completed, and its critical and high findings are fixed, b · `spec/20-requirements/requirements.md:623`
-- **REQ-320** [V] The platform exports SOC 2 evidence on demand: user and role lists, change records, restor · `spec/20-requirements/requirements.md:624`
-- **REQ-321** [V] Drivers use a native iOS and Android app ('Driver App, Native iOS / Android'). · `spec/20-requirements/requirements.md:630`
-- **REQ-322** [V] The platform receives trip and vehicle data from the Uber and Lyft driver apps to offer a  · `spec/20-requirements/requirements.md:631`
-- **REQ-323** [V] Every charger holds the booked slot through a real-time OCPP reservation ('Real-time reser · `spec/20-requirements/requirements.md:632`
-- **REQ-324** [V] The platform launches in Los Angeles in Q3 2027. · `spec/20-requirements/requirements.md:633`
-- **REQ-325** [V] LA sites connect over OCPI 2.2.1 rather than through per-operator integrations. · `spec/20-requirements/requirements.md:634`
-- **REQ-326** [V] The platform operates in 10 US metros by the end of 2027. · `spec/20-requirements/requirements.md:635`
-- **REQ-327** [V] Ops can enable an overbooking policy for one site and one off-peak window once that site's · `spec/20-requirements/requirements.md:636`
-- **REQ-328** [V] The platform exchanges bookings with CPOs through the OCPI 2.3 Booking module. · `spec/20-requirements/requirements.md:637`
-- **REQ-329** [V] Charging prices vary by time of use, based on utility tariff data from OpenEI URDB. · `spec/20-requirements/requirements.md:643`
-- **REQ-330** [V] The platform takes part in OpenADR 3.0 demand response. · `spec/20-requirements/requirements.md:644`
-- **REQ-331** [V] The platform supports bookings for autonomous-vehicle fleets and depots. · `spec/20-requirements/requirements.md:645`
+- **REQ-270** [V] Each fleet invoice covers its drivers' energy, so fleet finance never handles drivers' car · `spec/20-requirements/requirements.md:555`
+- **REQ-271** [V] The platform invoices each fleet monthly for a fee per completed booking ($2 today). · `spec/20-requirements/requirements.md:556`
+- **REQ-272** [V] After each completed session, the station operator's payable amount is recorded automatica · `spec/20-requirements/requirements.md:557`
+- **REQ-273** [V] The platform records each session's cost to Amperlane at the station operator's B2B tariff · `spec/20-requirements/requirements.md:558`
+- **REQ-274** [V] The platform bills fleets a bundled per-kWh rate that includes the guaranteed slot. · `spec/20-requirements/requirements.md:559`
+- **REQ-275** [V] The platform charges station operators a take rate of 10–12% on charging GMV booked throug · `spec/20-requirements/requirements.md:560`
+- **REQ-276** [V] The platform charges station operators a fee only on incremental off-peak sessions, never  · `spec/20-requirements/requirements.md:561`
+- **REQ-277** [V] When Amperlane holds station operators' money, they are paid weekly, with the payout frequ · `spec/20-requirements/requirements.md:562`
+- **REQ-278** [V] Fleets are invoiced through Stripe Invoicing and station operators are paid by Stripe Conn · `spec/20-requirements/requirements.md:563`
+- **REQ-279** [V] Money owed to station operators is held and moved by Stripe and never sits in an Amperlane · `spec/20-requirements/requirements.md:564`
+- **REQ-280** [V] The ledger shows Amperlane's exposure between weekly payouts to station operators and net- · `spec/20-requirements/requirements.md:565`
+- **REQ-281** [V] Each fleet has a credit limit on its outstanding balance, and exceeding it triggers the fl · `spec/20-requirements/requirements.md:566`
+- **REQ-282** [V] In a merchant-of-record model, energy is billed only from a matched session record that me · `spec/20-requirements/requirements.md:567`
+- **REQ-283** [V] Stripe files and delivers 1099 forms for station operators paid through the platform. · `spec/20-requirements/requirements.md:568`
+- **REQ-284** [V] A pricing module applies station operators' B2B tariffs and fleet bundled rates to session · `spec/20-requirements/requirements.md:569`
+- **REQ-285** [V] As merchant of record, Amperlane issues receipts and tax lines for the energy it sells to  · `spec/20-requirements/requirements.md:570`
+- **REQ-286** [V] A fleet can dispute an energy charge, and ops resolves it against the operator's session r · `spec/20-requirements/requirements.md:571`
+- **REQ-287** [V] A station operator sees its payouts in the station portal, each with a statement of the se · `spec/20-requirements/requirements.md:572`
+- **REQ-288** [V] A failed payout stays owed in the ledger, finance is alerted, and it is paid in the next p · `spec/20-requirements/requirements.md:573`
+- **REQ-289** [V] Finance can hold a station operator's payout with a reason code until it is released. · `spec/20-requirements/requirements.md:574`
+- **REQ-290** [V] A station operator completes payment-provider onboarding through the provider's hosted flo · `spec/20-requirements/requirements.md:575`
+- **REQ-291** [V] No single user can both change a station operator's payout account details and approve a p · `spec/20-requirements/requirements.md:576`
+- **REQ-292** [V] A chargeback or bank return is recorded in the ledger and shown to finance with the bookin · `spec/20-requirements/requirements.md:577`
+- **REQ-293** [V] The platform bills each fleet a subscription per vehicle per month ($15 in the brief), wit · `spec/20-requirements/requirements.md:578`
+- **REQ-294** [V] A fleet manager can restrict which sites the fleet's drivers may book. · `spec/20-requirements/requirements.md:579`
+- **REQ-295** [V] A fleet manager can set a maximum number of bookings per driver per day, such as two. · `spec/20-requirements/requirements.md:580`
+- **REQ-296** [V] Drivers never pay at the charger with their own cards, because Amperlane bills the session · `spec/20-requirements/requirements.md:581`
+- **REQ-297** [V] Adyen for Platforms replaces Stripe for payouts to station operators. · `spec/20-requirements/requirements.md:582`
+- **REQ-298** [V] The payer of the no-show fee (fleet, driver, or fleet pays and deducts) is a setting per f · `spec/20-requirements/requirements.md:588`
+- **REQ-299** [V] Where a fleet's policy is 'driver pays', the platform collects the no-show fee from the dr · `spec/20-requirements/requirements.md:589`
+- **REQ-300** [V] Before a driver's first booking under a 'driver pays' policy, the driver sees the fee and  · `spec/20-requirements/requirements.md:590`
+- **REQ-301** [V] When a fee a driver already paid is reversed, the driver is refunded to the original payme · `spec/20-requirements/requirements.md:591`
+- **REQ-302** [V] Under a 'fleet pays and deducts' policy, the fleet invoice shows each no-show fee with the · `spec/20-requirements/requirements.md:592`
+- **REQ-303** [V] No-show fees are passed through to the station operator, and reversing a fee reverses the  · `spec/20-requirements/requirements.md:593`
+- **REQ-304** [V] Whether a no-show fee still applies after a late driver accepts the re-offer is a setting  · `spec/20-requirements/requirements.md:594`
+- **REQ-305** [V] A 'running late' report either releases the stall to walk-ups at once or extends the hold  · `spec/20-requirements/requirements.md:600`
+- **REQ-306** [V] A driver whose vehicle is seen approaching the site is not marked a no-show when grace end · `spec/20-requirements/requirements.md:601`
+- **REQ-307** [V] Grace is extended automatically while the vehicle is within a set distance of the site, up · `spec/20-requirements/requirements.md:602`
+- **REQ-308** [V] The platform integrates with the ChargePoint CSMS. · `spec/20-requirements/requirements.md:608`
+- **REQ-309** [V] The platform integrates with the EVgo CSMS. · `spec/20-requirements/requirements.md:609`
+- **REQ-310** [V] The platform integrates with the Electrify America CSMS. · `spec/20-requirements/requirements.md:610`
+- **REQ-311** [V] The platform reads SoC for Tesla vehicles through the Tesla Fleet API, metered per fleet a · `spec/20-requirements/requirements.md:611`
+- **REQ-312** [V] The platform reads SoC, charging state and location through Smartcar for vehicles without  · `spec/20-requirements/requirements.md:612`
+- **REQ-313** [V] Hosts without a CSMS connect their chargers over OCPP to a CitrineOS back-end that Amperla · `spec/20-requirements/requirements.md:613`
+- **REQ-314** [V] Stripe Billing history and Twilio message logs are migrated with the pilot history. · `spec/20-requirements/requirements.md:614`
+- **REQ-315** [V] The workflow engine runs on Temporal Cloud instead of self-hosted. · `spec/20-requirements/requirements.md:615`
+- **REQ-316** [V] An exception that needs ops while no ops person is signed in reaches an on-duty contact by · `spec/20-requirements/requirements.md:621`
+- **REQ-317** [V] During the March 2027 hypercare, a production incident that affects booking is acknowledge · `spec/20-requirements/requirements.md:622`
+- **REQ-318** [V] The platform is ready for a SOC 2 Type I audit by the date Amperlane sets: 12 months from  · `spec/20-requirements/requirements.md:623`
+- **REQ-319** [V] An external penetration test is completed, and its critical and high findings are fixed, b · `spec/20-requirements/requirements.md:624`
+- **REQ-320** [V] The platform exports SOC 2 evidence on demand: user and role lists, change records, restor · `spec/20-requirements/requirements.md:625`
+- **REQ-321** [V] Drivers use a native iOS and Android app ('Driver App, Native iOS / Android'). · `spec/20-requirements/requirements.md:631`
+- **REQ-322** [V] The platform receives trip and vehicle data from the Uber and Lyft driver apps to offer a  · `spec/20-requirements/requirements.md:632`
+- **REQ-323** [V] Every charger holds the booked slot through a real-time OCPP reservation ('Real-time reser · `spec/20-requirements/requirements.md:633`
+- **REQ-324** [V] The platform launches in Los Angeles in Q3 2027. · `spec/20-requirements/requirements.md:634`
+- **REQ-325** [V] LA sites connect over OCPI 2.2.1 rather than through per-operator integrations. · `spec/20-requirements/requirements.md:635`
+- **REQ-326** [V] The platform operates in 10 US metros by the end of 2027. · `spec/20-requirements/requirements.md:636`
+- **REQ-327** [V] Ops can enable an overbooking policy for one site and one off-peak window once that site's · `spec/20-requirements/requirements.md:637`
+- **REQ-328** [V] The platform exchanges bookings with CPOs through the OCPI 2.3 Booking module. · `spec/20-requirements/requirements.md:638`
+- **REQ-329** [V] Charging prices vary by time of use, based on utility tariff data from OpenEI URDB. · `spec/20-requirements/requirements.md:644`
+- **REQ-330** [V] The platform takes part in OpenADR 3.0 demand response. · `spec/20-requirements/requirements.md:645`
+- **REQ-331** [V] The platform supports bookings for autonomous-vehicle fleets and depots. · `spec/20-requirements/requirements.md:646`
 
 ## Priority (KYIV)
 

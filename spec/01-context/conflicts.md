@@ -4,7 +4,7 @@ type: context
 title: Conflicts between sources
 status: approved
 owner: Mykola Marchuk
-version: 1
+version: 2
 kyiv: null
 parents: [BUSINESS-CONTEXT]
 sources: [SRC-D1, SRC-C1, SRC-C2, SRC-D2, SRC-R1]
@@ -53,6 +53,7 @@ Status values:
 | CF-024 | Is there a cash gap whatever the business model? | resolved | — |
 | CF-025 | "All major CSMS" in the brief vs the systems actually reachable | needs-decision | Ravi Menon, Luis Ortega, with Dana Whitfield · 2026-11-06 |
 | CF-026 | Observed vs modelled shift-change burst | resolved | — |
+| CF-027 | Written go-live criteria vs the fixed 1 March 2027 launch | needs-decision | Dana Whitfield with Ravi Menon · 2026-11-06 |
 
 ## Details
 
@@ -361,3 +362,27 @@ Status values:
 - **Result:** observed is 40–50; 400 is the modelled launch burst, and the load-test target of 2,000 is 5× the model
   (CTX-055, CTX-115). SRC-D2#12 mislabels it.
 - **Status:** resolved.
+
+### CF-027 · Written go-live criteria vs the fixed 1 March 2027 launch
+- **Source A:** REQ-269 (Y, U-NF): the platform runs real bookings with real drivers at all three pilot sites for a set
+  period before 1 March 2027, "and the Amperlane Concierge process is switched off only after the written go-live
+  criteria are met". Its basis is Intellias' commitment to "plan backwards from it, including time to test with real
+  drivers" (SRC-C1@00:48:45), which the CEO called "a fair non-answer" (SRC-C1@00:49:11); CTX-082.
+- **Source B:** REQ-142 (K): NYC production go-live on 1 March 2027 "with real sites and real fleets and no spreadsheets
+  in the critical path", and REQ-097 (K): from the launch date no booking at the pilot sites is taken in the pilot
+  tools. Both rest on the CEO: "The date that matters is March first, 2027. NYC production launch. Real stations, real
+  fleets, no more spreadsheets in the critical path." (SRC-C1@00:29:06); CTX-079.
+- **Rule applied:** none settles it. Both come from the same call, so later > earlier does not apply, and each is
+  specific about a different thing (the switch-off condition, the date). A vendor statement does not override the
+  client, which favours the date, but the client did not reject the condition, and whether the launch waits for it is
+  a go-live decision in disguise (playbook §10.7). KYIV (K against Y) is not a precedence rule.
+- **Options:** (a) the launch moves until the criteria are met (REQ-142 fails); (b) the launch happens on 1 March 2027
+  whatever the criteria say, and REQ-269's condition becomes a readiness report (REQ-269 changes through a CR); (c) the
+  launch happens on the date, and the Concierge keeps running for a set time for the sites or fleets that miss a
+  criterion (REQ-097 and REQ-142 fail for them, temporarily). Setting criteria that can be met before the date (Q-055)
+  lowers the risk under every option.
+- **Status:** needs-decision. Owner: Dana Whitfield with Ravi Menon; due 2026-11-06, so the costed proposal states
+  which option it plans (the build ends 2027-02-26 and hypercare runs in March, SRC-D2#15). Links: Q-055 (the
+  criteria), A-056 (the pre-launch split), Q-025 (budget coverage), US-406, US-409, JS-407.
+- **Stories:** US-409 holds under every option (red team R3 limited it to before 2027-03-01). US-406 S1 names
+  2027-03-01 and should say "the launch date", so that the K story does not depend on this conflict (R6).
