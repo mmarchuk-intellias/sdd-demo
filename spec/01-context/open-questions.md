@@ -4,7 +4,7 @@ type: context
 title: Open questions and assumptions
 status: approved
 owner: Mykola Marchuk
-version: 5
+version: 6
 kyiv: null
 parents: [BUSINESS-CONTEXT]
 sources: [SRC-D1, SRC-C1, SRC-C2, SRC-D2, SRC-R1]
@@ -34,7 +34,7 @@ added Q-038. Step 2 (2026-10-28) added A-031 – A-047 and Q-039 – Q-050; Step
 Q-051 – Q-059; Step 3.3, decided at Gate 3 (2026-10-28), added A-059 (the defaults of the configured parameters,
 design.md §8), A-060 – A-062 and Q-060 – Q-064; Step 4, decided at Gate 4 (2026-10-28), added Q-065 – Q-071 (technical
 questions for the client from the task critique) and extended A-059 to two parameters design.md §8 added. Approved at
-Gate 4 (2026-10-29).
+Gate 4 (2026-10-29). Step 5 (2026-10-29) added Q-072, approved at Step 5 (2026-10-29).
 
 ## Questions
 
@@ -143,6 +143,7 @@ Gate 4 (2026-10-29).
 | Q-055 | What are the written go-live criteria for switching off the Amperlane Concierge (REQ-269), who signs them off, and how long should the platform run real bookings with real drivers before 1 March 2027? | REQ-269 switches the Concierge off only once the criteria are met, against a fixed launch date (REQ-142). The criteria and the period shape the build plan (build ends 2027-02-26, SRC-D2#15), hypercare and the budget (Q-025). What happens if they are not met is CF-027. Candidate criterion to propose when asked (Gate 3, 2026-10-28): a breach-notification procedure reviewed by counsel against the NY SHIELD Act and naming Amperlane's notification owner (constitution N18, JS-416 S2). Business decision (go-live criteria), not assumed (P5). | Dana Whitfield with Ravi Menon | end of Phase 0 (2026-11-27) | SRC-C1@00:29:06, SRC-C1@00:48:45, SRC-C1@00:49:11, SRC-D2#15 | no |
 | Q-065 | Which repository host, CI service and task tracker will hold Amperlane's code, pipelines and tasks (for example GitHub with GitHub Actions and GitHub Projects), and who creates the organisation and gives Intellias engineers access at the start of Phase 0? | The code lives in Amperlane's repositories, and both teams work in them from Phase 0 (CTX-005, CTX-006, REQ-119, REQ-143). The CI pipeline, branch protection, the trust between CI and the Terraform jobs, equal roles in repositories and tracker, and the check that a done task has a merged change depend on the host. The tasks keep the host-specific parts behind configuration and name GitHub only as a placeholder (P4.2 critique NEW-Q-5-1). | Ravi Menon | 2026-11-06 (Phase 0 starts 2026-11-09, SRC-D2#15) | SRC-C2@00:06:05, SRC-C2@00:06:41, SRC-C2@00:55:08, CTX-005, CTX-006 | no |
 | Q-066 | To which AWS organisation or account are Amperlane's $100k AWS Activate credits applied, how much remains and when do they expire, and will the platform's new accounts (production, staging, development, log archive, shared services) join that organisation? | Hosting uses the Activate credits first (REQ-137), and the monthly cost report shows the credits left; neither the remaining amount nor the expiry can be read through an AWS API (T-937). The Terraform bootstrap needs the management account at the start of Phase 0 (T-904; P4.2 critique NEW-Q-5-2). | Ravi Menon | 2026-11-06 (Phase 0 starts 2026-11-09, SRC-D2#15) | SRC-C2@00:06:05, SRC-D2#11, CTX-085 | no |
+| Q-072 | What estimates and team size does the estimation workbook v1 give for the K tasks in tasks.yaml, and can the Mobility BU staff that team from 30 November 2026, or earlier for platform foundations in Phase 0? | P6 compares the K estimates with the committed capacity. The range check in kyiv-proposal.md shows that the closed K (335 tasks) fits the indicative 4.5–5.5 builders only if a K task takes 0.6–0.8 days on average. | Mark Feldman | 2026-10-30 | SRC-R1#open, SRC-D2#15, SRC-D2#16 | internal |
 
 ## Assumptions
 

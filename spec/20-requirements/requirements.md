@@ -4,7 +4,7 @@ type: requirements
 title: Amperlane Platform v1 requirements (closed list for Gate 2)
 status: approved
 owner: Mykola Marchuk
-version: 3
+version: 4
 kyiv: null
 parents: [BUSINESS-CONTEXT, CONSTITUTION]
 sources: [SRC-D1, SRC-C1, SRC-C2, SRC-D2, SRC-R1]
@@ -98,16 +98,16 @@ definition is baseline, while billing per completed booking is parked.
 | REQ-034 | S-F | Each site has a grace period, 10 minutes unless configured otherwise, and the auto-release, no-show and fee decisions for a booking use the value of that booking's site. | SRC-C1@00:09:55, SRC-C2@00:27:57, CTX-067 | K (provisional) | A-003, Q-004 |
 | REQ-035 | S-F | When a booking with a physical station hold is released after grace, cancelled or rebooked to another EVSE, the platform tells site staff within a set time to clear that stall for walk-ups. | SRC-C1@00:09:55, CTX-067 | K (provisional) | A-012 |
 | REQ-036 | S-F | A booking released after grace with no arrival creates exactly one no-show fee line item, unless it falls under an exclusion of REQ-180, in which case it goes to ops review. | SRC-C1@00:09:27, SRC-C1@00:09:55, CTX-067 | K (provisional) | Q-002 |
-| REQ-037 | S-F | A driver who arrives after the booking's grace period, including any ops extension, keeps the booking recorded as a no-show, and the arrival time is stored with it as a late arrival. | SRC-C2@00:29:56, CTX-133 | Y (provisional) | Q-003 |
-| REQ-038 | S-F | When a driver records arrival after the booking was released as a no-show, the driver gets, within a set time, an offer of the earliest free compatible slot at that site, accepted with one tap. | SRC-C2@00:30:01, SRC-C2@00:30:11, CTX-133 | Y (provisional) | Q-003 |
+| REQ-037 | S-F | A driver who arrives after the booking's grace period, including any ops extension, keeps the booking recorded as a no-show, and the arrival time is stored with it as a late arrival. | SRC-C2@00:29:56, CTX-133 | K (provisional) | Q-003 |
+| REQ-038 | S-F | When a driver records arrival after the booking was released as a no-show, the driver gets, within a set time, an offer of the earliest free compatible slot at that site, accepted with one tap. | SRC-C2@00:30:01, SRC-C2@00:30:11, CTX-133 | K (provisional) | Q-003 |
 | REQ-039 | S-F | A driver cancels a booking with one tap on the page opened from any message about that booking, or on the driver page, with no confirmation dialog or sign-in step. | SRC-C1@00:12:26, SRC-C1@00:12:42, SRC-C1@00:46:10, CTX-041, CTX-135 | K (provisional) | — |
-| REQ-040 | S-F | A driver reports 'running late' with one tap on the page opened from any message about that booking, or on the driver page, and the report and its time appear on the booking in the ops console. | SRC-C1@00:12:26, SRC-C1@00:46:10, SRC-C1@00:46:28, CTX-041, CTX-135 | Y (provisional) | A-020, CF-021 |
+| REQ-040 | S-F | A driver reports 'running late' with one tap on the page opened from any message about that booking, or on the driver page, and the report and its time appear on the booking in the ops console. | SRC-C1@00:12:26, SRC-C1@00:46:10, SRC-C1@00:46:28, CTX-041, CTX-135 | K (provisional) | A-020, CF-021 |
 | REQ-041 | S-F | A driver who replies with a cancel keyword to an SMS about a booking cancels that booking only, and gets a reply naming the booking cancelled. | SRC-C1@00:12:42, CTX-041 | Y (provisional) | — |
-| REQ-042 | S-F | Ops can extend the grace period of a single booking with a reason code, up to a maximum set per site. | SRC-C1@00:38:52, SRC-C1@00:39:22, CTX-035 | Y (provisional) | A-020, CF-021, Q-004 |
+| REQ-042 | S-F | Ops can extend the grace period of a single booking with a reason code, up to a maximum set per site. | SRC-C1@00:38:52, SRC-C1@00:39:22, CTX-035 | K (provisional) | A-020, CF-021, Q-004 |
 | REQ-043 | S-F | A driver records arrival by scanning the QR code posted at an EVSE of the booking's site, and the scan is stored with the EVSE, booking and time and counts as arrival only from a set time before the slot to the end of grace. | SRC-C2@00:40:06, SRC-C2@00:40:24, CTX-102 | K (provisional) | A-024 |
 | REQ-044 | S-F | The platform produces a printable QR code for each EVSE that site staff can put up. | SRC-C2@00:40:24, CTX-102 | K (provisional) | A-012 |
-| REQ-045 | S-F | A fleet or a driver can raise a dispute on a no-show within the dispute window (A-047), and ops records a decision with a reason code that reverses or keeps the fee line and is sent to whoever raised it. | SRC-C1@00:38:52, SRC-C1@00:39:22, SRC-C1@00:39:31, CTX-035 | Y (provisional) | Q-043, A-047, Q-002 |
-| REQ-046 | S-F | A driver can report that the allocated stall was blocked on arrival, and the report is stored with its time and the arrival evidence, raises an ops exception and makes the booking count as a failed station hold for fees (REQ-180). | SRC-C1@00:38:52, SRC-C1@00:39:22, SRC-C1@00:43:56, CTX-035, CTX-068 | Y (provisional) | Q-005 |
+| REQ-045 | S-F | A fleet or a driver can raise a dispute on a no-show within the dispute window (A-047), and ops records a decision with a reason code that reverses or keeps the fee line and is sent to whoever raised it. | SRC-C1@00:38:52, SRC-C1@00:39:22, SRC-C1@00:39:31, CTX-035 | K (provisional) | Q-043, A-047, Q-002 |
+| REQ-046 | S-F | A driver can report that the allocated stall was blocked on arrival, and the report is stored with its time and the arrival evidence, raises an ops exception and makes the booking count as a failed station hold for fees (REQ-180). | SRC-C1@00:38:52, SRC-C1@00:39:22, SRC-C1@00:43:56, CTX-035, CTX-068 | K (provisional) | Q-005 |
 | REQ-336 | S-F | When the charging driver reports the allocated stall blocked on arrival (REQ-046), the platform reallocates the booking to another free compatible EVSE at the same site where one is free, places the station hold on it and tells the driver the new EVSE. | SRC-C2@00:24:04, SRC-C1@00:38:52, SRC-C1@00:39:22, CTX-066 | Y (suggested) | Q-005 | v1 | approved |
 
 ### Charger faults and ops console
@@ -118,13 +118,13 @@ definition is baseline, while billing per completed booking is parked.
 | REQ-048 | S-F | On a fault, the platform rebooks every booking allocated to the faulted EVSE and re-checks every later booking at the site that day against the remaining compatible EVSEs, so each booking that no longer fits is handled as unplaced (REQ-049, REQ-050) before its allocation time. | SRC-C2@00:24:04, SRC-C2@00:34:48, SRC-C2@00:35:14, CTX-136 | Y (provisional) | A-017, CF-022, Q-038 |
 | REQ-049 | S-F | A driver whose booking cannot be placed at the same site after a fault gets, within a set time, a message offering the next free compatible slot at that site and the nearest free compatible slots at other sites, each accepted with one tap or keyword. | SRC-C2@00:34:48, SRC-C2@00:35:14, CTX-136 | Y (provisional) | A-017 |
 | REQ-050 | S-F | Each fault-affected booking the platform could not place appears in the ops exception queue within a set time of the fault, with the alternatives offered to its driver and the driver's answer. | SRC-C2@00:34:48, SRC-C2@00:35:14, CTX-136 | K (provisional) | A-017, Q-023 |
-| REQ-051 | S-F | When a fault or a maintenance hold changes bookings at a site, the station operator gets a notice within a set time and sees in the station portal each affected booking and its outcome. | SRC-C2@00:34:48, SRC-C2@00:35:14, SRC-C2@00:52:34, CTX-047, CTX-136 | Y (provisional) | — |
+| REQ-051 | S-F | When a fault or a maintenance hold changes bookings at a site, the station operator gets a notice within a set time and sees in the station portal each affected booking and its outcome. | SRC-C2@00:34:48, SRC-C2@00:35:14, SRC-C2@00:52:34, CTX-047, CTX-136 | K (provisional) | — |
 | REQ-052 | S-F | A booking rebooked because of a fault carries the reason code 'moved — charger fault', the rebooking itself never records a no-show, and arrival and grace are then judged against the new allocation. | SRC-C2@00:52:53, SRC-C2@00:53:32, CTX-036, CTX-047 | K (provisional) | — |
 | REQ-053 | S-F | Every booking state change records its actor (the system or a named person) and a reason code from a fixed catalogue, and a system-initiated change never uses a generic code. | SRC-C2@00:53:32, SRC-C2@00:53:40, SRC-C2@00:53:46, CTX-036 | K (provisional) | — |
 | REQ-054 | S-F | Ops can rebook all bookings of a faulted EVSE in one action. | SRC-C1@00:38:27, SRC-C1@00:38:52, SRC-C1@00:39:22, CTX-035 | Y (provisional) | A-017, CF-022 |
 | REQ-055 | S-F | Ops can make a booking on behalf of a registered driver under the same capacity, compatibility and hold rules as the driver's own booking, with ops recorded as booker. | SRC-C1@00:38:52, SRC-C1@00:39:22, CTX-035 | K (provisional) | — |
-| REQ-056 | S-F | Ops can confirm a held or unconfirmed booking with a reason code, under the same capacity and no-overlap rules as any booking. | SRC-C1@00:38:52, SRC-C1@00:39:22, SRC-C2@00:53:00, CTX-035 | Y (provisional) | — |
-| REQ-057 | S-F | Ops can release a booking with a reason code, with the same effect on capacity, station hold and driver messages as a cancellation. | SRC-C1@00:38:52, SRC-C1@00:39:22, SRC-C2@00:53:00, CTX-035 | Y (provisional) | — |
+| REQ-056 | S-F | Ops can confirm a held or unconfirmed booking with a reason code, under the same capacity and no-overlap rules as any booking. | SRC-C1@00:38:52, SRC-C1@00:39:22, SRC-C2@00:53:00, CTX-035 | K (provisional) | — |
+| REQ-057 | S-F | Ops can release a booking with a reason code, with the same effect on capacity, station hold and driver messages as a cancellation. | SRC-C1@00:38:52, SRC-C1@00:39:22, SRC-C2@00:53:00, CTX-035 | K (provisional) | — |
 | REQ-058 | S-F | Every booking task ops performs in the pilot (taking a request, confirming, arranging station holds, rebooking, releasing, answering a driver) is done in the ops console, and no booking data is read from or written to Airtable, Google Sheets or Retool. | SRC-C1@00:33:22, SRC-C1@00:37:27, SRC-C1@00:39:49, CTX-042, CTX-139 | K (provisional) | — |
 
 ### Driver channel and identity
@@ -149,7 +149,7 @@ definition is baseline, while billing per completed booking is parked.
 | REQ-069 | S-F | A fleet manager sees in the fleet portal every upcoming and past booking of the fleet with its driver, vehicle, site, time and current state. | SRC-D1#9, SRC-D1#11, CTX-004 | K (provisional) | — |
 | REQ-070 | S-F | A fleet manager can add, edit and retire the fleet's vehicles in the fleet portal, including connector, allowed adapters and maximum power. | SRC-D1#9, SRC-D1#11, SRC-C2@00:41:32, SRC-C2@00:42:11, CTX-004, CTX-100 | Y (provisional) | A-023 |
 | REQ-071 | S-F | The fleet portal reports per vehicle and per month the bookings, no-shows, completed bookings and the charging energy of matched session records. | SRC-D1#8, SRC-D1#9, SRC-D1#11, CTX-004 | Y (provisional) | — |
-| REQ-072 | S-F | A fleet sets whether its vehicles may use adapters, and the setting can be overridden per vehicle. | SRC-C2@00:41:53, SRC-C2@00:42:00, SRC-C2@00:42:11, CTX-100 | Y (provisional) | — |
+| REQ-072 | S-F | A fleet sets whether its vehicles may use adapters, and the setting can be overridden per vehicle. | SRC-C2@00:41:53, SRC-C2@00:42:00, SRC-C2@00:42:11, CTX-100 | K (provisional) | — |
 | REQ-073 | S-F | A fleet manager sees the no-shows of the fleet's drivers. | SRC-C1@00:12:58, CTX-140 | Y (provisional) | — |
 | REQ-074 | S-F | A fleet owner sees for each vehicle booked today whether arrival was recorded and whether a charging session started, updated as the evidence arrives. | SRC-C1@00:12:58, CTX-140 | Y (provisional) | Q-017 |
 | REQ-075 | S-F | The platform reads SoC, charging state and location of a fleet's vehicles from Geotab where the fleet grants access. | SRC-C2@00:38:24, SRC-C2@00:40:31, SRC-C2@00:40:39, CTX-073, CTX-099 | I (provisional) | Q-014, A-022, Q-016 |
@@ -161,7 +161,7 @@ definition is baseline, while billing per completed booking is parked.
 | REQ-076 | S-F | A station operator sets the days and hours in which each of its sites accepts bookings, in the station portal. | SRC-D1#6, SRC-D1#11 | Y (provisional) | Q-005 |
 | REQ-077 | S-F | A station operator changes a site's capacity rule in the station portal, and the change applies to new bookings at once with no Amperlane approval. | SRC-C1@00:26:54, SRC-C1@00:27:07, CTX-065 | Y (provisional) | A-018, Q-035 |
 | REQ-078 | S-F | A station operator can record the tariffs that apply at each site. | SRC-D1#6, SRC-D1#11 | I (provisional) | Q-001 |
-| REQ-079 | S-F | A station operator sees the upcoming bookings at its sites and the EVSE each one is allocated to. | SRC-D1#11, SRC-C2@00:52:34, CTX-047 | Y (provisional) | — |
+| REQ-079 | S-F | A station operator sees the upcoming bookings at its sites and the EVSE each one is allocated to. | SRC-D1#11, SRC-C2@00:52:34, CTX-047 | K (provisional) | — |
 | REQ-080 | S-F | A station operator sees, for each fault, how many bookings it forced to be rebooked, offered alternatives or sent to ops. | SRC-C2@00:35:14, CTX-037 | Y (provisional) | — |
 | REQ-081 | S-F | Site staff, such as the LIC attendant, sign in to the platform on a site device through a site-scoped login of their own that ops can revoke at any time. | SRC-C1@00:08:34, SRC-C1@00:08:44, CTX-024, CTX-033, SRC-C1@00:08:08, SRC-C1@00:25:00 | K (provisional) | A-021, A-012, Q-049 |
 | REQ-082 | S-F | The station portal shows, for each time window, how many EVSEs stay unbookable for walk-ups. | SRC-C1@00:25:55, SRC-C1@00:26:10, CTX-064 | Y (provisional) | Q-005 |
@@ -188,8 +188,8 @@ definition is baseline, while billing per completed booking is parked.
 
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
-| REQ-091 | S-F | The platform reports completed bookings per month for NYC sites, using the definition configured under REQ-224, with migrated pilot data shown separately (REQ-225). | SRC-C1@00:29:22, SRC-C1@00:30:26, CTX-138 | Y (provisional) | Q-017 |
-| REQ-092 | S-F | The platform reports per month, per fleet and per site the no-shows and the late arrivals, each as a share of all bookings whose slot fell in that month, with fault, site-full and maintenance rebooks not counted as no-shows. | SRC-C1@00:08:56, SRC-C1@00:09:10, SRC-C1@00:12:58, CTX-039, CTX-140 | Y (provisional) | CF-018, Q-029, Q-044 |
+| REQ-091 | S-F | The platform reports completed bookings per month for NYC sites, using the definition configured under REQ-224, with migrated pilot data shown separately (REQ-225). | SRC-C1@00:29:22, SRC-C1@00:30:26, CTX-138 | K (provisional) | Q-017 |
+| REQ-092 | S-F | The platform reports per month, per fleet and per site the no-shows and the late arrivals, each as a share of all bookings whose slot fell in that month, with fault, site-full and maintenance rebooks not counted as no-shows. | SRC-C1@00:08:56, SRC-C1@00:09:10, SRC-C1@00:12:58, CTX-039, CTX-140 | K (provisional) | CF-018, Q-029, Q-044 |
 | REQ-093 | S-F | The platform reports the median wait from arrival to session start per site, from measured events. | SRC-D1#3, SRC-D1#7, SRC-C1@00:45:14, CTX-040 | I (provisional) | Q-009, Q-012 |
 | REQ-094 | S-F | The platform reports utilisation per site for its off-peak windows. | SRC-D1#7, CTX-040 | I (provisional) | Q-005 |
 | REQ-095 | S-F | On demand, the platform produces the Series A data-room report for any range of months since October 2025, with each figure computed under REQ-224 and REQ-225 and traceable to its booking ids. | SRC-C1@00:48:20, SRC-C2@00:04:43, CTX-053 | Y (provisional) | A-026, Q-020, Q-017 |
@@ -198,7 +198,7 @@ definition is baseline, while billing per completed booking is parked.
 
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
-| REQ-096 | S-F | The pilot history since October 2025 (bookings, no-shows, arrival times, drivers and stalls) is migrated into the platform. | SRC-C1@00:48:20, SRC-C2@00:04:43, CTX-053 | Y (provisional) | A-026, Q-020 |
+| REQ-096 | S-F | The pilot history since October 2025 (bookings, no-shows, arrival times, drivers and stalls) is migrated into the platform. | SRC-C1@00:48:20, SRC-C2@00:04:43, CTX-053 | K (provisional) | A-026, Q-020 |
 
 ### Delivery constraints and scope
 
@@ -224,7 +224,7 @@ definition is baseline, while billing per completed booking is parked.
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
 | REQ-104 | S-NF | For connected sites, each EVSE's status age, measured and evaluated as A-031 defines, is at most 60 seconds. | SRC-C2@00:49:22, SRC-C2@00:49:30, CTX-112 | K (provisional) | A-031, Q-012 |
-| REQ-105 | S-NF | No CSMS vendor SDK is used inside the booking core, so moving a site to another CSMS changes only its integration. | SRC-C2@00:06:50, SRC-C2@00:07:08, CTX-086 | Y (provisional) | — |
+| REQ-105 | S-NF | No CSMS vendor SDK is used inside the booking core, so moving a site to another CSMS changes only its integration. | SRC-C2@00:06:50, SRC-C2@00:07:08, CTX-086 | K (provisional) | — |
 | REQ-106 | S-NF | A webhook from a CSMS, the payment provider or the messaging provider that arrives twice or out of order changes state at most once and leaves the same final state as in-order delivery. | SRC-C2@00:14:55, SRC-C2@00:15:02, SRC-C2@00:15:14, CTX-091 | K (provisional) | A-035 |
 | REQ-107 | S-NF | A periodic poll reconciles each connected site's EVSE status, so a lost webhook cannot leave status older than 60 seconds. | SRC-C2@00:15:02, SRC-C2@00:15:14, SRC-C2@00:49:30, CTX-091 | K (provisional) | A-031 |
 | REQ-108 | S-NF | The booking and slot data model has a documented mapping to the OCPI 2.3 Booking module. | SRC-C2@00:13:32, SRC-C2@00:13:40, CTX-022 | I (provisional) | — |
@@ -235,7 +235,7 @@ definition is baseline, while billing per completed booking is parked.
 |---|---|---|---|---|---|
 | REQ-109 | S-NF | Every fleet invoice line traces to ledger entries and to its booking when the invoice is issued. | SRC-C2@00:01:07, SRC-C2@00:47:25, CTX-127 | Y (provisional) | — |
 | REQ-110 | S-NF | A scheduled check reconciles the status of invoices, and of payouts where the business model has them (Q-001), with the payment provider, so a lost payment webhook never leaves a record in the wrong state longer than one check interval. | SRC-C2@00:15:14, CTX-091 | Y (provisional) | — |
-| REQ-111 | S-NF | The payment provider sits behind an interface, so it can be replaced without changing the booking core. | SRC-C2@00:47:10, SRC-C2@00:47:25 | Y (provisional) | A-007 |
+| REQ-111 | S-NF | The payment provider sits behind an interface, so it can be replaced without changing the booking core. | SRC-C2@00:47:10, SRC-C2@00:47:25 | K (provisional) | A-007 |
 
 ### Notifications and language
 
@@ -254,10 +254,10 @@ definition is baseline, while billing per completed booking is parked.
 
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
-| REQ-115 | S-NF | Migrated pilot history lives in the platform's own data model, linked to the same driver, fleet, site and EVSE records as new bookings, and can be queried with them. | SRC-C2@00:04:43, CTX-053 | Y (provisional) | A-026 |
-| REQ-116 | S-NF | A re-runnable pilot migration loads every source booking record or lists it as rejected with a reason, and its counts by month, site and original status equal those of the source export. | SRC-C1@00:48:20, SRC-C2@00:04:43, CTX-053 | Y (provisional) | Q-020 |
+| REQ-115 | S-NF | Migrated pilot history lives in the platform's own data model, linked to the same driver, fleet, site and EVSE records as new bookings, and can be queried with them. | SRC-C2@00:04:43, CTX-053 | K (provisional) | A-026 |
+| REQ-116 | S-NF | A re-runnable pilot migration loads every source booking record or lists it as rejected with a reason, and its counts by month, site and original status equal those of the source export. | SRC-C1@00:48:20, SRC-C2@00:04:43, CTX-053 | K (provisional) | Q-020 |
 | REQ-117 | S-NF | No code from the discarded prototype is reused; only its schema is consulted. | SRC-C2@00:04:20, SRC-C2@00:58:41, CTX-052 | Y (provisional) | — |
-| REQ-118 | S-NF | Pilot or platform data shared outside Amperlane or used outside production has driver names and phone numbers removed from every field, free text included. | SRC-C1@00:44:59 | Y (provisional) | — |
+| REQ-118 | S-NF | Pilot or platform data shared outside Amperlane or used outside production has driver names and phone numbers removed from every field, free text included. | SRC-C1@00:44:59 | K (provisional) | — |
 
 ### Security, privacy and compliance
 
@@ -269,7 +269,7 @@ definition is baseline, while billing per completed booking is parked.
 | REQ-122 | S-NF | Every production change goes through a recorded change-management process with review and approval. | SRC-C2@00:44:04, SRC-C2@00:44:25, CTX-107 | Y (provisional) | — |
 | REQ-123 | S-NF | Data is encrypted in transit and at rest. | SRC-C2@00:44:04, SRC-C2@00:44:25, CTX-107 | K (provisional) | A-037 |
 | REQ-124 | S-NF | Production runs in an AWS account separate from every non-production environment. | SRC-C2@00:44:04, SRC-C2@00:44:25, CTX-107 | K (provisional) | — |
-| REQ-125 | S-NF | Personal data is kept only as long as disputes, finance and the retention period counsel sets for its data type require, and is then deleted or anonymised automatically. | SRC-C2@00:50:34, SRC-C2@00:50:39, CTX-108 | Y (provisional) | A-025, Q-022 |
+| REQ-125 | S-NF | Personal data is kept only as long as disputes, finance and the retention period counsel sets for its data type require, and is then deleted or anonymised automatically. | SRC-C2@00:50:34, SRC-C2@00:50:39, CTX-108 | K (provisional) | A-025, Q-022 |
 | REQ-126 | S-NF | An append-only audit trail records who did what and when for every booking state change, override, manual ops action, station hold and, where the business model has them (Q-001), payout. | SRC-C2@00:50:39, SRC-C2@00:53:46, CTX-110 | K (provisional) | — |
 | REQ-127 | S-NF | Open-source components are used only where they are mature. | SRC-D1#10, SRC-C2@00:06:05, CTX-085 | Y (provisional) | — |
 
@@ -283,13 +283,13 @@ definition is baseline, while billing per completed booking is parked.
 | REQ-131 | S-NF | A load test of 2,000 booking attempts in 10 minutes, five times the modelled launch burst of about 400, with heavy contention on a few sites, meets the latency target with zero overlapping allocations. | SRC-C2@00:15:32, SRC-C2@00:16:00, SRC-C2@00:34:07, SRC-C2@00:34:22, CTX-055, CTX-115 | K (provisional) | A-009, A-034 |
 | REQ-132 | S-NF | The platform supports at least 10,000 completed bookings a month in NYC by June 2027. | SRC-C1@00:29:22, SRC-C1@00:30:00, CTX-138 | K (provisional) | Q-017, Q-007 |
 | REQ-133 | S-NF | Booking timers (hold expiry, reminder, station hold, pre-arrival check, grace, auto-release) run as durable workflows that survive restarts and maintenance, and fire late if needed but are never lost and take effect once. | SRC-C2@00:33:32, SRC-C2@00:33:51, CTX-094 | K (provisional) | A-028 |
-| REQ-134 | S-NF | The workflow engine is self-hosted in Amperlane's AWS account. | SRC-C2@00:33:51, CTX-094 | Y (provisional) | A-029, Q-026 |
+| REQ-134 | S-NF | The workflow engine is self-hosted in Amperlane's AWS account. | SRC-C2@00:33:51, CTX-094 | K (provisional) | A-029, Q-026 |
 | REQ-135 | S-NF | The platform is one modular monolith, not a set of microservices. | SRC-C2@00:54:21, SRC-C2@00:54:45, CTX-087 | K (provisional) | — |
 | REQ-136 | S-NF | The platform is written in TypeScript end to end, on PostgreSQL, hosted on AWS. | SRC-C2@00:06:05, CTX-085 | K (provisional) | — |
 | REQ-137 | S-NF | Hosting uses Amperlane's AWS Activate credits first. | SRC-C2@00:06:05, CTX-085 | Y (provisional) | Q-025 |
-| REQ-138 | S-NF | A test site in a time zone other than Eastern is configured, booked, allocated and released end to end with no change to the booking core. | SRC-D1#9, SRC-C1@00:31:33, CTX-008 | Y (provisional) | A-013 |
-| REQ-139 | S-NF | Every booking function that the driver PWA, portals and ops console use is available through a versioned, documented API that they themselves use. | SRC-D1#9 | Y (provisional) | — |
-| REQ-140 | S-NF | A simulated site lets engineers make chargers fault, overrun and report late drivers on demand. | SRC-C2@00:23:23, SRC-C2@00:55:37, SRC-C2@00:55:51, CTX-103 | Y (provisional) | — |
+| REQ-138 | S-NF | A test site in a time zone other than Eastern is configured, booked, allocated and released end to end with no change to the booking core. | SRC-D1#9, SRC-C1@00:31:33, CTX-008 | K (provisional) | A-013 |
+| REQ-139 | S-NF | Every booking function that the driver PWA, portals and ops console use is available through a versioned, documented API that they themselves use. | SRC-D1#9 | K (provisional) | — |
+| REQ-140 | S-NF | A simulated site lets engineers make chargers fault, overrun and report late drivers on demand. | SRC-C2@00:23:23, SRC-C2@00:55:37, SRC-C2@00:55:51, CTX-103 | K (provisional) | — |
 | REQ-141 | S-NF | An automated test replays the Gowanus fault (1:50 PM, nine bookings, two needing NACS or an adapter, during the shift change) and passes only if each booking is rebooked at Gowanus or offered alternatives, ops gets the summary, the station operator sees the outcomes and no booking is recorded as a no-show. | SRC-C2@00:55:37, SRC-C2@00:55:51, SRC-C2@00:56:04, CTX-047, CTX-103 | Y (provisional) | A-017 |
 
 ### Delivery constraints and scope
@@ -307,7 +307,7 @@ definition is baseline, while billing per completed booking is parked.
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
 | REQ-145 | U-F | Picking a slot places a hold on one unit of capacity, which expires and returns the capacity if the booker does not confirm within the hold time. | SRC-C2@00:27:21, SRC-D2#7, SRC-D2#12 | K (provisional) | A-001, A-005 |
-| REQ-146 | U-F | Per-site parameters (time grid, durations, buffer, hold time, allocation and pre-arrival offsets, reminder lead time, grace and its maximum extension) are changed by ops without a deployment, each change is audited, and it applies to bookings confirmed after it while earlier bookings keep their values. | SRC-C2@00:19:19, SRC-C2@00:28:55, SRC-C1@00:43:44, SRC-D2#7, CTX-069 | Y (provisional) | A-001, A-002, A-003, A-011, A-020 |
+| REQ-146 | U-F | Per-site parameters (time grid, durations, buffer, hold time, allocation and pre-arrival offsets, reminder lead time, grace and its maximum extension) are changed by ops without a deployment, each change is audited, and it applies to bookings confirmed after it while earlier bookings keep their values. | SRC-C2@00:19:19, SRC-C2@00:28:55, SRC-C1@00:43:44, SRC-D2#7, CTX-069 | K (provisional) | A-001, A-002, A-003, A-011, A-020 |
 | REQ-147 | U-F | A booking is confirmed only if, for every slot it covers, all bookings overlapping that slot, with the site's buffer, can still be allocated to distinct compatible EVSEs. | SRC-D2#12, SRC-C2@00:24:36, SRC-C2@00:41:32, CTX-092, CTX-100 | K (provisional) | A-014, CF-023 |
 | REQ-148 | U-F | When the site is full at station-hold time or at the pre-arrival check, the driver immediately gets the next compatible slot at the same site and the nearest compatible free slots at other sites. | SRC-C2@00:24:04, SRC-C2@00:51:58, SRC-C2@00:52:32 | Y (provisional) | A-019, Q-033 | v2 | approved |
 | REQ-149 | U-F | A booking rebooked because its site was full carries the reason code 'moved — site full'. | SRC-C2@00:24:04, SRC-C2@00:53:32 | Y (provisional) | A-019, Q-033 |
@@ -322,16 +322,16 @@ definition is baseline, while billing per completed booking is parked.
 | REQ-153 | U-F | When a booking with a charger reservation is cancelled, released or rebooked, the platform cancels the charger reservation. | SRC-C2@00:07:35, CTX-088 | K (provisional) | Q-009 |
 | REQ-154 | U-F | For every booking the platform records the station-hold method used, each request sent, the response from the charger or site staff, and its time. | SRC-C2@00:08:09, SRC-C2@00:47:59, SRC-D2#8, CTX-127 | Y (provisional) | Q-009 |
 | REQ-155 | U-F | When a charger reservation is rejected, or not answered within a set time, the platform sends a signage request to site staff and raises an ops exception. | SRC-C2@00:07:35, SRC-C2@00:09:34, SRC-C2@00:14:11, CTX-060, CTX-088 | K (provisional) | — |
-| REQ-156 | U-F | When site staff have not acknowledged a station-hold request by the pre-arrival check, ops gets an exception to contact the site, and the booking stays valid. | SRC-C1@00:08:08, SRC-C1@00:37:27, SRC-C2@00:21:33, CTX-061 | Y (provisional) | A-046, Q-041, A-012 |
+| REQ-156 | U-F | When site staff have not acknowledged a station-hold request by the pre-arrival check, ops gets an exception to contact the site, and the booking stays valid. | SRC-C1@00:08:08, SRC-C1@00:37:27, SRC-C2@00:21:33, CTX-061 | K (provisional) | A-046, Q-041, A-012 |
 | REQ-157 | U-F | Deprecated at P2.4 (2026-10-28): merged into REQ-027, which keeps the client's statement (SRC-C2@00:21:33). | SRC-C1@00:37:27, SRC-C1@00:40:15, SRC-C1@00:40:25, CTX-034, CTX-043 | — | A-012, A-021 | v1 | deprecated |
 | REQ-158 | U-F | The attendant view lets the attendant set each EVSE at the site to free, occupied or faulted. | SRC-C2@00:21:55, SRC-D2#6, SRC-D2#14, CTX-062 | K (provisional) | A-021, Q-010, Q-049 |
 | REQ-159 | U-F | The attendant view shows which driver is due at which EVSE and when. | SRC-C2@00:21:55, SRC-D2#6 | Y (provisional) | A-021, Q-048 |
 | REQ-160 | U-F | Every view of EVSE status shows when the status was observed, marks connected-site status older than 60 seconds as stale, and shows LIC status as 'last updated by attendant at <time>'. | SRC-C2@00:49:30, SRC-C2@00:49:38, CTX-112 | Y (provisional) | A-021 |
-| REQ-161 | U-F | Every booking for which the operator provides a session record is matched to it within a set time of the record arriving, with energy, start and end, and bookings left unmatched go to the reconciliation queue (REQ-214). | SRC-C2@00:13:48, SRC-C2@00:47:29, CTX-127 | Y (provisional) | Q-009, Q-011, Q-012, Q-017 |
+| REQ-161 | U-F | Every booking for which the operator provides a session record is matched to it within a set time of the record arriving, with energy, start and end, and bookings left unmatched go to the reconciliation queue (REQ-214). | SRC-C2@00:13:48, SRC-C2@00:47:29, CTX-127 | K (provisional) | Q-009, Q-011, Q-012, Q-017 |
 | REQ-162 | U-F | The platform ingests the LIC ChargePoint portal CSV, uploaded by hand at irregular times, for reconciliation only, and skips rows it already ingested. | SRC-C2@00:19:59, SRC-C2@00:21:49, SRC-C2@00:21:55, CTX-062 | Y (provisional) | A-021, Q-011 |
 | REQ-163 | U-F | Where a CSMS provides pricing, the driver sees the site's public price before booking. | SRC-C2@00:19:30, CTX-061 | I (provisional) | Q-001, Q-012 |
 | REQ-164 | U-F | The platform keeps a time-stamped history of every EVSE status change, so the status at any past moment can be retrieved. | SRC-C2@00:47:59, SRC-D2#10, CTX-127 | Y (provisional) | A-025 |
-| REQ-165 | U-F | Ops onboards a new site in the ops console (operator, address, time zone, supply pattern, EVSEs, connectors, capacity rules, terms) without a code change, and the site becomes bookable only once ops marks it live. | SRC-C1@00:42:37, SRC-C1@00:43:44, SRC-C2@00:20:55, CTX-063, CTX-070 | Y (provisional) | A-022, Q-007 |
+| REQ-165 | U-F | Ops onboards a new site in the ops console (operator, address, time zone, supply pattern, EVSEs, connectors, capacity rules, terms) without a code change, and the site becomes bookable only once ops marks it live. | SRC-C1@00:42:37, SRC-C1@00:43:44, SRC-C2@00:20:55, CTX-063, CTX-070 | K (provisional) | A-022, Q-007 |
 | REQ-166 | U-F | The platform connects to CPOs over OCPI 2.2.1 as an eMSP (Locations, Tariffs, Sessions, CDRs, Tokens and the RESERVE_NOW command), tested against a simulated CPO. | SRC-C2@00:25:36, SRC-C2@00:26:05, SRC-D2#14, CTX-104 | I (provisional) | A-015, A-022, Q-008 |
 | REQ-167 | U-F | When the AMPECO API is unreachable or its status is stale, the platform runs station holds at Gowanus as at a status-only site until the API recovers. | SRC-C2@00:21:07, CTX-060, CTX-063, CTX-112 | Y (provisional) | — |
 | REQ-168 | U-F | When a site's status feed is unavailable, the platform keeps accepting bookings within the capacity rules, shows the status as stale with its age, and raises an ops exception before the next allocation at that site. | SRC-C2@00:24:04, SRC-C2@00:49:38, CTX-061, CTX-112 | Y (provisional) | Q-012 |
@@ -343,15 +343,15 @@ definition is baseline, while billing per completed booking is parked.
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
 | REQ-171 | U-F | A booking cancelled before the site's cancellation cut-off (Q-042) gets no no-show fee. | SRC-C1@00:12:26, CTX-135 | Y (provisional) | Q-042, Q-002 |
-| REQ-334 | U-F | A 'running late' report by itself never waives the no-show fee of a driver who then does not arrive within grace. | SRC-C1@00:12:26, CTX-135 | Y (provisional) | Q-042, Q-002 |
+| REQ-334 | U-F | A 'running late' report by itself never waives the no-show fee of a driver who then does not arrive within grace. | SRC-C1@00:12:26, CTX-135 | K (provisional) | Q-042, Q-002 |
 | REQ-172 | U-F | The booking confirmation tells the driver the grace period and the no-show fee terms that apply to the booking. | SRC-C1@00:47:44, SRC-D2#18 | Y (provisional) | Q-002 |
 | REQ-173 | U-F | The platform records arrival from the phone's location only when the driver has opted in. | SRC-C2@00:39:22, SRC-C2@00:40:06, CTX-102, CTX-109 | I (provisional) | A-024, Q-016 |
-| REQ-174 | U-F | The platform records arrival from a CSMS session-start event on the booking's allocated EVSE between a set time before the slot and the end of grace, where the CSMS sends one. | SRC-C2@00:40:06, SRC-D2#7, CTX-102 | Y (provisional) | Q-009, Q-012 |
+| REQ-174 | U-F | The platform records arrival from a CSMS session-start event on the booking's allocated EVSE between a set time before the slot and the end of grace, where the CSMS sends one. | SRC-C2@00:40:06, SRC-D2#7, CTX-102 | K (provisional) | Q-009, Q-012 |
 | REQ-175 | U-F | The platform records arrival when a vehicle's telematics location enters the site's geofence, where the fleet authorised it and the driver opted in. | SRC-C2@00:38:05, SRC-D2#7, CTX-101 | I (provisional) | Q-014, Q-016, A-024 |
 | REQ-176 | U-F | The attendant can confirm a driver's arrival in the attendant view. | SRC-C2@00:21:55, SRC-D2#6 | Y (provisional) | A-021, Q-010, Q-049 |
 | REQ-177 | U-F | Once arrival is recorded, the booking is not released at the end of grace, even when the grace timer fires late. | SRC-D2#7, CTX-131 | K (provisional) | A-028 |
 | REQ-178 | U-F | While a session runs, the platform shows its live status from the CSMS where the CSMS provides it. | SRC-D2#7 | I (provisional) | Q-009, Q-012 |
-| REQ-179 | U-F | For a disputed no-show, ops sees on one screen the booking's ordered history: states, actors, reason codes, station-hold attempts, EVSE status at the time, arrival evidence, messages and the session record. | SRC-C2@00:47:53, SRC-C2@00:47:59, CTX-110, CTX-127 | Y (provisional) | A-024, A-047 |
+| REQ-179 | U-F | For a disputed no-show, ops sees on one screen the booking's ordered history: states, actors, reason codes, station-hold attempts, EVSE status at the time, arrival evidence, messages and the session record. | SRC-C2@00:47:53, SRC-C2@00:47:59, CTX-110, CTX-127 | K (provisional) | A-024, A-047 |
 | REQ-180 | U-F | No no-show fee is created automatically for a booking that was rebooked, whose station hold failed, whose site was full or faulted, whose reminder was not delivered, or whose grace timer fired late, and each such booking goes to the ops exception queue, where ops creates or waives the fee with a reason code. | SRC-C2@00:24:04, SRC-C2@00:52:53, CTX-036 | K (provisional) | A-019, A-028, Q-002 |
 | REQ-181 | U-F | When a booking has an arrival but no charging session starts within a set time, no no-show fee is created, and the booking is rebooked at the site or routed to ops as a fault case. | SRC-C2@00:47:53, SRC-C2@00:47:59 | Y (provisional) | — |
 | REQ-182 | U-F | Ops can waive a no-show fee before it is invoiced, with a reason code, recorded as a separate ledger entry. | SRC-C1@00:38:52, SRC-C1@00:39:22, CTX-035 | Y (provisional) | Q-002 |
@@ -361,21 +361,21 @@ definition is baseline, while billing per completed booking is parked.
 
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
-| REQ-184 | U-F | Ops can place a maintenance hold that removes EVSEs or capacity at a site from booking for a time window. | SRC-C2@00:53:00, CTX-035 | Y (provisional) | A-018, Q-035 |
-| REQ-335 | U-F | Ops can place a fleet-priority hold that keeps capacity at a site for a time window for one named fleet's bookings only. | SRC-C2@00:53:00, CTX-035 | Y (provisional) | A-018, Q-035 |
+| REQ-184 | U-F | Ops can place a maintenance hold that removes EVSEs or capacity at a site from booking for a time window. | SRC-C2@00:53:00, CTX-035 | K (provisional) | A-018, Q-035 |
+| REQ-335 | U-F | Ops can place a fleet-priority hold that keeps capacity at a site for a time window for one named fleet's bookings only. | SRC-C2@00:53:00, CTX-035 | K (provisional) | A-018, Q-035 |
 | REQ-185 | U-F | When a maintenance hold removes an EVSE with allocated bookings, those bookings are rebooked as on a fault, with the reason code 'moved — maintenance'. | SRC-C2@00:53:00 | Y (provisional) | A-018, Q-035 |
-| REQ-186 | U-F | When a station operator lowers a capacity rule, or ops adds a fleet-priority hold, below the confirmed bookings, those bookings stand and the station operator or ops sees each booking above the new limit to act on it. | SRC-C1@00:26:54, SRC-C2@00:53:00, CTX-065 | Y (provisional) | A-018, Q-035 |
+| REQ-186 | U-F | When a station operator lowers a capacity rule, or ops adds a fleet-priority hold, below the confirmed bookings, those bookings stand and the station operator or ops sees each booking above the new limit to act on it. | SRC-C1@00:26:54, SRC-C2@00:53:00, CTX-065 | K (provisional) | A-018, Q-035 |
 | REQ-187 | U-F | Ops sees a summary of the automatic fault rebookings and can undo any of them. | SRC-C2@00:53:00 | Y (provisional) | A-017, CF-022 |
 | REQ-188 | U-F | For fault-affected bookings the platform could not place, it proposes rebookings that ops approves in bulk. | SRC-C2@00:53:00, CTX-035 | Y (provisional) | A-017, CF-022, Q-038 |
 | REQ-189 | U-F | The ops console lists every open exception (failed or unacknowledged station hold, site full, fault, unplaced booking, undelivered time-critical message, status feed down, fee decision, open dispute) in one queue, in which the exceptions ops must handle before a booking's grace ends come first, ordered by that booking's slot start or, for a site-level exception, by the next allocation it affects, followed by the other exceptions, such as disputes and fee decisions, oldest first. | SRC-C2@00:24:04, SRC-C2@00:53:49, CTX-035 | K (provisional) | Q-023 | v2 | approved |
-| REQ-190 | U-F | The ops console shows one live board per site for the current day with bookings by state, EVSE status with its age, and open exceptions. | SRC-C2@00:02:34, CTX-042 | Y (provisional) | — |
-| REQ-191 | U-F | A driver can report a faulted EVSE in one tap from the booking page or by message, which creates an ops alert linked to the site and EVSE. | SRC-C2@00:34:36, SRC-C2@00:51:36, CTX-048 | Y (provisional) | — |
+| REQ-190 | U-F | The ops console shows one live board per site for the current day with bookings by state, EVSE status with its age, and open exceptions. | SRC-C2@00:02:34, CTX-042 | K (provisional) | — |
+| REQ-191 | U-F | A driver can report a faulted EVSE in one tap from the booking page or by message, which creates an ops alert linked to the site and EVSE. | SRC-C2@00:34:36, SRC-C2@00:51:36, CTX-048 | K (provisional) | — |
 | REQ-192 | U-F | At LIC, a faulted status set by the attendant triggers the same rebooking as a CSMS fault. | SRC-C2@00:21:55 | Y (provisional) | A-021, Q-010 |
 | REQ-193 | U-F | A station operator can mark an EVSE out of service in the station portal, which triggers fault rebooking. | SRC-C2@00:34:36, CTX-048 | I (provisional) | — |
-| REQ-194 | U-F | After a fault, an EVSE returns to the pool only after it has reported available for a set time or ops returns it, and bookings already rebooked are not moved back. | SRC-C2@00:51:36, CTX-047 | Y (provisional) | — |
+| REQ-194 | U-F | After a fault, an EVSE returns to the pool only after it has reported available for a set time or ops returns it, and bookings already rebooked are not moved back. | SRC-C2@00:51:36, CTX-047 | K (provisional) | — |
 | REQ-195 | U-F | Ops can find a driver's bookings, messages and fees by mobile number, plate or booking code in one search. | SRC-C1@00:38:15, CTX-045 | Y (provisional) | — |
 | REQ-196 | U-F | The ops console shows the full message history per driver and booking, with language and delivery status. | SRC-C1@00:37:27, CTX-043 | I (provisional) | — |
-| REQ-197 | U-F | Ops can send a templated or free-text message to a driver on the driver's channel from the ops console, recorded against the booking. | SRC-C2@00:51:58, CTX-047 | Y (provisional) | — |
+| REQ-197 | U-F | Ops can send a templated or free-text message to a driver on the driver's channel from the ops console, recorded against the booking. | SRC-C2@00:51:58, CTX-047 | K (provisional) | — |
 
 ### Driver channel and identity
 
@@ -433,7 +433,7 @@ definition is baseline, while billing per completed booking is parked.
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
 | REQ-224 | U-F | For each booking the platform stores arrival, session-record match with energy, rebooks and reason codes, and reports completed bookings by a definition over those fields that ops can change without a deployment. | SRC-C1@00:13:26, SRC-C1@00:29:22, SRC-C2@00:30:01 | K (provisional) | Q-017 |
-| REQ-225 | U-F | Migrated pilot data is marked as pilot data in every report, reported under the same status definitions as platform data, and every metric can be shown with or without it. | SRC-C2@00:05:22, SRC-C2@00:52:53, CTX-054 | Y (provisional) | A-026, CF-018, Q-029 |
+| REQ-225 | U-F | Migrated pilot data is marked as pilot data in every report, reported under the same status definitions as platform data, and every metric can be shown with or without it. | SRC-C2@00:05:22, SRC-C2@00:52:53, CTX-054 | K (provisional) | A-026, CF-018, Q-029 |
 | REQ-226 | U-F | The platform reports per site and day: booking attempts, expired holds, confirmations, alternatives offered and accepted, cancellations, no-shows, late arrivals and completed bookings. | SRC-C1@00:08:56, SRC-C1@00:30:00, CTX-039, CTX-138 | I (provisional) | Q-044 |
 | REQ-227 | U-F | The platform reports ops workload: exceptions per day by type, time to pick up, and manual ops actions per booking. | SRC-C1@00:33:03, SRC-C1@00:38:15, CTX-139 | I (provisional) | — |
 
@@ -441,9 +441,9 @@ definition is baseline, while billing per completed booking is parked.
 
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
-| REQ-228 | U-F | Migrated statuses are re-classified so that moved, no-show and cancelled are distinct outcomes, and each re-classified record keeps its original status and the rule and evidence used. | SRC-C2@00:05:22, SRC-C2@00:52:53, CTX-054 | Y (provisional) | A-026, CF-018, Q-029 |
-| REQ-229 | U-F | Where a site's pilot Google Sheet and Airtable disagree, the migration applies one documented precedence rule and lists every conflict it resolved. | SRC-C2@00:02:34, SRC-C2@00:05:22, CTX-042, CTX-054 | Y (provisional) | Q-020, A-026 |
-| REQ-230 | U-F | Migrated records from before February 2026 carry a data-quality flag. | SRC-C2@00:05:22, CTX-054 | Y (provisional) | Q-020 |
+| REQ-228 | U-F | Migrated statuses are re-classified so that moved, no-show and cancelled are distinct outcomes, and each re-classified record keeps its original status and the rule and evidence used. | SRC-C2@00:05:22, SRC-C2@00:52:53, CTX-054 | K (provisional) | A-026, CF-018, Q-029 |
+| REQ-229 | U-F | Where a site's pilot Google Sheet and Airtable disagree, the migration applies one documented precedence rule and lists every conflict it resolved. | SRC-C2@00:02:34, SRC-C2@00:05:22, CTX-042, CTX-054 | K (provisional) | Q-020, A-026 |
+| REQ-230 | U-F | Migrated records from before February 2026 carry a data-quality flag. | SRC-C2@00:05:22, CTX-054 | K (provisional) | Q-020 |
 | REQ-231 | U-F | At cut-over, every pilot booking for a slot after the cut-over exists in the platform with its driver, site and window, also where its driver's number is not registered or no registered vehicle is known for it, and its driver is told in their language how to manage it. | SRC-C1@00:29:06, SRC-C1@00:33:22, CTX-079, CTX-042 | K (provisional) | A-026, A-055, A-061 | v2 | approved |
 | REQ-232 | U-F | Each booking is invoiced exactly once, by the pilot process if its slot started before the cut-over and by the platform otherwise. | SRC-C1@00:13:26, SRC-C2@00:03:28, CTX-051 | K (provisional) | Q-017 |
 
@@ -451,7 +451,7 @@ definition is baseline, while billing per completed booking is parked.
 
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
-| REQ-233 | U-F | Ops can anonymise one driver's personal data on request, keeping booking, audit and ledger records with the driver replaced by a pseudonym. | SRC-C2@00:50:34, CTX-095, CTX-108, CTX-110 | Y (provisional) | A-025, Q-022 |
+| REQ-233 | U-F | Ops can anonymise one driver's personal data on request, keeping booking, audit and ledger records with the driver replaced by a pseudonym. | SRC-C2@00:50:34, CTX-095, CTX-108, CTX-110 | K (provisional) | A-025, Q-022 |
 | REQ-234 | U-F | When a fleet or station operator leaves the platform, its users are disabled, its future bookings are cancelled with a reason code, and its data is kept or deleted per the retention matrix. | SRC-C1@00:43:27 | I (provisional) | A-025 |
 | REQ-235 | U-F | Fleet and station portal users can sign in with a one-time link or code sent to their email or phone, without a password. | SRC-C1@00:25:00, CTX-030 | I (provisional) | A-038 |
 
@@ -467,7 +467,7 @@ definition is baseline, while billing per completed booking is parked.
 
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
-| REQ-237 | U-NF | Staging runs every integration against a sandbox or simulator and never against production chargers, real payments or real drivers. | SRC-C2@00:36:50, SRC-C2@00:37:15, CTX-072, CTX-107 | Y (provisional) | Q-009 |
+| REQ-237 | U-NF | Staging runs every integration against a sandbox or simulator and never against production chargers, real payments or real drivers. | SRC-C2@00:36:50, SRC-C2@00:37:15, CTX-072, CTX-107 | K (provisional) | Q-009 |
 | REQ-238 | U-NF | Open Charge Map data is shown with the attribution its CC BY 4.0 licence requires. | SRC-C2@00:11:03 | I (provisional) | — |
 
 ### Charger faults and ops console
@@ -505,7 +505,7 @@ definition is baseline, while billing per completed booking is parked.
 |---|---|---|---|---|---|
 | REQ-248 | U-NF | Drivers get SMS or WhatsApp messages only after the platform has recorded the driver's agreement to booking messages, with its time and how it was given, and a STOP reply ends messages on that channel at once. | SRC-C2@00:02:58, CTX-097 | K (provisional) | A-023, Q-047 |
 | REQ-249 | U-NF | Every WhatsApp message the platform starts outside a 24-hour window opened by the driver uses a pre-approved template in the driver's language. | SRC-C2@00:50:56, SRC-C2@00:51:03, CTX-097 | Y (provisional) | Q-034 |
-| REQ-250 | U-NF | Consent texts, fee notices and their language versions exist in English, Spanish and Bengali, and the platform stores which version and language each driver accepted, with the time. | CTX-028, CTX-109 | Y (provisional) | A-024, Q-016, Q-002 |
+| REQ-250 | U-NF | Consent texts, fee notices and their language versions exist in English, Spanish and Bengali, and the platform stores which version and language each driver accepted, with the time. | CTX-028, CTX-109 | K (provisional) | A-024, Q-016, Q-002 |
 
 ### Reporting and metrics
 
@@ -517,7 +517,7 @@ definition is baseline, while billing per completed booking is parked.
 
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
-| REQ-252 | U-NF | The raw pilot export is stored read-only, accessible only to named people, and deleted at the end of the period counsel sets. | SRC-C2@00:58:37 | Y (provisional) | A-025, A-026, Q-022 |
+| REQ-252 | U-NF | The raw pilot export is stored read-only, accessible only to named people, and deleted at the end of the period counsel sets. | SRC-C2@00:58:37 | K (provisional) | A-025, A-026, Q-022 |
 
 ### Security, privacy and compliance
 
@@ -529,11 +529,11 @@ definition is baseline, while billing per completed booking is parked.
 | REQ-256 | U-NF | Location is kept only as derived arrival events, encrypted and access-controlled, and each raw location reading is deleted once its arrival event is derived. | SRC-C2@00:50:18, SRC-C2@00:50:34, CTX-108 | Y (provisional) | A-025, Q-022 |
 | REQ-257 | U-NF | Vehicle data is read only for vehicles whose fleet has recorded its authorisation as account owner, and reading stops when the fleet revokes it. | SRC-C2@00:39:18, SRC-C2@00:39:22, CTX-109 | Y (provisional) | A-024, Q-014, Q-016 |
 | REQ-258 | U-NF | Each portal user sees only their own organisation's data: a fleet user only that fleet's vehicles, drivers, bookings and invoices, a station operator only its own sites and no drivers' phone numbers, and an attendant only the current day's bookings at their site. | SRC-D2#10, SRC-D2#11, CTX-107, CTX-108 | K (provisional) | A-016, Q-048 |
-| REQ-259 | U-NF | Ops users can view a driver's location evidence only within an open dispute for that booking. | SRC-C2@00:50:18, CTX-108 | Y (provisional) | A-024 |
-| REQ-260 | U-NF | The platform rejects and logs inbound messaging and CSMS webhooks whose signature or shared secret does not verify. | SRC-C2@00:14:11, CTX-091, CTX-107 | Y (provisional) | — |
+| REQ-259 | U-NF | Ops users can view a driver's location evidence only within an open dispute for that booking. | SRC-C2@00:50:18, CTX-108 | K (provisional) | A-024 |
+| REQ-260 | U-NF | The platform rejects and logs inbound messaging and CSMS webhooks whose signature or shared secret does not verify. | SRC-C2@00:14:11, CTX-091, CTX-107 | K (provisional) | — |
 | REQ-261 | U-NF | Deprecated at P2.4 (2026-10-28): merged into REQ-081, which keeps the client's statement (SRC-C1@00:08:34). | SRC-C1@00:08:08, SRC-C1@00:25:00, CTX-033 | — | A-021, Q-049 | v1 | deprecated |
-| REQ-262 | U-NF | The audit trail also records changes to capacity rules, fleet policies, partner terms, user roles and per-EVSE settings, with before and after values. | SRC-C2@00:50:39, CTX-065, CTX-110 | Y (provisional) | — |
-| REQ-263 | U-NF | Every view or export of a driver's personal data by an ops, finance, fleet, station-operator or site-staff user is recorded in the audit trail. | SRC-C2@00:50:18, CTX-108, CTX-110 | Y (provisional) | — | v2 | approved |
+| REQ-262 | U-NF | The audit trail also records changes to capacity rules, fleet policies, partner terms, user roles and per-EVSE settings, with before and after values. | SRC-C2@00:50:39, CTX-065, CTX-110 | K (provisional) | — |
+| REQ-263 | U-NF | Every view or export of a driver's personal data by an ops, finance, fleet, station-operator or site-staff user is recorded in the audit trail. | SRC-C2@00:50:18, CTX-108, CTX-110 | K (provisional) | — | v2 | approved |
 | REQ-264 | U-NF | A register of every vendor that receives platform data records which data each receives and why. | SRC-C2@00:44:04, CTX-107, CTX-108 | I (provisional) | — |
 | REQ-265 | U-NF | The platform stores no driver's licence, TLC licence or bank account numbers unless the data register records a purpose for them approved by Amperlane. | SRC-C2@00:50:18, CTX-108 | Y (provisional) | — |
 
@@ -541,7 +541,7 @@ definition is baseline, while billing per completed booking is parked.
 
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
-| REQ-266 | U-NF | Ops can get the next bookings per site from a copy kept outside the primary system and refreshed at a set interval, so bookings can be honoured by phone during a platform outage. | SRC-C1@00:33:22, CTX-042, CTX-139 | Y (provisional) | — |
+| REQ-266 | U-NF | Ops can get the next bookings per site from a copy kept outside the primary system and refreshed at a set interval, so bookings can be honoured by phone during a platform outage. | SRC-C1@00:33:22, CTX-042, CTX-139 | K (provisional) | — |
 | REQ-267 | U-NF | Amperlane's engineers can export all platform data in open formats without Intellias' help. | SRC-C2@00:06:05, SRC-C2@00:06:41, CTX-005 | Y (provisional) | — |
 | REQ-268 | U-NF | Every alert and every external-system outage has a written runbook that Amperlane's engineers have used at least once before hypercare ends. | SRC-C2@00:55:08, SRC-C2@00:55:26, CTX-006, CTX-007 | Y (provisional) | Q-039 |
 
@@ -549,7 +549,7 @@ definition is baseline, while billing per completed booking is parked.
 
 | REQ | Q | Requirement | Sources | KYIV | Q/A |
 |---|---|---|---|---|---|
-| REQ-269 | U-NF | For a set period before 1 March 2027 the platform runs real bookings with real drivers at all three pilot sites, and the Amperlane Concierge process is switched off only after the written go-live criteria are met. | SRC-C1@00:29:06, SRC-C1@00:48:45, CTX-079, CTX-082 | Y (provisional) | Q-025 |
+| REQ-269 | U-NF | For a set period before 1 March 2027 the platform runs real bookings with real drivers at all three pilot sites, and the Amperlane Concierge process is switched off only after the written go-live criteria are met. | SRC-C1@00:29:06, SRC-C1@00:48:45, CTX-079, CTX-082 | K (provisional) | Q-025 |
 
 ## Parking lot
 

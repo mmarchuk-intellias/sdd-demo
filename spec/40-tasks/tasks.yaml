@@ -323,7 +323,7 @@
   feature: FT-01.7
   implements: [SS-028]
   traces_to: [REQ-138, REQ-165]
-  kyiv: Y
+  kyiv: K
   description: 'In the `inventory` module, add `POST /v1/sites` for ops: one request with the station operator, address,
     location, site code, IANA time zone, supply pattern, CSMS kind, EVSEs with connectors, capacity rules with bookable
     hours and partner terms. It stores the site as not live (live marking is T-107) with version 1 of its parameters from
@@ -1286,7 +1286,7 @@
   feature: FT-07.2
   implements: [SS-016]
   traces_to: [REQ-056, REQ-057]
-  kyiv: Y
+  kyiv: K
   description: 'In the `booking` module, add `POST /v1/ops/holds/{holdId}/force-confirm` and `POST /v1/ops/bookings/{bookingId}/force-release`,
     each with a required catalogue reason code (else REASON_CODE_REQUIRED; a code outside the catalogue is refused by T-122).
     Force-confirm works on a never-confirmed hold before or after its hold time and confirms only if the cap re-check and
@@ -1324,7 +1324,7 @@
   feature: FT-07.3
   implements: [SS-017]
   traces_to: [REQ-184]
-  kyiv: Y
+  kyiv: K
   description: 'In the `booking` module, add `POST /v1/ops/manual-holds` with kind maintenance: named EVSEs or a number
     of units, a window and a catalogue reason code, stored in `manual_hold` (T-120). Named EVSEs leave the pool (T-126),
     the open-slot view (T-133), offers and `compatibleEvses` (T-130) for every slot overlapping the window; units count
@@ -1360,7 +1360,7 @@
   feature: FT-07.3
   implements: [SS-018]
   traces_to: [REQ-335]
-  kyiv: Y
+  kyiv: K
   description: 'In the `booking` module, add manual holds of kind fleet_priority to `POST /v1/ops/manual-holds` and `PATCH
     /v1/ops/manual-holds/{id}` (shorten or end): a number of units at a site for a window, naming one fleet and a catalogue
     reason code, counted in every slot of the window against the cap and in the pool check, never above the cap. Holds for
@@ -1399,7 +1399,7 @@
   feature: FT-09.1
   implements: [SS-019]
   traces_to: [REQ-186]
-  kyiv: Y
+  kyiv: K
   description: 'In the `booking` module, subscribe through the platform''s outbox (SS-427 clause 1) to capacity-rule-changed
     and bookable-hours-reduced events of the `inventory` module (T-104) and to manual-hold-changed events (T-146). For each
     affected slot whose active bookings exceed the new limit, keep every booking and store an over-limit entry (`over_limit_slot`:
@@ -1672,7 +1672,7 @@
   feature: FT-14.2
   implements: [SS-035]
   traces_to: [REQ-134]
-  kyiv: Y
+  kyiv: K
   description: 'On the self-hosted Temporal deployment that batch 5''s T-908 provisions in each environment''s AWS account
     (SS-424, SS-425; A-029, ADR-007), add the checks of SS-035: a plan test over the production Terraform that the Temporal
     services and their persistence and visibility databases are defined in Amperlane''s production account, a deployment
@@ -1703,7 +1703,7 @@
   feature: FT-14.2
   implements: [SS-035]
   traces_to: [REQ-134]
-  kyiv: Y
+  kyiv: K
   description: 'Write a staging test that denies network egress from the platform and Temporal to everything outside Amperlane''s
     AWS accounts (a staging-only egress-deny variable, default off, added to the per-environment network module of batch
     5''s T-905 in `infra/terraform`; the production root module never sets it), places a hold and a booking with short test
@@ -1935,7 +1935,7 @@
   feature: FT-08.1
   implements: [SS-039]
   traces_to: [REQ-072]
-  kyiv: Y
+  kyiv: K
   description: 'In the `fleet` module, add the fleet''s adapter policy (allow | forbid) and an optional per-vehicle override,
     with `PUT /v1/fleets/{fleetId}/adapter-policy`, `PUT /v1/vehicles/{vehicleId}/adapter-override` and `DELETE /v1/vehicles/{vehicleId}/adapter-override`
     for a fleet manager of the fleet or ops; drivers and other users are refused (another fleet''s manager is also refused
@@ -2173,7 +2173,7 @@
   feature: FT-01.7
   implements: [SS-028]
   traces_to: [REQ-138, REQ-165]
-  kyiv: Y
+  kyiv: K
   description: 'In the ops console app (`apps/ops-console`, shell and sign-in from the SS-219 tasks), add a site list and
     an onboarding form calling T-108 (site data, EVSEs with connectors, capacity rules with bookable hours, partner terms)
     and a ''go live'' action calling T-107 that shows each missing item the API names. The CSMS-kind selector offers only
@@ -2264,7 +2264,7 @@
   feature: FT-07.3
   implements: [SS-017, SS-018, SS-019]
   traces_to: [REQ-184, REQ-186, REQ-335]
-  kyiv: Y
+  kyiv: K
   description: 'In the ops console app (`apps/ops-console`), add a manual-holds screen per site: place a maintenance hold
     on named EVSEs or units, place a fleet-priority hold for a named fleet, shorten or end a hold (T-145, T-146), with refusal
     reasons shown. In the station portal (`apps/station-portal`) and the ops console, add the over-limit list of T-147 (slot,
@@ -2419,7 +2419,7 @@
   feature: FT-13.4
   implements: [SS-337, SS-336]
   traces_to: [REQ-125, REQ-233]
-  kyiv: Y
+  kyiv: K
   description: 'In the `fleet` module (`backend/src/modules/fleet/`), the module''s anonymisation and purge handlers for
     driver personal data: the mobile number in every fleet''s driver registration (T-181), the same number as a booker-only
     number of any fleet (T-182), the driver record of a number no fleet registered (batch 5''s T-1009) and any name the
@@ -3048,7 +3048,7 @@
   feature: FT-07.3
   implements: [SS-113]
   traces_to: [REQ-185]
-  kyiv: Y
+  kyiv: K
   description: 'In booking/allocation (fault-rebooking/), add the maintenance cause to the saga''s decisions: affectedByMaintenance
     lists the active bookings allocated to the held EVSEs inside the hold''s window and the site''s unallocated confirmed
     bookings inside the window (event contract of SS-017 clause 2; the saga per SS-036 clause 1). Allocated ones go through
@@ -3427,7 +3427,7 @@
   feature: FT-02.3
   implements: [SS-119]
   traces_to: [REQ-156]
-  kyiv: Y
+  kyiv: K
   description: 'In booking/station-hold, consume booking.pre_arrival_checked (T-306): if the booking''s site-staff request
     (a fallback after a failed reservation included) is not acknowledged, raise ''contact the site'' (SS-219 clause 1);
     raise none when it was acknowledged or the charger accepted the reservation. A later acknowledgement records its time
@@ -3701,7 +3701,7 @@
   feature: FT-03.3
   implements: [SS-128]
   traces_to: [REQ-037, REQ-038]
-  kyiv: Y
+  kyiv: K
   description: 'In booking/arrival, implement the late-arrival port called by T-327 (QR scan) and T-330 (attendant). For
     evidence after the end of grace (ops extensions included) it keeps or records the booking as a no-show and stores the
     evidence time as a late arrival (arrival_evidence with late set). For the first late arrival it asks the Booking engine
@@ -3733,7 +3733,7 @@
   feature: FT-03.3
   implements: [SS-129]
   traces_to: [REQ-040, REQ-334]
-  kyiv: Y
+  kyiv: K
   description: 'In booking/arrival, add POST /v1/bookings/{bookingId}/running-late (Idempotency-Key) for the driver PWA''s
     one-tap action (SS-327; a limited session may send it, SS-321 clause 2), in the versioned API description (SS-432),
     and the internal command Messaging calls for the keyword (SS-310 clause 8). For an active booking it records the report
@@ -3764,7 +3764,7 @@
   feature: FT-03.3
   implements: [SS-130]
   traces_to: [REQ-042]
-  kyiv: Y
+  kyiv: K
   description: 'In booking/arrival, add POST /v1/ops/bookings/{bookingId}/grace-extensions (minutes, reason code, Idempotency-Key),
     ops only, in the versioned API description (SS-432). For an active booking with no arrival whose end of grace has not
     passed, it records the extension (booking.grace_extension, T-303) with the ops user, GRACE_EXTENDED and the time, and
@@ -3867,7 +3867,7 @@
   feature: FT-02.1
   implements: [SS-133]
   traces_to: [REQ-046]
-  kyiv: Y
+  kyiv: K
   description: 'In booking/arrival, add POST /v1/bookings/{bookingId}/blocked-stall (Idempotency-Key) for the driver PWA''s
     one-tap action (SS-327), in the versioned API description (SS-432). Only the booking''s charging driver or booker may
     report (link-session scope, SS-320 clause 8); others are refused and the booking is unchanged; a released or cancelled
@@ -3903,7 +3903,7 @@
   feature: FT-02.1
   implements: [SS-106]
   traces_to: [REQ-336]
-  kyiv: Y
+  kyiv: K
   description: 'In booking/allocation, consume booking.blocked_stall_reported (T-338): if another free compatible EVSE exists
     at the site (T-301), reallocate the booking to it with REALLOCATED_STALL_BLOCKED and emit booking.reallocated (T-306),
     so the station hold is placed on the new EVSE by its method (T-317) and the charging driver is told (SS-301); otherwise
@@ -3971,7 +3971,7 @@
   feature: FT-03.5
   implements: [SS-134]
   traces_to: [REQ-045]
-  kyiv: Y
+  kyiv: K
   description: 'In booking/arrival, add table booking.no_show_dispute and, in the versioned API description (SS-432): POST
     /v1/fleet/no-shows/{bookingId}/disputes (a fleet manager of the booking''s fleet, SS-323 clause 2); POST /v1/bookings/{bookingId}/disputes
     (the booking''s charging driver with a full-scope session; a limited session is asked for the one-time code, SS-321
@@ -4005,7 +4005,7 @@
   feature: FT-03.5
   implements: [SS-135]
   traces_to: [REQ-179, REQ-259]
-  kyiv: Y
+  kyiv: K
   description: 'In booking/arrival, add GET /v1/ops/disputes/{disputeId}/evidence, ops only, in the versioned API description
     (SS-432), returning one time-ordered timeline: the booking''s state changes with actor and reason code (booking history,
     SS-332 clause 6); the station-hold record (T-304); the EVSE status at each of those times with its source and age from
@@ -4213,7 +4213,7 @@
   feature: FT-03.5
   implements: [SS-134, SS-135]
   traces_to: [REQ-045, REQ-179, REQ-259]
-  kyiv: Y
+  kyiv: K
   description: 'In the ops console, add a "record dispute" action on a no-show (for a driver, or a fleet without portal
     users, T-341), the dispute page with the evidence timeline of T-342 in one view (stale statuses marked with their age;
     location evidence shown only while the dispute is open) and the decision form (reverse or keep, reason code, T-354);
@@ -4243,7 +4243,7 @@
   feature: FT-03.5
   implements: [SS-134]
   traces_to: [REQ-045]
-  kyiv: Y
+  kyiv: K
   description: 'In the fleet portal''s no-show list (SS-224 clause 1) add "dispute" on each no-show of the fleet within
     the window, and on the driver page of a no-show booking in the driver PWA add "dispute this no-show" (behind the one-time
     code for a limited session, SS-321 clause 4), both calling T-341 with one idempotency key per submission; texts in the
@@ -4295,7 +4295,7 @@
   feature: FT-03.3
   implements: [SS-130, SS-129]
   traces_to: [REQ-040, REQ-042, REQ-334]
-  kyiv: Y
+  kyiv: K
   description: 'In the ops console''s booking panel (reached from the queue, the site board or driver search, SS-219 – SS-221),
     show a driver''s running-late reports with their times (T-334) and an "extend grace" action (minutes and a reason code
     from the catalogue, T-335) that shows the allowance left under the site''s maximum and the new end of grace; one idempotency
@@ -4352,7 +4352,7 @@
   feature: FT-03.5
   implements: [SS-134]
   traces_to: [REQ-045]
-  kyiv: Y
+  kyiv: K
   description: 'In booking/arrival, add POST /v1/ops/disputes/{disputeId}/decision (reverse or keep, reason code, Idempotency-Key),
     ops only, in the versioned API description (SS-432). A decision on an open dispute (T-341) records the ops user, DISPUTE_FEE_REVERSED
     or DISPUTE_FEE_KEPT with the ops reason, and the time, closes the dispute and reports its ''open dispute'' exception
@@ -4383,7 +4383,7 @@
   feature: FT-13.4
   implements: [SS-337, SS-336]
   traces_to: [REQ-125, REQ-233]
-  kyiv: Y
+  kyiv: K
   description: 'In the `booking` module (`backend/src/modules/booking/`, the arrival and station-hold folders of batch 2,
     which hold the module''s driver personal data), the anonymisation and purge handlers for: the arrival evidence of each
     booking (T-303; arrival events only, A-024), pending QR scans with their device cookie id (T-353), running-late reports
@@ -4427,7 +4427,7 @@
   feature: FT-05.1
   implements: [SS-217]
   traces_to: [REQ-105]
-  kyiv: Y
+  kyiv: K
   description: 'Create `backend/src/integrations/csms` (CSMS integrations, design.md section 2.4, ADR-003, code conventions
     4 and 5): the vendor-neutral CSMS interface the core modules use, with platform types only: NormalisedStatusEvent (EVSE
     id, platform status available|occupied|charging|faulted|unknown, observed-at, source, provider event id), PollRequest
@@ -4909,7 +4909,7 @@
   feature: FT-04.1
   implements: [SS-209]
   traces_to: [REQ-194]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/workflows/evse-status`, start a child workflow `evse-return:<evseId>` when an EVSE is excluded
     for a fault. It counts the platform-wide "Stable-available time" (design.md section 8, default 30 min) from the first
     available report; any other status stops it and the count restarts from the next available report. At the end the exclusion
@@ -4988,7 +4988,7 @@
   feature: FT-05.2
   implements: [SS-205]
   traces_to: [REQ-164]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/modules/evse-status`, add `status_observation` (evse_id, status, observed_at, received_at,
     source) and `status_receipt` (evse_id, received_at) as monthly time-series partitions (design.md section 2.5), insert-only
     for the application role (insert-only table helper of T-906), written on every received status, late ones at their own
@@ -5023,7 +5023,7 @@
   feature: FT-04.1
   implements: [SS-210]
   traces_to: [REQ-191]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/modules/evse-status`, add public command `reportDriverFault({bookingId, dedupeKey, reportedAt})`
     for the driver page''s one-tap action (SS-327) and the fault keyword (SS-310), and the route `POST /v1/bookings/{bookingId}/fault-report`
     that the driver PWA calls (T-768): a driver session whose number is the booking''s booker or charging driver (T-747;
@@ -5262,7 +5262,7 @@
   feature: FT-05.1
   implements: [SS-215]
   traces_to: [REQ-162]
-  kyiv: Y
+  kyiv: K
   description: 'Create `backend/src/integrations/chargepoint-csv` (the LIC CSV integration) with `POST /v1/ops/lic-exports`
     (multipart, Amperlane ops role only, Idempotency-Key through the guard of T-207''s idempotency library, with a `csms_integrations.idempotency_key`
     table from its template) and an upload screen in `apps/ops-console` showing the result. It checks that the file is a
@@ -5298,7 +5298,7 @@
   feature: FT-03.1
   implements: [SS-216]
   traces_to: [REQ-174]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/integrations/csms`, add the normalised session-start pipeline: where a site''s integration
     declares sessionStart, each session start the CSMS sends becomes one session-start event (site, EVSE, CSMS start time,
     provider event id, and any vehicle, token or account identifier) for Arrival & no-show (SS-125), whether or not the
@@ -5332,7 +5332,7 @@
   feature: FT-13.3
   implements: [SS-218]
   traces_to: [REQ-260]
-  kyiv: Y
+  kyiv: K
   description: 'Add a verification guard in `backend/src/integrations/csms` applied to every CSMS webhook endpoint (T-519,
     T-523): per integration either the vendor''s signature scheme or a shared secret header configured with the vendor,
     checked on the raw body before parsing. Secrets are read only from the managed secret store at runtime (N14), with a
@@ -5364,7 +5364,7 @@
   feature: FT-05.1
   implements: [SS-217]
   traces_to: [REQ-105]
-  kyiv: Y
+  kyiv: K
   description: 'Add a CI suite that runs the CSMS-facing core suites (EVSE status, T-501 - T-512, and the Station-hold dispatcher''s
     charger-reservation path) for one site configured first with the AMPECO integration, against the simulated site standing
     in for the AMPECO API, and then switched by configuration to the simulator integration (T-555), with no core code change
@@ -5389,7 +5389,7 @@
   feature: FT-07.1
   implements: [SS-220]
   traces_to: [REQ-190]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/modules/ops-console`, add `GET /v1/ops/sites/{siteId}/board` (Amperlane ops role), and in
     `apps/ops-console` the site board screen over it: the site''s bookings of the current day (slot starting on the site''s
     current calendar day, or running into it, in the site''s time zone) grouped by state from the Booking engine; each EVSE
@@ -5420,7 +5420,7 @@
   feature: FT-07.1
   implements: [SS-221]
   traces_to: [REQ-195]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/modules/ops-console`, add `GET /v1/ops/search?q=` (Amperlane ops role), and in `apps/ops-console`
     the search screen over it. This task tries the query as an E.164 number (parsed with the US default region, accepting
     country code, spaces, dashes and brackets; the parser dependency passes the SC9 maturity check): a number returns the
@@ -5673,7 +5673,7 @@
   feature: FT-08.2
   implements: [SS-224]
   traces_to: [REQ-045, REQ-073]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/modules/partner-portals`, add `GET /v1/fleet/no-shows?driver=` (fleet-scoped) over the fleet
     booking projection: bookings of the fleet''s vehicles that ended as no-shows (released at end of grace without arrival,
     RELEASED_NO_ARRIVAL), with charging driver, vehicle, site, date and slot time, and the late-arrival time where one was
@@ -5703,7 +5703,7 @@
   feature: FT-08.2
   implements: [SS-224]
   traces_to: [REQ-045, REQ-073]
-  kyiv: Y
+  kyiv: K
   description: 'In `apps/fleet-portal`, add the no-shows screen over T-538 with a driver filter. Consume the dispute-decided
     request for a fleet raiser (Arrival & no-show, SS-134 clause 9) into `partner_portals.fleet_dispute_decision`: show
     the decision and its reason code on the dispute and mark the no-show "newly decided" in the fleet''s no-show view until
@@ -5790,7 +5790,7 @@
   feature: FT-09.2
   implements: [SS-226]
   traces_to: [REQ-079]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/modules/partner-portals`, add the projection `station_upcoming` (confirmed upcoming bookings
     per site with slot and allocated EVSE, or "not yet allocated") fed by confirmation, allocation, reallocation, cancellation,
     release and rebook events, and `GET /v1/station/sites/{siteId}/upcoming` scoped to the operator''s sites; in `apps/station-portal`,
@@ -5821,7 +5821,7 @@
   feature: FT-09.2
   implements: [SS-227]
   traces_to: [REQ-051]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/modules/partner-portals`, add the projection `station_fault_outcome` fed only by the per-booking
     outcome events of a charger fault (SS-108 clauses 8 and 10) and of a maintenance hold (SS-113 clause 6): per fault or
     hold, each booking with its slot, former EVSE and outcome as emitted (rebooked to another EVSE at the site with its
@@ -6013,7 +6013,7 @@
   feature: FT-11.1
   implements: [SS-230]
   traces_to: [REQ-091, REQ-225]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/modules/reporting`, add `GET /v1/reporting/completed-bookings?from=&to=` (Amperlane staff
     roles): one figure per month for NYC sites under the configured definition (T-547), each stating the definition it was
     counted under; each booking is placed in the month its final slot started in the site''s time zone. A site is in NYC
@@ -6049,7 +6049,7 @@
   feature: FT-11.2
   implements: [SS-232]
   traces_to: [REQ-092]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/modules/reporting`, add the shared booking classification (no-show, late arrival, counted
     booking) and `GET /v1/reporting/no-shows?month=` (Amperlane staff roles): per fleet and per site, the number of no-shows
     and of late arrivals, each also as a share of all bookings whose final slot started in that month (site time zone).
@@ -6081,7 +6081,7 @@
   feature: FT-11.1
   implements: [SS-231]
   traces_to: [REQ-095, REQ-225]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/modules/reporting`, add `GET /v1/reporting/data-room?from=&to=` (Amperlane users only):
     per month from October 2025 (a fixed value of REQ-095), completed bookings (T-549 rules) and no-shows (T-550 rules)
     with the definition stated, each figure with the sorted list of booking ids behind it, pilot data marked and every figure
@@ -6216,7 +6216,7 @@
   feature: FT-05.1
   implements: [SS-217]
   traces_to: [REQ-105]
-  kyiv: Y
+  kyiv: K
   description: 'Create `backend/src/integrations/simulator`, the simulator integration that SS-217 (notes) names beside
     AMPECO and ChargeLab for clause 5: a CSMS integration (code convention 5) that serves a site of CSMS kind ''simulator''
     through the vendor-neutral CSMS interface and registry of T-500, talking to the simulated site of SS-435 (`tools/simulator`,
@@ -6253,7 +6253,7 @@
   feature: FT-07.1
   implements: [SS-220]
   traces_to: [REQ-190]
-  kyiv: Y
+  kyiv: K
   description: 'In `apps/ops-console`, make the site board of T-528 live: register a board topic on the live-update channel
     of T-511 (ops role only), fed by booking state changes (Booking engine events), EVSE status changes and stale changes
     (`evse-status.status-changed`, `evse-status.stale-changed`; T-501, T-506) and exception events (raised, updated, closed,
@@ -6281,7 +6281,7 @@
   feature: FT-07.1
   implements: [SS-221]
   traces_to: [REQ-195]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/modules/ops-console`, extend the ops search of T-529 (`GET /v1/ops/search?q=` and its screen
     in `apps/ops-console`): the same query is also tried as a vehicle plate (Fleet & vehicles) and as a booking code (SS-003
     clause 8). A booking code returns the booking with its charging driver, booker, vehicle, messages and fees; a plate
@@ -6311,7 +6311,7 @@
   feature: FT-13.4
   implements: [SS-337, SS-336]
   traces_to: [REQ-125, REQ-233]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/modules/partner-portals` (created by T-536), the anonymisation and purge handlers for the
     read models that copy driver personal data: the fleet bookings projection (T-536: the charging driver as shown and the
     booker), the station operator''s upcoming bookings (T-542), the fault and maintenance outcomes (T-543) and the attendant''s
@@ -6347,7 +6347,7 @@
   feature: FT-13.4
   implements: [SS-337, SS-336]
   traces_to: [REQ-125, REQ-233]
-  kyiv: Y
+  kyiv: K
   description: 'In `backend/src/modules/ops-console` (created by T-507), the anonymisation and purge handlers for the driver
     personal data that raising components put into an exception''s details: the sender''s number and the message text of
     ''message not understood'' exceptions (batch 4''s T-722), the driver named in ''undelivered message'' exceptions (T-707)
@@ -6734,7 +6734,8 @@
   feature: FT-06.4
   implements: [SS-307]
   traces_to: [REQ-106, REQ-219]
-  kyiv: K
+  kyiv: Y
+  kyiv_override_reason: Applies only where the WhatsApp channel is enabled; WhatsApp (REQ-062, REQ-249) is Y, so this task waits for T-709 (Step 5, CR-011).
   description: 'In `notifications`, route the ''undelivered on WhatsApp'' outcome of T-709 (no approved template in the
     driver''s language outside the 24-hour window) into delivery tracking as an undelivered report, so the undelivered-message
     exception (T-707) and the one resend by SMS (T-708) follow. Applies only where the WhatsApp channel is enabled.
@@ -7292,7 +7293,7 @@
   feature: FT-09.2
   implements: [SS-313]
   traces_to: [REQ-051]
-  kyiv: Y
+  kyiv: K
   description: 'In `notifications`, consume the per-booking outcomes of a charger fault (SS-108 clause 8) and of a maintenance
     hold (SS-113 clause 6). When at least one booking changed, send one SMS to the station operator''s registered notice
     contact within the configured station-operator notice time (SS-026 clause 2, default 15 min) of the fault being recorded
@@ -7329,7 +7330,7 @@
   feature: FT-07.1
   implements: [SS-314]
   traces_to: [REQ-045, REQ-197]
-  kyiv: Y
+  kyiv: K
   description: 'In `notifications`, add the ops message endpoint (ops role only, identity T-740; Idempotency-Key through
     the guard of T-207''s idempotency library, so a retried send sends nothing more): a templated message (catalogue, the
     recipient''s language) or free text as written, about a booking, to its charging driver or booker on the recipient''s
@@ -7426,7 +7427,7 @@
   feature: FT-06.5
   implements: [SS-305]
   traces_to: [REQ-250]
-  kyiv: Y
+  kyiv: K
   description: 'In `notifications`, add `consent_text` versions (purpose, version number, EN, ES and BN texts, published
     flag) and insert-only `consent_acceptance` records (driver, text, version, language shown, time). API for a driver session
     (T-747): get the latest published complete version in the driver''s stored language (T-701); accept a version; close
@@ -8296,7 +8297,7 @@
   feature: FT-13.2
   implements: [SS-333]
   traces_to: [REQ-146, REQ-262]
-  kyiv: Y
+  kyiv: K
   description: 'In `audit`, a configuration-change entry kind and the interface `recordConfigChange(tx, item, changes, actor)`,
     called in the saving transaction by the owners of capacity rules, bookable hours, per-site booking parameters, partner
     terms, fleet policies, user roles, per-EVSE settings and driver languages (each owner wires it in its own task; in this
@@ -8359,7 +8360,7 @@
   feature: FT-13.2
   implements: [SS-334, SS-317]
   traces_to: [REQ-121, REQ-260]
-  kyiv: Y
+  kyiv: K
   description: 'In `audit`, a refusal kind of security event with what was refused, the requester or source, and the time,
     used by out-of-scope refusals (T-741), refused text commands (T-750) and webhooks whose signature fails: Twilio (wired
     here into T-705) and the CSMS and payment integrations, which call the same interface in their own tasks (SS-218, SS-413
@@ -8388,7 +8389,7 @@
   feature: FT-13.2
   implements: [SS-335]
   traces_to: [REQ-263]
-  kyiv: Y
+  kyiv: K
   description: 'In `audit`, an API response hook, one place for portal pages, exports and direct API calls, that for ops,
     finance, fleet, station-operator and site-staff principals finds driver personal data in the response through the personal-data
     tags of the route schemas (T-743) and appends one access entry per driver: the user, the user''s organisation, the driver''s
@@ -8475,7 +8476,7 @@
   feature: FT-13.4
   implements: [SS-336]
   traces_to: [REQ-125]
-  kyiv: Y
+  kyiv: K
   description: 'In `audit`, add to each register entry its retention period (''not set'' where counsel has set none, A-025,
     Q-022) and any finance retention rule holding the field past that period (which rules exist is Q-070; none is assumed);
     keep a latest-activity instant per driver internal id, moved forward when the driver books again (booking-confirmed
@@ -8500,7 +8501,7 @@
   feature: FT-13.4
   implements: [SS-336]
   traces_to: [REQ-125]
-  kyiv: Y
+  kyiv: K
   description: 'In `audit`, the retention run as a Temporal schedule in the workflows code, at least daily (A-058, N10):
     for each register entry with a period, the owning module''s purge handler (a public-interface contract: list expired
     records, delete or pseudonymise them) is asked for data past its period that no open dispute or running dispute window
@@ -8537,7 +8538,7 @@
   feature: FT-13.4
   implements: [SS-336]
   traces_to: [REQ-125]
-  kyiv: Y
+  kyiv: K
   description: 'In `audit`, an append-only deletion journal outside the purged tables (internal ids, data type and time,
     no personal data) written by every purge (T-789) and anonymisation (T-791), and a post-restore step, run by the restore
     runbook before the API is opened, that re-applies through the same handlers every journal entry made since the backup''s
@@ -8561,7 +8562,7 @@
   feature: FT-13.4
   implements: [SS-337, SS-335]
   traces_to: [REQ-233, REQ-263]
-  kyiv: Y
+  kyiv: K
   description: 'In `audit`, an ops-only endpoint taking a registered mobile number that replaces that driver''s name, phone
     number and other personal data with one pseudonym in every fleet''s records through each owning module''s handler (the
     contract of T-789); bookings, audit entries, ledger entries and personal-data access entries (T-785) stay under the
@@ -8691,7 +8692,7 @@
   feature: FT-12.2
   implements: [SS-339]
   traces_to: [REQ-118]
-  kyiv: Y
+  kyiv: K
   description: 'In `audit`, a de-identification transform used for exports to parties outside Amperlane, data-room extracts
     (SS-231) and staging seeds (A-034): remove every driver name and phone number from every field, free text included,
     recognising phone numbers in any written format (with or without country code, spaces or punctuation); keep booking
@@ -8722,7 +8723,7 @@
   feature: FT-12.2
   implements: [SS-339]
   traces_to: [REQ-118]
-  kyiv: Y
+  kyiv: K
   description: 'In `audit`, a release gate after the transform (T-795): scan the output for any phone number and for the
     name of every driver that the platform or the migrated pilot history holds, drivers no longer registered included (SS-416);
     on a match, do not release the output and tell the person who requested it the field and record where the match was
@@ -9202,7 +9203,7 @@
   feature: FT-14.4
   implements: [SS-432]
   traces_to: [REQ-139]
-  kyiv: Y
+  kyiv: K
   description: 'In backend/src/platform/http: URL versioning (/v1/...) with NestJS URI versioning; an OpenAPI 3.1 description
     generated from the controllers per version, published as a build artefact and committed under backend/openapi/published/v<N>.json
     when the version is released (the baseline of T-1002''s breaking-change check); the router keeps serving every version
@@ -9233,7 +9234,7 @@
   feature: FT-14.4
   implements: [SS-432]
   traces_to: [REQ-139]
-  kyiv: Y
+  kyiv: K
   description: 'Under apps/: driver-pwa, fleet-portal, station-portal, ops-console and attendant-view in React with TypeScript
     (A-044), with the build tooling chosen in T-900; a shared UI kit with message keys in EN, ES and BN (N22) and a lint
     forbidding literal user-facing strings (code convention 7); sign-in through the identity service for the four web front-ends;
@@ -9466,7 +9467,7 @@
   feature: FT-14.4
   implements: [SS-435]
   traces_to: [REQ-140, REQ-237]
-  kyiv: Y
+  kyiv: K
   description: 'tools/simulator: a simulated pattern-A site of EVerest charger simulators (OCPP 1.6) connected to     the
     simulator''s own OCPP 1.6 central-system endpoint (boot, heartbeat, status, start and stop transaction, meter values,
     reservation messages), with a site registry shaped like Gowanus (CTX-060): 16 EVSEs, one per port (A-004,     Q-013),
@@ -9495,7 +9496,7 @@
   feature: FT-14.4
   implements: [SS-435]
   traces_to: [REQ-140, REQ-237]
-  kyiv: Y
+  kyiv: K
   description: 'Scenario command ''fault EVSE n'': the EVerest charger reports a fault over OCPP; the AMPECO stand-in     (T-1004)
     turns it into an AMPECO status change, sends the status webhook to the configured webhook URL, which is     the platform''s
     AMPECO-integration endpoint in staging (T-1005; the endpoint itself is CSMS integrations'' T-519), and returns the faulted
@@ -9523,7 +9524,7 @@
   feature: FT-14.4
   implements: [SS-435]
   traces_to: [REQ-140, REQ-237]
-  kyiv: Y
+  kyiv: K
   description: 'Scenario commands: ''overrun'', where the session on an EVSE continues past the next booking''s slot start
     so the stand-in keeps reporting it charging and sends the status events a real site sends; ''driver late'', where a
     simulated driver with a link session reports running late through the driver API endpoint of SS-129 (via the generated
@@ -9551,7 +9552,7 @@
   feature: FT-14.4
   implements: [SS-435]
   traces_to: [REQ-140, REQ-237]
-  kyiv: Y
+  kyiv: K
   description: 'Scenario ''gowanus-1350'' (tools/simulator/scenarios): seeds the simulated site in staging (onboarded     by
     T-1005) through the platform''s ops APIs with a test fleet, its drivers (numbers from the staging test number range,
     SS-339 clause 7) and vehicles, two of which need NACS or an adapter (SS-115 clause 2), and the nine bookings that ran
@@ -9580,7 +9581,7 @@
   feature: FT-14.4
   implements: [SS-435]
   traces_to: [REQ-140, REQ-237]
-  kyiv: Y
+  kyiv: K
   description: 'In the platform''s integration registry: when the environment is staging, each integration''s configuration
     is validated before start against a deny list (AMPECO production base URLs, the ChargeLab production host, Stripe keys
     with a live prefix, the production Twilio senders); a failing integration is not started and reports itself disabled.
@@ -10445,7 +10446,7 @@
   feature: FT-10.3
   implements: [SS-415]
   traces_to: [REQ-111]
-  kyiv: Y
+  kyiv: K
   description: 'Interface PaymentProvider in settlement''s public interface, in platform terms only (submitInvoice, readInvoiceStatus,
     payment events, paymentPageLink) with the error codes PROVIDER_UNAVAILABLE, SUBMISSION_REJECTED and IDEMPOTENCY_CONFLICT,
     registered through the integration registry (T-900). Module backend/src/integrations/stripe, the only place the Stripe
@@ -10474,7 +10475,7 @@
   feature: FT-10.3
   implements: [SS-415]
   traces_to: [REQ-111]
-  kyiv: Y
+  kyiv: K
   description: 'An import-lint rule (on the vendor-import gate of T-998) for the stripe and @stripe/* packages outside integrations/stripe;
     a contract suite of the core''s invoicing behaviour (submission, status, payment events, page link) that runs against
     the Stripe implementation and against an in-memory second implementation configured in its place, with no change to
@@ -10731,7 +10732,7 @@
   feature: FT-10.4
   implements: [SS-407]
   traces_to: [REQ-161]
-  kyiv: Y
+  kyiv: K
   description: 'Settlement public command deliverSessionRecord for the CSMS integrations (SS-213, SS-215): stores source,
     external id (unique per source), EVSE, start, end, energy in kWh and received time, indexed by EVSE and time. A read
     model in the settlement schema, fed through the outbox consumers by allocation events (SS-100 clause 3) and arrival
@@ -10756,7 +10757,7 @@
   feature: FT-10.4
   implements: [SS-407]
   traces_to: [REQ-161]
-  kyiv: Y
+  kyiv: K
   description: 'Matching on store and in a sweep (a Temporal schedule every minute in backend/src/workflows/settlement)
     for records not yet matched: a record matches the booking with a recorded arrival allocated to that EVSE whose window,
     from the start of its arrival window (SS-026 clause 1) to its end, contains the record''s start; the match keeps energy,
@@ -10788,7 +10789,7 @@
   feature: FT-10.4
   implements: [SS-408]
   traces_to: [REQ-214]
-  kyiv: Y
+  kyiv: K
   description: 'Settlement opens a booking_without_record case when a booking is marked without session record, and a record_without_arrival
     case holding the record and the booking when a record''s start lies within the window of a booking allocated to that
     EVSE with no recorded arrival, such as a no-show; it opens none for a record on an EVSE that no booking was allocated
@@ -10816,7 +10817,7 @@
   feature: FT-10.4
   implements: [SS-408]
   traces_to: [REQ-214]
-  kyiv: Y
+  kyiv: K
   description: 'Endpoints GET /v1/settlement/reconciliation-cases (finance and ops: each open case with its booking or charge,
     its session record, the reason and when it was opened), POST .../{id}/outcome (ops only; manual match, confirmed no-show,
     accepted as walk-up, accepted without session record; reason code from SS-020''s catalogue; applied as SS-408''s notes
@@ -10848,7 +10849,7 @@
   feature: FT-10.2
   implements: [SS-406]
   traces_to: [REQ-213]
-  kyiv: Y
+  kyiv: K
   description: 'When a fee on an issued invoice is reversed, a credit is queued for the first invoice of that fleet issued
     after the reversal, naming the original invoice and booking; issued invoice lines are immutable (INVOICE_ISSUED for
     any change or removal through the interface; database grants refuse it underneath); a fee reversed or waived before
@@ -10876,7 +10877,7 @@
   feature: FT-10.2
   implements: [SS-406]
   traces_to: [REQ-213]
-  kyiv: Y
+  kyiv: K
   description: 'Credit lines on an invoice are capped at its charges so it is issued at zero with its total equal to the
     sum of its lines; leftover credit is carried, unrefunded (Q-064), to the fleet''s following invoices as carried-credit
     lines naming the invoice it came from until used up; a re-run of month close creates no second credit for a fee.
@@ -11040,7 +11041,7 @@
   feature: FT-10.4
   implements: [SS-408]
   traces_to: [REQ-214]
-  kyiv: Y
+  kyiv: K
   description: 'In apps/ops-console, on the reconciliation queue: the outcome actions per case with a reason-code picker,
     ''link to booking'' for untraceable charges, and ''accept all without session record'' for one site and period. End-to-end
     tests are named after the JS-324 scenarios; the clause tests stay with the API tasks (D2).
@@ -11063,7 +11064,7 @@
   feature: FT-12.1
   implements: [SS-417]
   traces_to: [REQ-116]
-  kyiv: Y
+  kyiv: K
   description: 'In the migration module: migration_run (id, export id, rule versions, started, finished, status) and migration_record
     (run, source system, source id, file, row, original status, site, slot-start month in the site''s time zone, outcome
     loaded, merged or rejected, reason), the provenance of INV-11, insert-only once its run finishes; source readers plug
@@ -11093,7 +11094,7 @@
   feature: FT-12.1
   implements: [SS-416, SS-417]
   traces_to: [REQ-096, REQ-115, REQ-116]
-  kyiv: Y
+  kyiv: K
   description: 'SourceReaders for the Airtable export (bookings with driver number, fleet, site, slot, status, comment,
     arrival time) and for each site''s pilot Sheet (a column per EVSE, a row per slot), configured by YAML column maps;
     the documented site mapping (pilot site names to Gowanus, JFK and LIC) and each site''s column-to-EVSE mapping as versioned
@@ -11124,7 +11125,7 @@
   feature: FT-12.2
   implements: [SS-419]
   traces_to: [REQ-229]
-  kyiv: Y
+  kyiv: K
   description: 'A versioned rule file migration/rules/precedence.yaml (id and version; the Sheet wins for slot and EVSE,
     Airtable for driver and fleet; pairing: same site, day and driver) and the merge step producing one candidate booking
     per pair: the winner per field; single-source bookings with the missing fields ''not recorded''; rejection when a field
@@ -11156,7 +11157,7 @@
   feature: FT-12.2
   implements: [SS-419]
   traces_to: [REQ-229]
-  kyiv: Y
+  kyiv: K
   description: 'A conflict list per run (booking, both source values or the one source, the value kept, the rule id and
     version), produced for every booking settled by the rule; none for agreeing sources; a re-run under a new rule version
     settles every conflict again and shows the new version on each entry. Exported as CSV for Priya Nair''s review.
@@ -11181,7 +11182,7 @@
   feature: FT-12.2
   implements: [SS-417, SS-418]
   traces_to: [REQ-116, REQ-228, REQ-230]
-  kyiv: Y
+  kyiv: K
   description: 'A versioned status mapping covering every pilot status value across its two historical changes (CTX-054)
     to an outcome set in which rebooked, no-show and cancelled are distinct; a record whose value no mapping covers is rejected
     as ''unknown status value'' and the run goes on; original status, applied rule (id, version) and evidence are stored
@@ -11210,7 +11211,7 @@
   feature: FT-12.2
   implements: [SS-418]
   traces_to: [REQ-228, REQ-230]
-  kyiv: Y
+  kyiv: K
   description: 'Versioned re-classification rules in migration/rules/reclassification.yaml, validated by Priya Nair on the
     raw export (Q-020, Q-029): R1, no-show to rebooked when the site''s Sheet shows the same driver placed in another slot
     that day after a charger fault; R2, cancelled to no-show when the comment says the driver did not arrive (pattern list
@@ -11238,7 +11239,7 @@
   feature: FT-12.1
   implements: [SS-416]
   traces_to: [REQ-096, REQ-115]
-  kyiv: Y
+  kyiv: K
   description: 'Cross-module addition in the booking module (backend/src/modules/booking, Booking engine; GAP-5-3:     unlike
     SS-003 clause 9 for carried-over bookings, no Booking engine clause receives migrated bookings),     coordinated with
     the Booking engine tasks and reviewed by the booking module''s owner (D7): a migration adding     the origin value pilot_migration
@@ -11273,7 +11274,7 @@
   feature: FT-12.1
   implements: [SS-416]
   traces_to: [REQ-096, REQ-115]
-  kyiv: Y
+  kyiv: K
   description: 'The loader step of a run: takes the merged, classified records for every slot from October 2025 on (no date
     filter) and records each through recordMigratedBooking with its slot, outcome, arrival time where recorded, EVSE through
     the column-to-EVSE mapping or ''not recorded'', the driver record of its number, and the fleet Airtable records for
@@ -11300,7 +11301,7 @@
   feature: FT-12.2
   implements: [SS-420]
   traces_to: [REQ-252]
-  kyiv: Y
+  kyiv: K
   description: 'An S3 bucket of its own in the production account (KMS, versioning, Object Lock with a legal hold on every
     object while no retention is set); a bucket policy that allows reads only to the IAM Identity Center roles of the people
     on the export''s access list (a Terraform variable set by the Amperlane CTO and changed through the change process)
@@ -11328,7 +11329,7 @@
   feature: FT-12.2
   implements: [SS-420]
   traces_to: [REQ-252]
-  kyiv: Y
+  kyiv: K
   description: 'Migration-module configuration rawExportRetentionEnd: a client decision with no default, shown ''not set''
     until counsel sets it (Q-022, A-025); while not set, the legal hold stays; a daily Temporal schedule deletes every version
     of the export within one day after the end (A-058) through a deletion role that lifts the legal hold, and records the
@@ -11468,7 +11469,7 @@
   feature: FT-12.3
   implements: [SS-423]
   traces_to: [REQ-269]
-  kyiv: Y
+  kyiv: K
   description: 'Migration-module golive_record with endpoints for ops: the written criteria, entered once agreed (Q-055;
     none until then); the configured pre-launch real-booking period (a client decision with no default, design.md section
     8); the staff list of Amperlane and Intellias numbers kept by ops; and per pilot site (Gowanus, JFK, LIC) the real bookings
@@ -11499,7 +11500,7 @@
   feature: FT-12.3
   implements: [SS-423]
   traces_to: [REQ-269]
-  kyiv: Y
+  kyiv: K
   description: 'Endpoint POST /v1/migration/golive/approval (named approver, Idempotency-Key through libs/idempotency):
     refused, listing each open criterion and each site not proven, while any written criterion is not met or any pilot site
     is not proven; otherwise records the approval with the approver, the time and the evidence per criterion. Refusing does
@@ -11633,7 +11634,7 @@
   feature: FT-12.3
   implements: [SS-423]
   traces_to: [REQ-269]
-  kyiv: Y
+  kyiv: K
   description: 'In apps/ops-console, a Go-live area: the written criteria with their evidence, each pilot site''s proven
     state, the staff list, and the approval action for a named approver. End-to-end tests are named after the US-409 scenarios;
     the clause tests stay with the back-end tasks (D2).
@@ -11778,7 +11779,7 @@
   feature: FT-14.4
   implements: [SS-432]
   traces_to: [REQ-139]
-  kyiv: Y
+  kyiv: K
   description: 'Required CI checks on the descriptions T-911 generates: Spectral rules (backend/openapi/.spectral.yaml)
     failing an endpoint without a request schema, response schemas or its error codes (problem details with stable codes,
     code convention 7); a breaking-change check (oasdiff) of each version''s generated description against its last published
@@ -11832,7 +11833,7 @@
   feature: FT-14.4
   implements: [SS-435]
   traces_to: [REQ-140, REQ-237]
-  kyiv: Y
+  kyiv: K
   description: 'tools/simulator/ampeco-standin: a stand-in for the AMPECO API over the simulated site of T-920, built from
     AMPECO''s API documentation and recorded payloads until a sandbox exists (Q-009, CTX-072): EVSE status reads, webhook
     subscription and status webhooks in AMPECO''s payload shape, charger reservation and cancellation (passed to the EVerest
@@ -11860,7 +11861,7 @@
   feature: FT-14.4
   implements: [SS-435]
   traces_to: [REQ-140, REQ-237]
-  kyiv: Y
+  kyiv: K
   description: 'The simulator (EVerest chargers and the AMPECO stand-in) as a staging-only deployable (deployables register,
     T-998) on ECS in the staging account, with egress limited by security group and network firewall to staging''s AMPECO-integration
     webhook URL; staging configuration sets the AMPECO integration''s base URL and webhook registration to the stand-in
@@ -11977,7 +11978,7 @@
   feature: FT-12.1
   implements: [SS-416]
   traces_to: [REQ-096, REQ-115]
-  kyiv: Y
+  kyiv: K
   description: 'Cross-module addition in the fleet module (backend/src/modules/fleet, Fleet & vehicles; GAP-5-2: no Fleet
     & vehicles clause covers a driver record for a number no fleet registered), coordinated with the Fleet & vehicles tasks
     and reviewed by the fleet module''s owner: public command ensureDriverRecord(number in E.164) returning the number''s
@@ -12031,7 +12032,7 @@
   feature: FT-13.4
   implements: [SS-337, SS-336]
   traces_to: [REQ-125, REQ-233]
-  kyiv: Y
+  kyiv: K
   description: 'In the migration module (`backend/src/modules/migration`), the anonymisation and purge handlers for the
     driver personal data that runs keep: the source values of each conflict-list entry for the driver field, numbers and
     names included (T-980), and the evidence of re-classification rules, which can quote an Airtable comment (T-982). Migrated

@@ -17,7 +17,7 @@
 
 | KYIV | K | Y | I | V | none | provisional | final |
 |---|---|---|---|---|---|---|---|
-| Requirements | 100 | 141 | 28 | 62 | 0 | 331 | 0 |
+| Requirements | 152 | 89 | 28 | 62 | 0 | 331 | 0 |
 
 **K coverage:** OK, no K item has a coverage gap.
 
@@ -153,7 +153,7 @@ _none_
 
 ### Overrides with a reason
 
-_none_
+- **T-710** [Y] Treat a WhatsApp message with no approved template as undelivered and resend it by SMS is Y, inherits K: Applies only where the WhatsApp channel is enabled; WhatsApp (REQ-062, REQ-249) is Y, so this task waits for T-709 (Step 5, CR-011). · `spec/40-tasks/tasks.yaml`
 
 ## Staleness
 
