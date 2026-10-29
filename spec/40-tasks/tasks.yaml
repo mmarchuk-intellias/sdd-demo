@@ -317,7 +317,7 @@
   title: Onboard a site as data through the ops API with code, time zone and CSMS checks
   type: backend
   status: approved
-  version: 1
+  version: 2
   approved_with: {SS-028: 1}
   epic: EP-01
   feature: FT-01.7
@@ -335,7 +335,9 @@
     status service). Routes are versioned and published in the API description (batch 5''s T-911, SS-432), and each declares
     its permission in the identity role matrix, enforced by the deny-by-default guard that defines the ops and partner roles
     (batch 5''s T-909, SS-440 clause 1). The onboarding request also takes each EVSE''s external id in its CSMS (SS-030.5)
-    and accepts the CSMS kind ''simulator'' in CI and staging, which T-555 registers.
+    and accepts the CSMS kind ''simulator'' in CI and staging, which T-555 registers. The station operator is a minimal
+    record (id, name) in `inventory` (data-model.md, G-3): a site that names an operator not yet known creates it, and a
+    site that names a known operator references it.
 
     '
   acceptance_criteria: ['SS-028.1: an ops request with every onboarding item stores the site as not live, with its EVSEs,
@@ -344,7 +346,9 @@
       and a site naming an unknown CSMS kind is refused.', 'SS-028.3: sites with the zones America/New_York, America/Los_Angeles
       and Europe/Kyiv are accepted; an unknown zone name is refused.', 'SS-028.7: parameterised over create and go-live:
       a fleet-manager, station-operator, site-staff or driver principal is refused with 403 and nothing changes.', 'SS-028.8:
-      creating a site with a site code already used by another site is refused, and the other site''s code is unchanged.']
+      creating a site with a site code already used by another site is refused, and the other site''s code is unchanged.',
+    'SS-028.1: a site entered with a new station operator name creates the operator record, and a second site entered with
+      the same operator name references the same record.']
   needs: [SS-432.1, SS-440.1]
   depends_on: [T-101, T-103, T-106, T-107, T-909, T-911]
   blocks: [T-200, T-500, T-501, T-505, T-519, T-522, T-523, T-525, T-527, T-549, T-555, T-766, T-1005]
@@ -495,7 +499,7 @@
   type: backend
   status: approved
   version: 1
-  approved_with: {SS-020: 2}
+  approved_with: {SS-020: 3}
   epic: EP-13
   feature: FT-13.2
   implements: [SS-020]
@@ -530,8 +534,8 @@
       to the corrected entry''s id, and the corrected entry is unchanged.']
   needs: []
   depends_on: [T-120]
-  blocks: [T-123, T-127, T-302, T-305, T-306, T-307, T-312, T-313, T-314, T-316, T-318, T-322, T-323, T-327, T-329, T-330,
-    T-332, T-335, T-336, T-340, T-354, T-510, T-514, T-536, T-538, T-546, T-928, T-952, T-953, T-963, T-968, T-991]
+  blocks: [T-123, T-127, T-209, T-302, T-305, T-306, T-307, T-312, T-313, T-314, T-316, T-318, T-322, T-323, T-327, T-329,
+    T-330, T-332, T-335, T-336, T-340, T-354, T-510, T-514, T-536, T-538, T-546, T-928, T-952, T-953, T-963, T-968, T-991]
   estimate: null
   labels: []
 - id: T-123
@@ -539,7 +543,7 @@
   type: backend
   status: approved
   version: 1
-  approved_with: {SS-020: 2}
+  approved_with: {SS-020: 3}
   epic: EP-13
   feature: FT-13.2
   implements: [SS-020]
@@ -1788,30 +1792,35 @@
   title: Create the fleet module and let ops create fleets with no portal user
   type: backend
   status: approved
-  version: 1
-  approved_with: {SS-040: 1}
+  version: 2
+  approved_with: {SS-040: 2}
   epic: EP-08
   feature: FT-08.1
   implements: [SS-040]
-  traces_to: [REQ-206]
+  traces_to: [REQ-084, REQ-206]
   kyiv: K
   description: 'Create the `fleet` module in `backend/src/modules/fleet/` (fleet and vehicles, code conventions row 4) with
     schema `fleet`, forward-only migrations, its error-code catalogue and the domain-event contracts `fleet.vehicle_profile_changed`,
     `fleet.vehicle_retired`, `fleet.adapter_policy_changed` and `fleet.driver_vehicle_limit_changed`, published through
     the platform database layer''s transactional outbox (SS-427). Table `fleet` (id, name unique case-insensitively, kind,
-    created by, created at). Ops endpoints `POST /v1/fleets` and `GET /v1/fleets/{fleetId}/registrations` (the fleet''s
-    drivers, booker-only numbers and vehicles, for ops, for every fleet). A fleet is created with no portal user and everything
-    for it can be done by ops without a portal sign-in (A-023, Five Boroughs). Requires an Idempotency-Key (library of T-207).
-    Out of scope: driver, booker-only and vehicle registration (T-181 – T-183), the fleet manager login (Identity & access,
-    SS-323), screens (T-204). Routes are versioned and published in the API description (batch 5''s T-911, SS-432), and
-    each declares its permission in the identity role matrix, enforced by the deny-by-default guard that defines the ops
-    and partner roles (batch 5''s T-909, SS-440 clause 1).
+    billing contact name and e-mail address, created by, created at). Ops enter the billing contact when they create the
+    fleet and can change it (`PATCH /v1/fleets/{fleetId}/billing-contact`); the module''s public interface gives it to Ledger
+    & invoicing for the fleet''s Stripe customer (T-1007). Ops endpoints `POST /v1/fleets` and `GET /v1/fleets/{fleetId}/registrations`
+    (the fleet''s drivers, booker-only numbers and vehicles, for ops, for every fleet). A fleet is created with no portal
+    user and everything for it can be done by ops without a portal sign-in (A-023, Five Boroughs). Requires an Idempotency-Key
+    (library of T-207). Out of scope: driver, booker-only and vehicle registration (T-181 – T-183), the fleet manager login
+    (Identity & access, SS-323), screens (T-204). Routes are versioned and published in the API description (batch 5''s
+    T-911, SS-432), and each declares its permission in the identity role matrix, enforced by the deny-by-default guard
+    that defines the ops and partner roles (batch 5''s T-909, SS-440 clause 1).
 
     '
   acceptance_criteria: ['SS-040.1: ops create a fleet and then register a driver number, a booker-only number and a vehicle
       for it through the ops API; the fleet has no portal user and no step needs a portal session.', 'SS-040.2: the ops
       read returns, for each of two fleets, its drivers, booker-only numbers and vehicles.', 'SS-040.5: creating a fleet
-      with no name, or with the name of an existing fleet in another letter case, is refused.']
+      with no name, or with the name of an existing fleet in another letter case, is refused.', 'SS-040.6: ops create a
+      fleet with a billing contact, change its e-mail address, and the public interface used by T-1007 returns the changed
+      contact.', 'SS-040.7: creating a fleet with no billing contact, or with a billing e-mail address that is not valid,
+      is refused and no fleet is stored.']
   needs: [SS-427.1, SS-427.3, SS-432.1, SS-440.1]
   depends_on: [T-207, T-900, T-906, T-909, T-911, T-998, T-1001]
   blocks: [T-181, T-183, T-204, T-923, T-928, T-961, T-984, T-1007]
@@ -2035,11 +2044,11 @@
   type: backend
   status: approved
   version: 1
-  approved_with: {SS-040: 1}
+  approved_with: {SS-040: 2}
   epic: EP-08
   feature: FT-08.1
   implements: [SS-040]
-  traces_to: [REQ-206]
+  traces_to: [REQ-084, REQ-206]
   kyiv: K
   description: 'In the `fleet` module, make the fleet''s registrations (drivers T-181, booker-only numbers T-182, vehicles
     T-183) readable and editable by a fleet-manager principal bound to the fleet (the login is created by Identity & access,
@@ -2289,11 +2298,11 @@
   type: frontend
   status: approved
   version: 1
-  approved_with: {SS-037: 1, SS-042: 1, SS-040: 1}
+  approved_with: {SS-037: 1, SS-042: 1, SS-040: 2}
   epic: EP-08
   feature: FT-08.1
   implements: [SS-037, SS-042, SS-040]
-  traces_to: [REQ-201, REQ-205, REQ-206]
+  traces_to: [REQ-084, REQ-201, REQ-205, REQ-206]
   kyiv: K
   description: 'In the fleet portal app (`apps/fleet-portal`, shell and sign-in from the SS-223 tasks) add the drivers and
     booker-only numbers screens (list, add) calling T-181 and T-182; the same screens open in the ops console for any fleet,
@@ -2445,6 +2454,42 @@
       unchanged, with no person acting.']
   needs: [SS-336.3, SS-416.4]
   depends_on: [T-181, T-182, T-789, T-1009]
+  blocks: []
+  estimate: null
+  labels: []
+- id: T-209
+  title: Record arrived bookings as Completed on a matched session record or an ops reconciliation outcome
+  type: backend
+  status: approved
+  version: 1
+  approved_with: {SS-046: 1}
+  epic: EP-11
+  feature: FT-11.1
+  implements: [SS-046]
+  traces_to: [REQ-224]
+  kyiv: K
+  description: 'In the `booking` module, consume the session-matched event of T-966 and a new `settlement.reconciliation_case_closed`
+    event (booking id, outcome, ops user, reason code), which this task adds to T-968''s outcome path and bulk accept, published
+    through the transactional outbox (SS-427) in the transaction that closes the case. Apply the Arrived → Completed transition
+    of data-model.md §3 through T-122''s transition function: a session match gives COMPLETED_SESSION_MATCHED with the system
+    as actor; the outcomes ''manual match'' and ''accepted without a session record'' give COMPLETED_SESSION_MATCHED or
+    COMPLETED_WITHOUT_SESSION_RECORD with the ops user as actor. Both codes are added to the SS-020 catalogue here. A booking
+    in any other state is left unchanged, and commands on a Completed booking are refused. Consumers are idempotent by event
+    id (SS-427). Reads no configured parameter. Out of scope: the completed definition and its count (T-547), matching (T-966)
+    and the reconciliation cases themselves (T-962, T-967, T-968).
+
+    '
+  acceptance_criteria: ['SS-046.1: a session-matched event for an Arrived booking records Completed with COMPLETED_SESSION_MATCHED
+      and the system as actor, in one state change.', 'SS-046.2: parameterised over a single outcome and the bulk accept
+      of SS-408 clause 12: ''manual match'' and ''accepted without a session record'' record Completed with COMPLETED_SESSION_MATCHED
+      or COMPLETED_WITHOUT_SESSION_RECORD and the ops user as actor; ''confirmed no-show'' and ''accepted as walk-up'' leave
+      the booking''s state unchanged.', 'SS-046.3: parameterised over a no-show, a cancelled and an already Completed booking:
+      a session-matched event and each outcome record no state change, and a repeated event for a Completed booking records
+      nothing.', 'SS-046.4: cancel, release, rebook and grace-extension commands on a Completed booking are refused and
+      the booking stays Completed.', 'SS-046.5: time-skipping test ends the slot window of an Arrived booking with no match
+      and no outcome, and the booking is still Arrived.']
+  needs: [SS-020.1, SS-407.3, SS-408.6, SS-408.12]
+  depends_on: [T-122, T-966, T-968]
   blocks: []
   estimate: null
   labels: []
@@ -10776,7 +10821,7 @@
       record.']
   needs: [SS-026.1, SS-026.2]
   depends_on: [T-101, T-102, T-965]
-  blocks: [T-342, T-546, T-967]
+  blocks: [T-209, T-342, T-546, T-967]
   estimate: null
   labels: []
 - id: T-967
@@ -10836,7 +10881,7 @@
       closed on its own with the outcome and reason code, and cases holding a record or an untraceable charge untouched.']
   needs: [SS-020.2, SS-332.1, SS-014.1]
   depends_on: [T-122, T-129, T-780, T-909, T-911, T-963, T-967]
-  blocks: [T-972, T-976]
+  blocks: [T-209, T-972, T-976]
   estimate: null
   labels: []
 - id: T-969

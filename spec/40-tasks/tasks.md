@@ -4,7 +4,7 @@ type: tasks-index
 title: Task index
 status: approved
 owner: Mykola Marchuk
-version: 2
+version: 3
 kyiv: null
 parents: [EPICS]
 sources: []
@@ -325,6 +325,7 @@ Human-readable index of [tasks.yaml](tasks.yaml), the machine-readable source. G
 
 | Task | Title | Type | KYIV | Implements | Depends on | Chain depth |
 |---|---|---|---|---|---|---|
+| T-209 | Record arrived bookings as Completed on a matched session record or an ops reconciliation outcome | backend | K | SS-046 | T-122, T-966, T-968 | 22 |
 | T-546 | Build the reporting evidence store per booking | data | K | SS-229 | T-122, T-129, T-138, T-139, T-312, T-327, T-328, T-329, T-330, T-331, T-333, T-906, T-966, T-998, T-1001 | 21 |
 | T-547 | Count completed bookings under a configurable rule over the stored evidence | backend | K | SS-229 | T-546 | 22 |
 | T-548 | Let ops change the completed definition without a deployment | backend | K | SS-229 | T-129, T-511, T-547, T-740, T-782, T-909, T-911, T-916 | 23 |

@@ -1,15 +1,15 @@
 ---
 id: DATA-MODEL
 type: design
-title: Core data model (v1)
+title: Core data model (v2)
 status: approved
 owner: Mykola Marchuk
-version: 1
+version: 2
 kyiv: null
 parents: [BUSINESS-CONTEXT, DESIGN]
 sources: [SRC-C1, SRC-C2, SRC-D2]
 ---
-# Core data model, v1
+# Core data model, v2
 
 > **v1, revised after Steps 3 and 4** (playbook §10.1, CR-012). v0 was a hypothesis from the sources. v1 is the
 > logical model that the approved system stories (SS) and tasks (T) require. Every entity cites the SS clauses or tasks
@@ -17,7 +17,8 @@ sources: [SRC-C1, SRC-C2, SRC-D2]
 > Entities are grouped by the component that owns them (design.md §2.3, §2.6). Links between modules are ids without
 > foreign keys (constitution, code conventions row 4), so cardinalities across modules are logical only. The booking
 > entities should still map onto the OCPI 2.3 Booking module later (SRC-C2@00:13:32, SRC-C2@00:13:40). Gaps the revision
-> found are in section 5; they need a decision before T-122 builds the state machine of section 3.
+> found are in section 5. **v2** (CR-013, 2026-10-29) closes them: SS-046 enters Completed, the fleet has a billing
+> contact (SS-040), the station operator is a minimal record, and the decisions on G-4 – G-6 are recorded.
 
 ## 1. Entities
 
@@ -25,9 +26,9 @@ sources: [SRC-C1, SRC-C2, SRC-D2]
 
 | Entity | Key attributes | Notes | Required by |
 |---|---|---|---|
-| StationOperator | id, name | Entered with the site (SS-028.1); no SS defines more. Contacts are OperatorNoticeContact. See gap G-3. | SS-028.1, SS-323.1 |
+| StationOperator | id, name | A minimal record created with the first site that names it (SS-028.1, T-108; G-3). Contacts are OperatorNoticeContact. | SS-028.1, SS-323.1; T-108 |
 | Site (`site`) | operator, name, unique site code, address, latitude and longitude, IANA time zone, supply pattern (A/B/C), CSMS kind (integrated kinds; `simulator` in CI and staging), exactly one live status source (CSMS, OCPI Locations peer, attendant view), live flag (default false), synthetic flag | Terms and parameters are versioned entities below. | SS-028.1 – SS-028.8, SS-206.1, SS-428.5; T-100, T-931 |
-| EVSE (`evse`) | site, external id per CSMS, label, reservable flag (default false) | Live status is EvseCurrentStatus. Whether the stall named to drivers is the label is open (G-5). | SS-029.5, SS-100.3; T-100 |
+| EVSE (`evse`) | site, external id per CSMS, label, reservable flag (default false) | Live status is EvseCurrentStatus. The label is the stall name drivers are given (G-5). | SS-029.5, SS-100.3; T-100 |
 | Connector (`connector`) | EVSE, type (CCS1, NACS), maximum kW (> 0) | At least one per EVSE. | SS-030.1 – SS-030.3 |
 | CapacityRule (`capacity_rule`) | site, days of week, local window (may cross midnight), cap as a count of EVSEs (at most the EVSE count), valid from, actor | No percentage cap and no overbooking flag. | SS-023.1 – SS-023.4; T-103 |
 | BookablePeriod (`bookable_period`) | site, days of week, local start and end | | SS-023.1, SS-023.4; T-103 |
@@ -96,7 +97,7 @@ sources: [SRC-C1, SRC-C2, SRC-D2]
 
 | Entity | Key attributes | Notes | Required by |
 |---|---|---|---|
-| Fleet (`fleet`) | name (unique, case-insensitive), kind, adapter policy | No billing contact (gap G-2). | SS-039.1, SS-040.5; T-180, T-184 |
+| Fleet (`fleet`) | name (unique, case-insensitive), kind, adapter policy, billing contact (name, e-mail address) | The billing contact feeds the fleet's Stripe customer (G-2). | SS-039.1, SS-040.5 – SS-040.7; T-180, T-184, T-1007 |
 | Vehicle (`vehicle`) | fleet, plate (unique among the fleet's active vehicles), native connector, allowed adapters, adapter override, maximum DC kW, retired at | | SS-038.1 – SS-038.5; T-183 |
 | Driver | internal id, E.164 number, first name | A driver can exist with no registration and so no right to book; anonymised under a pseudonym that keeps the id. Language, channel and consent live in Messaging and Audit. | SS-318.1, SS-323.4, SS-337.2, SS-337.5; T-208, T-1009 |
 | DriverRegistration (`driver_registration`) | fleet, E.164 number, registered by and at, removed at | | SS-037.1, SS-037.3, SS-037.5; T-181 |
@@ -112,7 +113,7 @@ sources: [SRC-C1, SRC-C2, SRC-D2]
 |---|---|---|---|
 | PartnerUser | user, exactly one organisation (fleet, station operator or site), one role | Staff roles are separate; finance is read-only. | SS-323.1, SS-440; T-740 |
 | SiteStaffLogin | person, site, revoked | | SS-324.1, SS-324.3, SS-324.5; T-751 |
-| DriverRemoval | number, fleet, actor, time | Overlaps DriverRegistration.removed at (G-6). | SS-319.1, SS-319.6; T-745 |
+| DriverRemoval | number, fleet, actor, time | Stored once, as DriverRegistration.removed at in Fleet & vehicles; Identity reads it (G-6). | SS-319.1, SS-319.6; T-745 |
 | DriverLink, DriverSession | link: signed token bound to number and booking, expiry, first device; session: full or limited | | SS-320.1, SS-320.2, SS-320.4, SS-320.8; T-746, T-747 |
 | VerifiedDevice, OneTimeCode, CodeBlock | device and number with valid-until; hashed code with expiry and wrong-code count; block end | | SS-321.4 – SS-321.8; T-749 |
 
@@ -136,7 +137,7 @@ sources: [SRC-C1, SRC-C2, SRC-D2]
 | ExceptionType (`exception_type`) | code, name, dedupe level | 18 seeded. | SS-219.11; T-507 |
 | Portal read models | fleet bookings, booking evidence, station upcoming bookings, station fault outcomes, attendant's due drivers | Plate and first name only. | SS-223.1, SS-225.1, SS-227.1, SS-228.1; T-536 – T-544 |
 | ReportingBookingEvidence | per booking: state changes and reasons, arrival, session-record match and energy, rebooks, final slot, the no-show it followed | | SS-229.1; T-546 |
-| CompletedDefinition (`completed_definition`) | version, rule over the evidence fields only, actor, time | Default "state is Completed" (see G-1). | SS-229.2 – SS-229.4, SS-229.10; T-547, T-548 |
+| CompletedDefinition (`completed_definition`) | version, rule over the evidence fields only, actor, time | Default "state is Completed" (SS-046). | SS-229.2 – SS-229.4, SS-229.10; T-547, T-548 |
 | FaultCost | per fault: counts by final outcome | | SS-234.1, SS-234.2; T-553 |
 
 ### Settlement & ledger, Payments (Stripe)
@@ -248,15 +249,15 @@ marks, grace extensions and running-late reports change no state (SS-117.4, SS-1
 |---|---|---|
 | Confirmed | The booker confirms a hold (SS-003.7), or a pilot booking is carried over at cut-over (CARRIED_OVER_AT_CUTOVER, SS-003.9, SS-421.1) | Allocated at the allocation offset (SS-100); Cancelled; stays Confirmed with a site-full mark when no compatible EVSE is free (SS-105.1), then Allocated at the pre-arrival check (SS-105.6) or rebooked (MOVED_SITE_FULL, SS-105.3) |
 | Allocated | An EVSE is assigned at the allocation offset | Allocated again on reallocation (REALLOCATED_EVSE_OCCUPIED SS-104.1, REALLOCATED_STALL_BLOCKED SS-106.1, REBOOKING_UNDONE SS-111.2); Arrived; NoShow; Cancelled |
-| Arrived | The first arrival evidence within the arrival window: ARRIVED_QR_SCAN, ARRIVED_SESSION_START or ARRIVED_ATTENDANT (SS-124.1, SS-124.7, SS-125.1, SS-126.1) | Rebooked with MOVED_SESSION_NOT_STARTED when the session does not start, or the "charge not started" exception (SS-107.1 – SS-107.3); Completed: **no clause enters it (G-1)**. Never released after arrival (SS-127.3) and no reallocation (SS-104.7, SS-111.5). |
+| Arrived | The first arrival evidence within the arrival window: ARRIVED_QR_SCAN, ARRIVED_SESSION_START or ARRIVED_ATTENDANT (SS-124.1, SS-124.7, SS-125.1, SS-126.1) | Rebooked with MOVED_SESSION_NOT_STARTED when the session does not start, or the "charge not started" exception (SS-107.1 – SS-107.3); Completed (SS-046). Never released after arrival (SS-127.3) and no reallocation (SS-104.7, SS-111.5). |
 | NoShow | Grace ended with no arrival: auto-release, RELEASED_NO_ARRIVAL, the system as actor (SS-127.2) | — A late arrival keeps NoShow and sets the late flag (SS-128.1), and its re-offer creates a new booking (SS-011.2, SS-128.3); cancelling is refused (SS-132.4) |
 | Cancelled | The driver, the booker or the fleet cancels before arrival (CANCELLED_BY_DRIVER, CANCELLED_BY_BOOKER, CANCELLED_BY_FLEET, SS-013.1, SS-013.6), or ops release it (RELEASED_BY_OPS, with the effect of a cancellation and never a no-show, SS-016.3, SS-016.5) | — A late cancellation carries a mark (SS-132.2) |
-| Completed | **Not entered by any clause (G-1).** The default completed definition counts this state (SS-229.2, T-547). | — |
+| Completed | A session record is matched (COMPLETED_SESSION_MATCHED, SS-046.1), or ops close the booking's reconciliation case with a manual match or "accepted without a session record" (SS-046.2). An Arrived booking with neither stays Arrived after its window (SS-046.5). The default completed definition counts this state (SS-229.2). | — Final: commands on it are refused (SS-046.4) |
 
 **Rebook.** A rebook keeps the booking id and changes its slot, site or EVSE (SS-011.3, SS-108.6, SS-114.1) with
 MOVED_CHARGER_FAULT, MOVED_MAINTENANCE, MOVED_SITE_FULL, MOVED_SESSION_NOT_STARTED or REBOOKED_BY_OPS. Its allocation is
-deactivated at once (SS-102.5). Which state a booking rebooked to a later slot is in, Confirmed until its new
-allocation offset or Allocated, no clause says (G-4).
+deactivated at once (SS-102.5). A booking rebooked to a later slot is Confirmed again and is allocated at its new
+allocation offset (G-4).
 
 **v0 states removed:** Held and Expired (now the hold's lifecycle), AllocationFailed (a site-full mark), StationHeld,
 StationHoldUnacknowledged and StationHoldFailed (station-hold answers), ChargeFailed (a rebook or an exception),
@@ -296,20 +297,18 @@ closed with one of five outcomes (SS-408). MigrationRun: per SS-417.
 
 ## 5. Gaps found in the revision
 
-These are gaps in the approved system stories or tasks, not in this file. Each needs a decision; G-1 to G-3 affect K
-work.
+Gaps the v1 revision found in the approved system stories and tasks, and how CR-013 (2026-10-29) settled them.
 
-| # | Gap | Affects | Proposal |
-|---|---|---|---|
-| G-1 | No clause moves a booking to Completed, yet the default completed definition counts that state (SS-229.2, T-547) and T-122 builds the states of section 3. The north-star count would stay at zero. | K: REQ-224, REQ-091, REQ-132; T-122, T-546, T-547, T-933 | A CR adds an [Event] clause to the booking component: an Arrived booking enters Completed when its slot window has ended and either a session record is matched (SS-407) or ops or the attendant confirm the charge, the fallback while session records are unconfirmed (v0 §3, SS-408 notes). |
-| G-2 | T-1007 creates a fleet's Stripe customer "from the fleet's billing contact (SS-040)", but neither SS-040 nor T-180 records one. | K: REQ-083, REQ-084, REQ-087; T-180, T-1007 | A CR adds a billing contact (name, e-mail) to fleet creation in SS-040 and T-180; for the pilot fleets, Q-067 may reuse their Stripe customers. |
-| G-3 | SS-028.1 enters a site "with its station operator", and partner users belong to a station operator (SS-323.1), but no clause or task creates the operator record. | K: REQ-258 (station portal users); T-108, T-740 | Treat the operator as a minimal record (name) created with the site in T-108; no new behaviour. |
-| G-4 | No clause names the state of a booking rebooked to a later slot (Confirmed until its new allocation offset, or Allocated). | T-122, T-139, T-310 | Confirmed, re-allocated at the new allocation offset; record it in SS-114 notes at the next CR. |
-| G-5 | REQ-200 names "the EVSE and the stall" in the allocation message; no clause says whether the stall is the EVSE label. | T-100 and the allocation message | The EVSE label is the stall name; confirm with site staff in Phase 0. |
-| G-6 | DriverRemoval (SS-319) and DriverRegistration.removed at (SS-037) record the same fact twice. | T-181, T-745 | One record, in Fleet & vehicles; Identity reads it. |
+| # | Gap | Settled by |
+|---|---|---|
+| G-1 | No clause moved a booking to Completed, yet the default completed definition counts that state (SS-229.2, T-547), so the north-star count would have stayed at zero (K: REQ-224, REQ-091, REQ-132). | SS-046 (new) and T-209 (new); the reason codes join SS-020 (v3). |
+| G-2 | T-1007 creates a fleet's Stripe customer "from the fleet's billing contact (SS-040)", but no clause or task recorded one (K: REQ-083, REQ-084, REQ-087). | SS-040 v2 clauses 6 and 7, T-180 v2. For the pilot fleets, Q-067 may reuse their Stripe customers. |
+| G-3 | No clause or task created the station operator record that sites and station-portal users refer to (SS-028.1, SS-323.1). | A minimal record created with the site, T-108 v2. No new behaviour. |
+| G-4 | No clause named the state of a booking rebooked to a later slot. | Section 3: Confirmed again, allocated at its new allocation offset. T-122 implements it. |
+| G-5 | No clause said whether the stall in the allocation message (REQ-200) is the EVSE label. | The EVSE label is the stall name; site staff confirm the labels at onboarding in Phase 0. |
+| G-6 | DriverRemoval (SS-319) and DriverRegistration.removed at (SS-037) recorded the same fact. | One record in Fleet & vehicles; Identity reads it (T-181, T-745). |
 
-Smaller residue: the SS-020 notes still list STATION_HOLD_PLACED and STATION_HOLD_FAILED "where the station hold is
-recorded as a booking state", which no state does any more.
+The SS-020 notes no longer refer to a station-hold booking state (SS-020 v3).
 
 ## 6. Changes from v0
 

@@ -8,8 +8,8 @@
 |---|---|---|---|---|---|
 | Requirements | 336 | 0 | 0 | 331 | 5 |
 | User/job stories | 152 | 0 | 0 | 152 | 0 |
-| System stories | 203 | 0 | 0 | 203 | 0 |
-| Tasks | 378 | 44 | 0 | 334 | 0 |
+| System stories | 204 | 0 | 0 | 204 | 0 |
+| Tasks | 379 | 44 | 0 | 335 | 0 |
 
 | Quadrant | S-F | S-NF | U-F | U-NF |
 |---|---|---|---|---|
