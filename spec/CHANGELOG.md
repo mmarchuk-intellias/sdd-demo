@@ -4,7 +4,7 @@ type: changelog
 title: Approved changes to the baseline
 status: approved
 owner: Mykola Marchuk
-version: 4
+version: 5
 kyiv: null
 parents: [REQUIREMENTS]
 sources: []
@@ -29,3 +29,4 @@ the system stories, decided at Gate 3 (2026-10-28).
 | CR-009 | 2026-10-28 | contradiction REQ-231 vs REQ-009 v2 and REQ-012 (Step 3.3 system stories, Gate 3) | REQ-231 (v2) | JS-407, US-406; SS-003, SS-005, SS-006, SS-101, SS-421 | Mykola Marchuk |
 | CR-010 | 2026-10-28 | Gate 4 task critique (P4.2) and cleanup: clarifications within the requirements | SS-001, SS-020, SS-021, SS-026, SS-208, SS-222 (v2); design.md (v2: §8 parameters, §9 Phase 0 decisions); open-questions.md (v5: Q-065 – Q-071) | spec/40-tasks/tasks.yaml (T-124, T-314, T-318, T-322, T-532, T-928, T-993 and the handler tasks T-208, T-355, T-558, T-559, T-1011) | Mykola Marchuk |
 | CR-011 | 2026-10-29 | Step 5 KYIV proposal (P5.1): the provisional K was not closed under the task graph (49 Y tasks were prerequisites of K tasks) | requirements.md (v4: 52 rows Y → K, still provisional; row versions unchanged); open-questions.md (v6: Q-072) | 39 stories, 52 system stories and 93 tasks copy the inherited K (P2), no version change; T-710 set to Y by a human override (kyiv_override_reason); tasks.md (v2) | Mykola Marchuk |
+| CR-012 | 2026-10-29 | Design revision after Steps 3 and 4 (playbook §10.1): data-model.md and integrations.md were still v0 | data-model.md (v1: entities, relationships, lifecycles and invariants from the system stories and tasks; gaps G-1 – G-6); integrations.md (v1: MVP use, platform services I-20 – I-30, U-15 – U-24); design.md (v3: §2.4, §2.5); open-questions.md (v7: Q-073, Q-074; Q-047 now cites REQ-248) | T-122 builds the states of data-model.md §3; gaps G-1 – G-3 affect K work and need a CR on SS-040, T-180, T-1007 and the booking lifecycle | Mykola Marchuk |

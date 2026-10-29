@@ -1,15 +1,15 @@
 ---
 id: DESIGN
 type: design
-title: Amperlane Platform v1 high-level design (v2)
+title: Amperlane Platform v1 high-level design (v3)
 status: approved
 owner: Mykola Marchuk
-version: 2
+version: 3
 kyiv: null
 parents: [BUSINESS-CONTEXT, INTEGRATIONS]
 sources: [SRC-D1, SRC-C1, SRC-C2, SRC-D2]
 ---
-# High-level design, v2
+# High-level design, v3
 
 > **v1** (Gate 3, 2026-10-28). v0 was a hypothesis (playbook §10.1), built from the context and the confirmed
 > integration capabilities. v1 adds what Step 3 settled: the refined component names the system stories use (§2.6) and
@@ -17,6 +17,9 @@ sources: [SRC-D1, SRC-C1, SRC-C2, SRC-D2]
 > **v2** (Gate 4, 2026-10-28) adds the configured parameters the Step 4 task critique found missing (§8: the site-staff
 > request channel and number, arrival from a session start and its evidence, the cut-over takeover reply timeout) and
 > the open technical decisions for Phase 0 (§9).
+> **v3** (CR-012, 2026-10-29) aligns §2.4 and §2.5 with the KYIV of Gate 2 and the Step 4 tasks: the OCPI gateway,
+> telematics and routing are not in the committed plan, and the cache and the event bus are dropped. The data model and
+> the integrations inventory were revised with it (data-model.md v1, integrations.md v1).
 > **Requirements must not cite this file**; they cite sources and `CTX-` facts.
 > Decisions the sources show as already agreed are recorded as ADRs in [adr/](adr/). Everything else here is a
 > proposal, and each component says how solid it is:
@@ -118,12 +121,12 @@ stay in §2.1 – §2.5 for the parts they still describe.
 | Adapter | Responsibility | Why it exists | Solidity |
 |---|---|---|---|
 | CSMS adapters: AMPECO, ChargeLab, CSV ingest | Normalise status events; send charger reservations where supported; fetch session records where available; ingest the LIC CSV for reconciliation. | CTX-060 – CTX-063, CTX-086, CTX-091 | client-stated; session records unconfirmed (U-6, U-7) |
-| OCPI 2.2.1 eMSP gateway | Locations, Tariffs, Sessions, CDRs, Tokens, Commands (RESERVE_NOW). | CTX-071, CTX-104 | proposed (A-015) |
-| Telematics adapters | Geotab now; Tesla Fleet API or Smartcar as options; manual SoC as a non-adapter fallback. | CTX-099, CTX-101 | Geotab access unconfirmed (Q-014) |
-| Payments adapter (Stripe) | Invoices today; Connect transfers and 1099s if B/C. | CTX-051, CTX-128, A-007 | contingent on Q-001 |
-| Messaging adapter (Twilio) | SMS today; WhatsApp to set up. | CTX-097, A-008 | WhatsApp unconfirmed (Q-034) |
+| OCPI 2.2.1 eMSP gateway | Locations, Tariffs, Sessions, CDRs, Tokens, Commands (RESERVE_NOW). | CTX-071, CTX-104 | proposed (A-015); I at Gate 2 (REQ-166), not in the committed plan |
+| Telematics adapters | Geotab, Tesla Fleet API or Smartcar; manual SoC (REQ-018) and booking without vehicle data (REQ-019) cover the gap. | CTX-099, CTX-101 | not in the committed plan: Geotab is I (REQ-075), Tesla Fleet API and Smartcar are V (REQ-311, REQ-312); Geotab access unconfirmed (Q-014) |
+| Payments adapter (Stripe) | Fleet invoices in every business-model option; Connect transfers and 1099s only if B/C. | CTX-051, CTX-128, A-007 | invoices client-stated (REQ-083, REQ-087); Connect contingent on Q-001 |
+| Messaging adapter (Twilio) | SMS; WhatsApp behind a switch that is off (§8). | CTX-097, A-008 | WhatsApp is Y (REQ-062) and unconfirmed (Q-034) |
 | Discovery data (NLR AFDC, Open Charge Map) | A static map layer of non-partner chargers; never used for availability. | CTX-089 | proposed |
-| Routing | Directions and arrival ETA. | SRC-D1#9 | provisional: Google Maps behind an adapter (CF-020, A-030) |
+| Routing | Directions and arrival ETA. | SRC-D1#9 | provisional: Google Maps behind an adapter (CF-020, A-030); not in the committed plan: directions open the driver's navigation app (REQ-064), ETA is I (REQ-065) |
 
 ### 2.5 Data and platform
 
@@ -131,8 +134,8 @@ stay in §2.1 – §2.5 for the parts they still describe.
 |---|---|---|---|
 | PostgreSQL (+ PostGIS) | System of record; exclusion constraints; geo queries. | CTX-085, CTX-093 | Postgres agreed (ADR-001); PostGIS proposed |
 | Time-series partitions | EVSE status history and metering. | CTX-112, CTX-127 (dispute evidence) | proposed |
-| Valkey cache | Rate limits and idempotency keys only; holds stay in Postgres. | No CTX requires it: idempotency keys could live in Postgres (A-005, CF-017) | proposed; candidate to drop for v0 |
-| Event bus (EventBridge/SQS) | Decouples adapters from the core. | Not required by CTX-091 (idempotent consumers and polling work without it); weigh against two engineers (CTX-007) | proposed; candidate to drop for v0 |
+| Valkey cache | Rate limits and idempotency keys only; holds stay in Postgres. | No CTX requires it: idempotency keys could live in Postgres (A-005, CF-017) | dropped in Step 4: idempotency keys live in Postgres (SS-014, T-207) |
+| Event bus (EventBridge/SQS) | Decouples adapters from the core. | Not required by CTX-091 (idempotent consumers and polling work without it); weigh against two engineers (CTX-007) | dropped in Step 4: a transactional outbox in Postgres (SS-427, T-1001) |
 | AWS (ECS Fargate, RDS), Terraform, separate production account | Hosting in Amperlane's accounts. | CTX-005, CTX-085, CTX-107 | AWS and Terraform agreed (ADR-001); services proposed |
 | OpenTelemetry + Grafana | Observability, SOC 2 evidence. | CTX-107 | proposed |
 | EVerest simulator | A simulated site for tests: faults, overstays, late drivers, the Gowanus replay. | CTX-103 | client-stated |
