@@ -4,7 +4,7 @@ type: changelog
 title: Approved changes to the baseline
 status: approved
 owner: Mykola Marchuk
-version: 2
+version: 3
 kyiv: null
 parents: [REQUIREMENTS]
 sources: []
@@ -27,3 +27,4 @@ the system stories, decided at Gate 3 (2026-10-28).
 | CR-007 | 2026-10-28 | Step 3 red team: site full at the pre-arrival check | REQ-148 (v2) | JS-019 | Mykola Marchuk |
 | CR-008 | 2026-10-28 | new requirement from a source (SRC-C2@00:24:04) | REQ-336 (new, Y), epics.md FT-02.1 | JS-020 | Mykola Marchuk |
 | CR-009 | 2026-10-28 | contradiction REQ-231 vs REQ-009 v2 and REQ-012 (Step 3.3 system stories, Gate 3) | REQ-231 (v2) | JS-407, US-406; SS-003, SS-005, SS-006, SS-101, SS-421 | Mykola Marchuk |
+| CR-010 | 2026-10-28 | Gate 4 task critique (P4.2) and cleanup: clarifications within the requirements | SS-001, SS-020, SS-021, SS-026, SS-208, SS-222 (v2); design.md (v2: §8 parameters, §9 Phase 0 decisions); open-questions.md (v5: Q-065 – Q-071) | spec/40-tasks/tasks.yaml (T-124, T-314, T-318, T-322, T-532, T-928, T-993 and the handler tasks T-208, T-355, T-558, T-559, T-1011) | Mykola Marchuk |

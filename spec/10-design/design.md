@@ -1,19 +1,22 @@
 ---
 id: DESIGN
 type: design
-title: Amperlane Platform v1 high-level design (v1)
+title: Amperlane Platform v1 high-level design (v2)
 status: approved
 owner: Mykola Marchuk
-version: 1
+version: 2
 kyiv: null
 parents: [BUSINESS-CONTEXT, INTEGRATIONS]
 sources: [SRC-D1, SRC-C1, SRC-C2, SRC-D2]
 ---
-# High-level design, v1
+# High-level design, v2
 
 > **v1** (Gate 3, 2026-10-28). v0 was a hypothesis (playbook §10.1), built from the context and the confirmed
 > integration capabilities. v1 adds what Step 3 settled: the refined component names the system stories use (§2.6) and
 > the configured parameters with their defaults (§8, A-059). The rest of the v0 text stands until a trigger of §7.
+> **v2** (Gate 4, 2026-10-28) adds the configured parameters the Step 4 task critique found missing (§8: the site-staff
+> request channel and number, arrival from a session start and its evidence, the cut-over takeover reply timeout) and
+> the open technical decisions for Phase 0 (§9).
 > **Requirements must not cite this file**; they cite sources and `CTX-` facts.
 > Decisions the sources show as already agreed are recorded as ADRs in [adr/](adr/). Everything else here is a
 > proposal, and each component says how solid it is:
@@ -266,7 +269,7 @@ its consumers follow in brackets.
 
 | Parameter | Default | Unit | Owning SS (consumers) | Basis |
 |---|---|---|---|---|
-| **Per site (SS-026 clause 1)** | | | | |
+| **Per site (SS-026 clauses 1, 10, 11)** | | | | |
 | Time grid | 15 | min | SS-026 (SS-001, SS-002) | A-001 (SRC-C2@00:27:21, SRC-D2#7) |
 | Booking durations | 30, 45, 60 | min | SS-026 (SS-002) | A-001 |
 | Buffer | 10 | min | SS-026 (SS-102) | A-001 |
@@ -283,6 +286,9 @@ its consumers follow in brackets.
 | Clear-instruction time | 2, after release, cancellation or rebooking | min | SS-026 (SS-120) | A-059 (Intellias proposal) |
 | Cancellation cut-off | the slot start | instant | SS-026 (SS-013, SS-132) | A-049 (Q-042) |
 | Silence time | 5 | min | SS-026 (SS-204) | A-059 (Intellias proposal): must exceed the 60 s stale threshold (N2) |
+| Site-staff request channel | attendant view | setting (attendant view or SMS) | SS-026 clause 10 (SS-118) | A-059 (Intellias proposal, Gate 4): A-046 and A-048 let site staff acknowledge in the attendant view or by SMS reply; the attendant view needs no staff number. Validated with the station operators (Q-041, Q-059) |
+| Arrival from a session start | off | setting | SS-026 clause 11 (SS-125) | A-051 (2): switched on per site only once Phase 0 confirms the session-start evidence there (Q-009, Q-012, Q-051) |
+| Session-start evidence | the EVSE's status changing to charging or occupied | setting (CSMS session-start event or status change) | SS-026 clause 11 (SS-125, SS-107) | A-051 (1): the CSMS session-start event where Phase 0 confirms the CSMS sends one, otherwise the status change |
 | **Platform-wide (SS-026 clause 2)** | | | | |
 | Site-full exception time | 60 | s | SS-026 (SS-105) | A-059 (Intellias proposal) |
 | Unplaced-booking exception time | 5, after the fault | min | SS-026 (SS-109) | A-059 (Intellias proposal) |
@@ -317,6 +323,7 @@ its consumers follow in brackets.
 | Idempotency-key retention (platform keys, inbound message and event ids) | at least 7 | days | SS-014, SS-025, SS-309 | A-035 |
 | Provider idempotency-key retention (Stripe) | 24 | h | SS-412 | A-059 (Intellias proposal): from Stripe's documentation, not a presale source (Q-062) |
 | Cut-over instant | 2027-03-01 01:00 America/New_York | instant | SS-422 (SS-410, SS-421) | A-059 (Intellias proposal): the launch date of REQ-142 (SRC-C1@00:29:06) at the start of the N5 maintenance window (A-028), Step 3.1 bucket-5 #46; moves with CF-027 |
+| Takeover reply timeout | 5 | min | SS-422 clauses 4, 5 | A-059 (Intellias proposal, Gate 4; NEW-Q-P3-3 of the P4.2 critique): the help keyword and the platform's reply each cross the carrier once, and the reply is due within the 10 s dispatch target (constitution N11, A-036), so 5 minutes leaves room for carrier delay without holding the cut-over in the maintenance window; checked at the cut-over rehearsal |
 | Consecutive failed synthetic checks before the availability alert | 3 | checks (one a minute, A-033) | SS-428 | A-059 (Intellias proposal) |
 | Prototype similarity threshold | a duplicated block of 10 or more lines | lines | SS-439 | A-059 (Intellias proposal) |
 | Staging test number range | +1 NPA-555-0100 to NPA-555-0199 | phone numbers | SS-339 (SS-435) | A-059 (Intellias proposal): NANP numbers reserved for fictional use, not a presale source |
@@ -327,13 +334,32 @@ its consumers follow in brackets.
 | **Client decisions: no default** | | | | |
 | No-show fee amount and station share | client decision | USD | SS-027 | Q-002, Q-005 (bucket-5 #17); recorded per site before it goes live; an explicit zero is allowed |
 | Bookable hours and capacity rules | client decision | — | SS-023 | Q-005; set per site at onboarding |
+| Site-staff number for SMS requests | client decision | phone number (E.164) | SS-026 clause 10 (SS-118) | Q-041 (JFK), Q-059 (Gowanus): the station operator names it; none until set, and until then the site cannot be switched to SMS (SS-026 clause 12) |
 | Agreement forms | client decision | list | SS-304 | Q-056 (legal policy); none until Q-056 is answered |
 | Pre-launch real-booking period | client decision | dates | SS-423 | Q-055 (go-live criteria); none until Q-055 is answered |
 | Raw pilot export retention period | client decision | period | SS-420 | Q-022, A-025; none until counsel sets it, shown as "not set" (SS-420 clause 5) |
 
-59 parameters: 15 with a source or a registered item, 39 under A-059, 5 client decisions.
+64 parameters: 17 with a source or a registered item, 41 under A-059, 6 client decisions. v1 had 59 (15, 39 and
+5); v2 adds the site-staff request channel and the takeover reply timeout (A-059), arrival from a session start and
+its evidence (A-051), and the site-staff number (client decision).
 
 Not configuration: webhook secrets (SS-218, SS-317) are credentials; the 60 s stale threshold and status-age bound
 (constitution N1, N2; REQ-104, REQ-160), 99% of reachable minutes (A-031), October 2025 (REQ-095), the daily purge
 (A-058), the 10 s dispatch (constitution N11, A-036) and the N24 page targets are fixed values in the constitution or a
 requirement.
+
+## 9. Open technical decisions for Phase 0
+
+Added at Gate 4 (2026-10-28) from the Step 4 task critique (P4.2). Each is an Intellias technical decision, taken in
+Phase 0 (2026-11-09 – 2026-11-27, SRC-D2#15) by the owner named; where it sets or bends a code convention, the
+Amperlane CTO confirms it, as for every "Intellias convention" (constitution). None is a client business decision. The
+affected tasks carry the label `phase0-decision` and stay draft until the decision is recorded (in an ADR where the
+constitution asks for one). A decision that changes a system story's text goes through a change request.
+
+| Decision | Options | Owner | Tasks affected | Source |
+|---|---|---|---|---|
+| Load-test tool for the A-034 scenario | (a) k6, which the P4.2 critique notes is AGPL-licensed: acceptable under code convention 3 only as a separate test tool that never ships in deployed code, with the licence scanner told so; (b) another maintained load-test tool (candidates to assess: Artillery, Gatling, Locust). Either passes the maturity check of code convention 3 (licence, a release in the last 12 months, more than one maintainer) | Intellias tech lead; Amperlane CTO confirms (an ADR if the check fails) | T-136 (scenario and evaluator), T-934 (release stage that runs them) | Constitution N6, code conventions 1 and 3; A-034, A-044; P4.2 critique NEW-Q-P1-1 |
+| Module layout of the §2.6 components EVSE status service, ops console back end and partner-portal read models | (a) modules of their own, `evse-status`, `ops-console` and `partner-portals`, each with its own schema, as the batch 3 tasks build them; code convention 4's module list is then extended by a constitution change; (b) EVSE status inside `inventory`, and the ops-console back end and the partner-portal read models as folders of the modules they serve or of `reporting`, the way Allocation & rebooking, Station-hold dispatcher and Arrival & no-show are folders of `booking` | Intellias tech lead with the solution architect; Amperlane CTO confirms (code convention 4) | T-501, T-507, T-536 (they create these module folders and schemas) | §2.6; constitution code convention 4; ADR-002; P4.2 critique NEW-Q-P2-2 |
+| How the simulated driver gets a driver session in staging, where messages reach only fictional test numbers and the simulator holds no platform credential | (a) a staging-only test-harness endpoint, callable only by the simulator's machine identity, that issues a driver session for a number in the staging test number range (SS-339); (b) the simulator receives the driver's link on a fictional staging number through a message sink of the Twilio integration and opens it as a driver would; (c) keep the late-driver scenario in the CI compose with a session issued by the test harness, as T-922 does now. (a) and (b) must not exist in production | Intellias solution architect with the tech lead | T-922 | CTX-103 (simulator); SS-435, SS-339; A-006; P4.2 critique NEW-Q-P3-2 |
+| Pool check per slot or per whole window | (a) per-slot feasibility, as SS-003 clause 2 states and T-126 builds: in every slot the bookings can be matched to distinct compatible EVSEs, possibly a different EVSE in different slots; (b) whole-window feasibility: each booking matched to one compatible EVSE for its whole window with buffers, as allocation needs (stricter; a change request to SS-003 clause 2). Decided on the Phase 0 prototype with the simulator and shown to the Amperlane CTO | Intellias solution architect with the tech lead; Amperlane CTO (CF-023) | T-126 | A-014, CF-023, ADR-005, ADR-006; §6 item 1; tasks-log-1 NEW-Q-2 |
+| Whether a site is "in NYC" by its location or by a metro attribute | (a) the site's configured location inside New York City's five-borough boundary plus the America/New_York time zone, as T-549 builds (SS-230 notes); (b) a metro attribute set at onboarding in Inventory & site configuration (a new site field: a change request to SS-028) | Intellias tech lead with the solution architect | T-549 | CTX-138; SS-230 clause 4, SS-028 clause 1; tasks-log-3 NEW-Q-4 |
